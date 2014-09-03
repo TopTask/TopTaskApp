@@ -1,0 +1,63 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">TopTask</string>
+
+    <!-- Strings Gerais -->
+    <string name="g_nome">Nome:</string>
+    <string name="g_email">E-mail:</string>
+    <string name="g_senha">Senha:</string>
+    <string name="g_descricao">Descrição:</string>
+    <string name="g_data">Data:</string>
+    <string name="g_data_termino">Data término:</string>
+    <string name="g_set">Editar:</string>
+
+    <!-- Strings Botões -->
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_cadastrar">Cadastre-se</string>
+    <string name="btn_novo_projeto">Criar novo Projeto + </string>
+
+    <!-- Títulos de Activities -->
+    <string name="title_activity_entrada">Entrada</string>
+    <string name="title_activity_fragment_tarefas">Tarefas</string>
+    <string name="title_activity_projetos">Projetos</string>
+    <string name="title_activity_cadastro_projeto">Novo Projeto</string>
+    <string name="title_activity_cadastro_usuario">Cadastro</string>
+    <string name="title_activity_login_usuario">Login</string>
+    <string name="title_activity_cadastro_tarefa">Cadastro de Tarefa</string>
+    <string name="cadastro_titulo_novo_projeto">Cadastro novo Projeto</string>
+
+    <!-- String Actions -->
+    <string name="action_settings">Configurações</string>
+    <string name="action_accept_projeto">Novo Projeto</string>
+    <string name="action_criar_novo_projeto">"Criar novo Projeto + "</string>
+    <string name="action_accept_tarefa">Nova Tarefa</string>
+    <string name="action_accept_usuario">Nova Conta</string>
+    <string name="action_websearch">Web search</string>
+
+    <!-- substituir -->
+    <string name="action_entrar">Entrar</string>
+    <string name="action_sair_conta">Sair</string>
+    <string name="action_enviar">Enviar</string>
+
+    <!-- Outros -->
+    <string name="drawer_open">Navigation drawer aberto</string>
+    <string name="drawer_close">Navigation drawer fechado</string>
+    <string name="app_not_available">Desculpe, não há um web browser disponível</string>
+
+    <!-- Strings Menu -->
+    <string-array name="menu_array">
+        <item>Tarefas</item>
+        <item>Taskboard</item>
+        <item>Gráficos</item>
+        <item>Membros</item>
+        <item>Configurações</item>
+        <item>Sair</item>
+    </string-array>
+
+    <!-- Nome dos modelos de projetos -->
+    <string-array name="nomes_modelos">
+        <item>Scrum</item>
+        <item>Livre</item>
+    </string-array>
+
+</resources>

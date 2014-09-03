@@ -1,0 +1,66 @@
+﻿/* Criar tabelas do banco de dado */
+
+CREATE TABLE TTUsuario(
+  _id       INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome      TEXT,
+  senha     TEXT,
+  email     TEXT,
+  descricao TEXT,
+  foto      BLOB
+);
+
+CREATE TABLE TTProjeto(
+  _id       INTEGER PRIMARY KEY AUTOINCREMENT,
+  idUsuario INTEGER,
+  nome      TEXT,
+  email     TEXT,
+  descr     TEXT,
+  foto      BLOB
+  CONSTRAINT FKPU(idUsuario) references TTUsuario(_id)
+);
+
+CREATE TABLE TTTarefa(
+  _id        INTEGER PRIMARY KEY AUTOINCREMENT
+  nome       TEXT,
+  descricao  TEXT,
+  dataEntrega    TEXT,
+  idMembro  INTEGER ,
+  idProjeto  INTEGER,
+  prioridade INTEGER,
+  progresso  INTEGER, /* 0 = A fazer; 1 = Fazendo; 2 = Feita; */ 
+  foto       BLOB,
+  CONSTRAINT FKMembroUsuario(idMembro) references TTMembro(_id)
+  CONSTRAINT FKMembroProjeto(idProjeto) references TTProjeto(_id)
+); 
+
+CREATE TABLE TTMembro(
+  _id        INTEGER PRIMARY KEY AUTOINCREMENT, /* id do membro do projeto */
+  idUsuario  INTEGER,             /* id do usuário que é membro do projeto */
+  idProjeto  INTEGER,             /* id do projeto o qual o membro faz parte */
+  permissao  INTEGER,             /* nível de permissão dentro do projeto Nível = {(0,ProductOwner),(1,ScrumMaster),(2,Normal)}*/
+  CONSTRAINT FKMembroUsuario(idUsuario) references TTUsuario(_id)
+  CONSTRAINT FKMembroProjeto(idProjeto) references TTProjeto(_id)
+);
+
+
+CREATE TABLE TTSubTarefa(
+  _id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome       TEXT,
+  descr      TEXT,
+  entrega    TEXT,
+  descr      TEXT,
+  idMebro  INTEGER,
+  idTarefa   INTEGER,
+  prioridade INTEGER,
+  progresso  INTEGER, /* 0 = A fazer; 1 = Fazendo; 2 = Feita; */ 
+  CONSTRAINT FKMembroUsuario(idMembro) references TTMembro(_id)
+  CONSTRAINT FKMembroTarefa(idProjeto) references TTTarefa(_id)
+); 
+
+/* Diz a quem está atrbuído realizar certa tarefa*/
+CREATE TABLE TTGrupo(
+  _id   INTEGER,
+  idMembro   INTEGER,
+  CONSTRAINT FKGrupoMembro(idMembro) references TTMembro(id)
+  CONSTRAINT FKGrupoTarefa(idTarefa) references TTTarefa(id)
+);
