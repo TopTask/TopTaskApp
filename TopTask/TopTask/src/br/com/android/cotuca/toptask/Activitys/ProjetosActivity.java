@@ -1,24 +1,19 @@
 package br.com.android.cotuca.toptask.Activitys;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.Activitys.CadastroProjetoActivity.PlaceholderFragment;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos.ListenerClickNovoProjeto;
-import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 
 public class ProjetosActivity extends Activity implements ListenerClickNovoProjeto, ListenerClickProjeto{
 
