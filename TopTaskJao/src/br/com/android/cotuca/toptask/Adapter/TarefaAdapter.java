@@ -1,0 +1,86 @@
+package br.com.android.cotuca.toptask.Adapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Context;
+//import android.provider.SyncStateContract.Constants;
+//import android.sax.StartElementListener;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
+
+public class TarefaAdapter extends BaseAdapter{
+
+	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
+	private LayoutInflater inflater;
+	
+	public TarefaAdapter (Context contesto, List<Tarefa> tarefas) {
+		inflater = (LayoutInflater) contesto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		this.tarefas = tarefas;
+	}
+	
+	@Override
+	public int getCount() {
+		
+		return tarefas.size();
+	}
+
+	@Override
+	public Tarefa getItem(int position) {
+		
+		return tarefas.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View view = convertView;
+		ViewHolder holder = null;
+		
+		if (view == null) {
+			view = inflater.inflate(R.layout.tarefa_adapter,null);
+			
+			holder = new ViewHolder();
+			holder.nomeTarefa = (TextView) view.findViewById(R.id.txt_nomeTarefa);
+			holder.discricaoTarefa = (TextView) view.findViewById(R.id.txt_descricaoTarefa);
+			holder.imgDono = (ImageView) view.findViewById(R.id.img_donoTarefa);
+			holder.dataTermino = (TextView) view.findViewById(R.id.txt_dataTermino);
+			
+			view.setTag(holder);
+		
+		} else {
+			holder = (ViewHolder) view.getTag();
+		}
+		
+		Tarefa tarefa = tarefas.get(position);
+		holder.nomeTarefa.setText(tarefa.getNome());
+		holder.dataTermino.setText(tarefa.getDataEntrega());
+		holder.discricaoTarefa.setText(tarefa.getDescricao());
+	
+		//holder.imgDono.setImageBitmap(); colocar aqui a imagem de acordo com o icone do dono 
+		
+		return view;
+	}
+	
+	private static class ViewHolder {
+		TextView  nomeTarefa;
+		TextView  discricaoTarefa;
+		ImageView imgDono;
+		TextView  dataTermino;
+	}
+
+	
+}

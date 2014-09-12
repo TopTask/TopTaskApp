@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">TopTask</string>
+    
+    <!--Strings Gerais -->
+    <string name="g_nome">Nome:</string>
+    <string name="g_email">E-mail:</string>
+    <string name="g_senha">Senha:</string>
+    <string name="g_descricao">Descrição:</string>
+    <string name="g_data">Data:</string>
+    <string name="g_data_termino">Data término:</string>
+    
+    <!--SUBTITUIR-->
+    <string name="cadastro_data_nova_tarefa">Data termino:</string>
+    <string name="cadastro_descricao_tarefa">Descrição:</string>
+    <string name="cadastro_nome_tarefa">Nome:</string>
+    <string name="cadastro_nome_projeto">Nome:</string>
+    <string name="lbl_desc_novo_projeto">Descrição:</string>
+    <string name="cadastro_descricao_projeto">Descrição:</string>
+    <string name="cadastro_data_novo_projeto">Data:</string>
+    
+    <!--Strings Menu -->
+    <string-array name="menu_array">
+        <item>Tarefas</item>
+        <item>Taskboard</item>
+        <item>Gráficos</item>
+        <item>Chat</item>
+        <item>Membros</item>
+        <item>Configurações</item>
+        <item>Sair</item>
+    </string-array>
+    
+    <!--Strings Botões -->
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_cadastrar">Cadastre-se</string>
+ 
+    <!--Títulos de Activities -->
+    <string name="title_activity_entrada">Entrada</string>
+    <string name="title_activity_fragment_tarefas">Tarefas</string>
+    <string name="title_activity_projetos">Projetos</string>
+    <string name="title_activity_cadastro_projeto">Novo Projeto</string>
+    <string name="title_activity_cadastro_usuario">Cadastro</string>
+    <string name="title_activity_login_usuario">Login</string>
+    <string name="title_activity_cadastro_tarefa">Cadastro de Tarefa</string>
+    <string name="cadastro_titulo_novo_projeto">Cadastro novo Projeto</string>
+    
+    <!-- Nome dos modelos de projetos -->
+    <string-array name="nomes_modelos">
+        <item>Scrum</item>
+        <item>Livre</item>
+    </string-array>
+    
+    <!-- String Actions -->
+    <string name="action_settings">Configurações</string>
+    <string name="action_accept_projeto">Novo Projeto</string>
+    <string name="criar_novo_projeto">"Criar novo Projeto + "</string>
+    <string name="action_accept_tarefa">Nova Tarefa</string>
+    <!-- substituir -->
+    <string name="action_criar_tarefa">Nova Tarefa</string>
+    <string name="action_accept_usuario">Nova Conta</string>
+    <string name="action_add_projeto">Adicionar Projeto</string>
+    <string name="action_entrar">Entrar</string>
+    <string name="action_sair_conta">Sair</string>
+    <string name="action_enviar">Enviar</string>
+    <!-- SUBSTIRUIR -->
+    <string name="enviar_activity_chat">Enviar</string> 
+   	<string name="hint_cadastro_nome_projeto">Nome do projeto</string>
+    
+   	<!-- Outros -->
+    <string name="drawer_open">Navigation drawer aberto</string>
+    <string name="drawer_close">Navigation drawer fechado</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Desculpe, não há um web browser disponível</string>
+
+</resources>

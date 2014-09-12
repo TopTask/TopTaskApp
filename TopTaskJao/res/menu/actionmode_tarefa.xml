@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/acction_concluir_tarefa"
+        android:icon="@drawable/ic_action_good"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Finalizar Tarefa"/>
+
+    <item 
+        android:id="@+id/acction_excluir_tarefa"
+        android:icon="@drawable/ic_action_discard"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Excluir Tarefa"/>
+    
+    <item 
+        android:id="@+id/acction_editar_tarefa"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Editar tarefa"/>
+    
+</menu>

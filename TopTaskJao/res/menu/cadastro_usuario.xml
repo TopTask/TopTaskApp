@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.android.cotuca.toptask.CadastroUsuarioActivity" >
+
+    <item
+        android:id="@+id/action_criar_usuario"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_accept_usuario"
+        android:icon="@drawable/ic_action_accept"/>
+
+</menu>

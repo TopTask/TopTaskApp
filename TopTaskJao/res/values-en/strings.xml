@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">TopTask</string>
+    
+    <!--Strings Gerais -->
+    <string name="g_nome">Name:</string>
+    <string name="g_email">E-mail:</string>
+    <string name="g_senha">Password:</string>
+    <string name="g_descricao">Description:</string>
+    <string name="g_data">Date:</string>
+    <string name="g_data_termino">Deadline:</string>
+    
+    <!--Strings Menu -->
+    <string-array name="menu_array">
+        <item>Tasks</item>
+        <item>Taskboard</item>
+        <item>Graphs</item>
+        <item>Chat</item>
+        <item>Members</item>
+        <item>Settings</item>
+        <item>Exit</item>
+    </string-array>
+    
+    <!--Strings Botões -->
+    <string name="btn_entrar">Enter</string>
+    <string name="btn_cadastrar">Sign in</string>
+ 
+    <!--Títulos de Activities -->
+    <string name="title_activity_entrada">Home</string>
+    <string name="title_activity_fragment_tarefas">Tasks</string>
+    <string name="title_activity_projetos">Projects</string>
+    <string name="title_activity_cadastro_projeto">New Project</string>
+    <string name="title_activity_cadastro_usuario">Sign in</string>
+    <string name="title_activity_login_usuario">Log in</string>
+    <string name="title_activity_cadastro_tarefa">New Task</string>
+    <string name="cadastro_titulo_novo_projeto">New Project</string>
+    
+    <!-- Nome dos modelos de projetos -->
+    <string-array name="nomes_modelos">
+        <item>Scrum</item>
+        <item>Free Style</item>
+    </string-array>
+    
+    <!-- String Actions -->
+    <string name="action_settings">Settings</string>
+    <string name="action_accept_projeto">Create Project</string>
+    <string name="criar_novo_projeto">"New Project + "</string>
+    <string name="action_accept_tarefa">New Task</string>
+    <!-- substituir -->
+    <string name="action_criar_tarefa">New Task</string>
+    <string name="action_accept_usuario">New Account</string>
+    <string name="action_add_projeto">Add Project</string>
+    <string name="action_entrar">Enter</string>
+    <string name="action_sair_conta">Exit</string>
+    <string name="action_enviar">Send</string>
+    <!-- SUBSTIRUIR -->
+    <string name="enviar_activity_chat">Send</string> 
+   	<string name="hint_cadastro_nome_projeto">Project name</string>
+    
+   	<!-- Outros -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Closed navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there is no web browser avaiable</string>
+
+</resources>
