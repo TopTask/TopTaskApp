@@ -63,11 +63,10 @@ public class MSimplesActivity extends Activity implements
 	private boolean actionModeAtivado = false;
 	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma tarefa for clicada no fragment de tarefas
 	
-	private int idProjetoSelecionado = 0;
+	private int idProjetoSelecionado;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 
 		mTitle = mDrawerTitle = getTitle();
@@ -106,17 +105,25 @@ public class MSimplesActivity extends Activity implements
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		if (savedInstanceState == null) {
+		
+		
+		Intent intentDadosRecebidos = getIntent();
+		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
+		
+		if (dadosRecebidos == null) {
 			selectItem(0);
 		} else {
 			
-			idProjetoSelecionado = savedInstanceState.getInt(ContratoProjetos.NOME_TABELA + "+" + ContratoProjetos.Colunas._ID);
-			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado: "+ idProjetoSelecionado); 
+			idProjetoSelecionado = dadosRecebidos.getInt("ID_PROJETO");
+			
+			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado na main: "+ idProjetoSelecionado); 
 			
 			selectItem(0);
 		}
+		
+		super.onCreate(savedInstanceState);
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -175,6 +182,7 @@ public class MSimplesActivity extends Activity implements
 			
 			Bundle dadosProjeto = new Bundle();
 			dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
+			
 			f_tarefas.setArguments(dadosProjeto);
 			Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "+ idProjetoSelecionado);
 			

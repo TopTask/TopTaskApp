@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickPro
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos.ListenerClickNovoProjeto;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class ProjetosActivity extends Activity implements ListenerClickNovoProjeto, ListenerClickProjeto{
 
@@ -98,8 +100,13 @@ public class ProjetosActivity extends Activity implements ListenerClickNovoProje
 		
 		int idProjetoSelecionado = projeto.getId();
 	
+		Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado: "+ idProjetoSelecionado); 
+		
 		Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
-		i.putExtra(ContratoProjetos.NOME_TABELA + "+" + ContratoProjetos.Colunas._ID, idProjetoSelecionado);
+		Bundle dados = new Bundle();
+		dados.putInt("ID_PROJETO", idProjetoSelecionado);
+		
+		i.putExtras(dados);
 		startActivity(i);
 	}
 	

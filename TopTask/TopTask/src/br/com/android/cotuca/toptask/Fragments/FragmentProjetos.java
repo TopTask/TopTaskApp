@@ -71,8 +71,6 @@ public class FragmentProjetos extends ListFragment implements OnMenuItemClickLis
 		
 		Projeto projeto = adapter.getItem(position);
 		
-		Log.i(Tags.TOPTASK_FRAGMENT, "Id do projeto no getItem: "+projeto.getId());
-		
 		listener.onProjetoClick(projeto);
 	}
 	

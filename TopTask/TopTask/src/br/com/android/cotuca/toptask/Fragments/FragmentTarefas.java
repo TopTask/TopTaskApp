@@ -1,6 +1,5 @@
 package br.com.android.cotuca.toptask.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Intent;
