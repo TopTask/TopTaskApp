@@ -10,7 +10,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	private static DBHelper instancia;
 	private static final String DB_NOME = "DB_Toptask";
-	private static final int DB_VERSAO =17;
+	private static final int DB_VERSAO =18;
 //	private static final String SQL_CREATE_1 = "";
 	
 	private static final String SQL_DROP_TAREFA = "DROP TABLE IF EXISTS " + ContratoTarefas.NOME_TABELA;

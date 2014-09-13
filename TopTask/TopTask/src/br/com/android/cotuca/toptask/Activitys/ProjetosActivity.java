@@ -1,5 +1,7 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -10,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
+import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos.ListenerClickNovoProjeto;
 
@@ -25,13 +29,20 @@ public class ProjetosActivity extends Activity implements ListenerClickNovoProje
 		getActionBar().setTitle("Projetos");
 		setContentView(R.layout.activity_projetos);
 		
-//		Logica para verificar qual fragment colocar 
+		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
+		List<Projeto> listProjetos = projetos.getProjetos();
+		
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		
-		FragmentSemProjetos fsp = new FragmentSemProjetos();
+		if (!listProjetos.isEmpty()) {
+			FragmentProjetos fp = new FragmentProjetos();
+			ft.add(R.id.container, fp, "fp");
+		}	else {
+			FragmentSemProjetos fsp = new FragmentSemProjetos();
+			ft.add(R.id.container, fsp, "fsp");
+		}
 		
-		ft.add(R.id.container, fsp, "fsp");
 		ft.commit();	
 		
 	}

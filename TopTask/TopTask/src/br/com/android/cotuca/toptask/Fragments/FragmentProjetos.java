@@ -16,6 +16,7 @@ import br.com.android.cotuca.toptask.Activitys.CadastroProjetoActivity;
 import br.com.android.cotuca.toptask.Activitys.CadastroTarefa;
 import br.com.android.cotuca.toptask.Adapter.AdapterProjeto;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 
 
 
@@ -53,7 +54,11 @@ public class FragmentProjetos extends ListFragment implements OnMenuItemClickLis
 //		Aqui sera feita a logica de pegar os projetos do webService
 		
 //		adapter = new ProjetoAdapter(getActivity(), ManipProjetos.getProjetos(int idDoLogin));
-//		setListAdapter(adapter);
+		
+		ProjetoDAO projetos = ProjetoDAO.getInstance(getActivity()); 
+		
+		adapter = new AdapterProjeto(getActivity(), projetos.getProjetos());
+		setListAdapter(adapter);
 		
 		
 	}

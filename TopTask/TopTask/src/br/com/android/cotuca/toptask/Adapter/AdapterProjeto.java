@@ -46,7 +46,7 @@ public class AdapterProjeto extends BaseAdapter{
 		ViewHolder holder = null;
 		
 		if (view == null) {
-			view = inflater.inflate(R.layout.adapter_tarefa,null);
+			view = inflater.inflate(R.layout.adapter_projeto,null);
 			
 			holder = new ViewHolder();
 			holder.nomeProjeto = (TextView) view.findViewById(R.id.txt_nomeProjeto);
