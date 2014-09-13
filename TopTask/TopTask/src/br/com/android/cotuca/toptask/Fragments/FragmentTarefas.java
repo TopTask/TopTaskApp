@@ -1,5 +1,6 @@
 package br.com.android.cotuca.toptask.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Intent;
@@ -26,6 +27,10 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 	private AdapterTarefa adapter;
 	private ListenerClickTarefa listener;
 	
+	
+
+
+
 	@Override
 	public void onAttach(Activity activity) { 
 		super.onAttach(activity);
@@ -50,6 +55,9 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+//		int idProjeto = savedInstanceState.getInt("ID_PROJETO");
+//		Log.d("FRAGMENT_TAREFAS", idProjeto+"");
 		
 		TarefaDAO tarefas = TarefaDAO.getInstance(getActivity()); 
 		

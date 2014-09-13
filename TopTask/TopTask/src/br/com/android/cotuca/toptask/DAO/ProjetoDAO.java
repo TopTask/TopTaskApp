@@ -23,9 +23,9 @@ public class ProjetoDAO {
 			ContratoProjetos.Colunas.NOME,
 			ContratoProjetos.Colunas.DESCRICAO,
 			ContratoProjetos.Colunas.DATA_ENTREGA,
-			//ContratoProjetos.Colunas.DONO,
-			//ContratoProjetos.Colunas.CONCLUIDA,
-			//ContratoProjetos.Colunas.FOTO
+			ContratoProjetos.Colunas.DONO,
+			ContratoProjetos.Colunas.CONCLUIDA,
+			ContratoProjetos.Colunas.FOTO
 			};
 	
 	public static ProjetoDAO getInstance(Context contexto) {
@@ -108,14 +108,13 @@ public class ProjetoDAO {
 		String nome = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.NOME));
 		String descricao = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.DESCRICAO));
 		String data = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.DATA_ENTREGA));
-		//int dono = c.getInt((c.getColumnIndex(ContratoProjetos.Colunas.DONO)));
+		int dono = c.getInt((c.getColumnIndex(ContratoProjetos.Colunas.DONO)));
 		int _id = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas._ID));
-		//int concluida = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.CONCLUIDA));
-		//String foto = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.FOTO));
+		int concluida = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.CONCLUIDA));
+		String foto = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.FOTO));
 		
-		//return new Projeto(_id,nome,descricao,data,dono,concluida,foto); 
+		return new Projeto(_id,nome,descricao,data,dono,concluida,foto); 
 		
-		return new Projeto(nome,descricao,data);
 	}
 
 	public void save(Projeto projeto) {
@@ -126,8 +125,6 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
 		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
 		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
-		
-		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
 		
 		long id = db.insert(ContratoProjetos.NOME_TABELA, null, values);
 		

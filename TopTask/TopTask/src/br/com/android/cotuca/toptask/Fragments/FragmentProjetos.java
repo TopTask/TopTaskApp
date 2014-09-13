@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import br.com.android.cotuca.toptask.Activitys.CadastroTarefa;
 import br.com.android.cotuca.toptask.Adapter.AdapterProjeto;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 
 
@@ -68,6 +70,8 @@ public class FragmentProjetos extends ListFragment implements OnMenuItemClickLis
 		super.onListItemClick(l, v, position, id);
 		
 		Projeto projeto = adapter.getItem(position);
+		
+		Log.i(Tags.TOPTASK_FRAGMENT, "Id do projeto no getItem: "+projeto.getId());
 		
 		listener.onProjetoClick(projeto);
 	}

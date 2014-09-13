@@ -40,6 +40,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 //import android.widget.Toast;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
@@ -61,6 +62,8 @@ public class MSimplesActivity extends Activity implements
 
 	private boolean actionModeAtivado = false;
 	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma tarefa for clicada no fragment de tarefas
+	
+	private int idProjetoSelecionado = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,12 @@ public class MSimplesActivity extends Activity implements
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
+			selectItem(0);
+		} else {
+			
+			idProjetoSelecionado = savedInstanceState.getInt(ContratoProjetos.NOME_TABELA + "+" + ContratoProjetos.Colunas._ID);
+			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado: "+ idProjetoSelecionado); 
+			
 			selectItem(0);
 		}
 	}
@@ -163,6 +172,12 @@ public class MSimplesActivity extends Activity implements
 		
 		if (posicao == 0) {
 			Fragment f_tarefas = new FragmentTarefas();
+			
+			Bundle dadosProjeto = new Bundle();
+			dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
+			f_tarefas.setArguments(dadosProjeto);
+			Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "+ idProjetoSelecionado);
+			
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
 		} else if (posicao == 5) {
 			Fragment f_membros = new FragmentMembros();

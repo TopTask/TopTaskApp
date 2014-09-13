@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
@@ -95,8 +96,10 @@ public class ProjetosActivity extends Activity implements ListenerClickNovoProje
 	@Override
 	public void onProjetoClick(Projeto projeto) {
 		
-//		mas tenho que passar o id de quem esta logado
+		int idProjetoSelecionado = projeto.getId();
+	
 		Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
+		i.putExtra(ContratoProjetos.NOME_TABELA + "+" + ContratoProjetos.Colunas._ID, idProjetoSelecionado);
 		startActivity(i);
 	}
 	
