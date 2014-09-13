@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -23,9 +22,9 @@ public class ProjetoDAO {
 			ContratoProjetos.Colunas.NOME,
 			ContratoProjetos.Colunas.DESCRICAO,
 			ContratoProjetos.Colunas.DATA_ENTREGA,
-			//ContratoProjetos.Colunas.DONO,
-			//ContratoProjetos.Colunas.CONCLUIDA,
-			//ContratoProjetos.Colunas.FOTO
+			ContratoProjetos.Colunas.DONO,
+			ContratoProjetos.Colunas.CONCLUIDA,
+			ContratoProjetos.Colunas.FOTO
 			};
 	
 	public static ProjetoDAO getInstance(Context contexto) {
@@ -108,14 +107,13 @@ public class ProjetoDAO {
 		String nome = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.NOME));
 		String descricao = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.DESCRICAO));
 		String data = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.DATA_ENTREGA));
-		//int dono = c.getInt((c.getColumnIndex(ContratoProjetos.Colunas.DONO)));
+		int dono = c.getInt((c.getColumnIndex(ContratoProjetos.Colunas.DONO)));
 		int _id = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas._ID));
-		//int concluida = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.CONCLUIDA));
-		//String foto = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.FOTO));
+		int concluida = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.CONCLUIDA));
+		String foto = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.FOTO));
 		
-		//return new Projeto(_id,nome,descricao,data,dono,concluida,foto); 
+		return new Projeto(_id,nome,descricao,data,dono,concluida,foto); 
 		
-		return new Projeto(nome,descricao,data);
 	}
 
 	public void save(Projeto projeto) {
@@ -123,9 +121,9 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.NOME, projeto.getNome());
 		values.put(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
 		values.put(ContratoProjetos.Colunas.DATA_ENTREGA,projeto.getDataEntrega());
-		//values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
-		//values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
-		//values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
+		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
+		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
 		
 		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
 		
@@ -139,12 +137,12 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.NOME, projeto.getNome());
 		values.put(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
 		values.put(ContratoProjetos.Colunas.DATA_ENTREGA,projeto.getDataEntrega());
-		//values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
-		//values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
-		//values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
+		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
+		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
 		
-		db.update(ContratoTarefas.NOME_TABELA, values,
-				ContratoTarefas.Colunas._ID + " = ? ",
+		db.update(ContratoProjetos.NOME_TABELA, values,
+				ContratoProjetos.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(projeto.getId()) });
 	}
 

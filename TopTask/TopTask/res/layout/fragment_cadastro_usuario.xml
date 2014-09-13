@@ -15,24 +15,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:hint="@string/g_nome"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/edt_emailNovoProjeto"
+        android:id="@+id/edt_emailNovoUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/edt_nomeNovoUsuario"
         android:layout_below="@+id/edt_nomeNovoUsuario"
+        android:hint="@string/g_email"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/edt_senhaNovoUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edt_emailNovoProjeto"
-        android:layout_below="@+id/edt_emailNovoProjeto"
+        android:layout_alignLeft="@+id/edt_emailNovoUsuario"
+        android:layout_below="@+id/edt_emailNovoUsuario"
+        android:hint="@string/g_senha"
         android:inputType="textPassword" />
-
-
 
 </RelativeLayout>

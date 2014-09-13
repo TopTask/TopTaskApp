@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress"
-        android:hint="Email:" />
+        android:hint="@string/g_email" />
 
 
     <EditText
@@ -26,6 +26,6 @@
         android:layout_alignLeft="@+id/edt_emailLogin"
         android:layout_below="@+id/edt_emailLogin"
         android:inputType="textPassword"
-        android:hint="Password:" />
+        android:hint="@string/g_senha" />
 
 </RelativeLayout>

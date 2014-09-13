@@ -91,8 +91,6 @@ public class ManipUsuarioTask {
 				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
 				soap.addProperty(ContratoUsuarios.Colunas.NOME, usu.getNome());
 				soap.addProperty(ContratoUsuarios.Colunas.SENHA, usu.getSenha());
-				soap.addProperty(ContratoUsuarios.Colunas.DESCRICAO,
-						usu.getDescricao());
 				// falta foto
 
 			} else {

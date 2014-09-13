@@ -9,8 +9,8 @@ public class ContratoProjetos {
 		public static final String NOME = "nome";
 		public static final String DESCRICAO = "descr";
 		public static final String DATA_ENTREGA = "entrega";
-		//public static final String DONO = "idUsuario";
-		//public static final String CONCLUIDA = "progresso";
-		//public static final String FOTO = "foto";
+		public static final String DONO = "idUsuario";
+		public static final String CONCLUIDA = "progresso";
+		public static final String FOTO = "foto";
 	}
 }

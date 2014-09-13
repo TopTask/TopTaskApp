@@ -112,10 +112,7 @@ DateDialog.SetDateListener {
 			
 			if (!ehAtu) {
 				Log.i("criarei um proj novo", "criarei um proj novo");
-				//Projeto novoProjeto = new Projeto(nome, descricao,data,1,1,"urlPic");
-				
-				Projeto novoProjeto = new Projeto(nome, descricao,data);
-				
+				Projeto novoProjeto = new Projeto(nome, descricao,data,1,1,"urlPic");
 				
 				//TEREMOS Q CRIAR UMA CLASSE QUE SALVARA EM JSON O idUsuario e idProjeto
 				//PRA N TER QUE FICAR PESQUISANDO QND FOR INSERIR/ALTERAR/ETC 
