@@ -175,6 +175,11 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			agendarNotificacao(nome, descricao, ano, mes, dia);
 
 			Intent i = new Intent(this, MSimplesActivity.class);
+			Bundle dadosBundle = new Bundle();
+			
+			dadosBundle.putInt("ID_PROJETO", idProjeto);
+			i.putExtras(dadosBundle);
+			
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 

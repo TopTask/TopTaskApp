@@ -29,16 +29,6 @@ public class DBHelper extends SQLiteOpenHelper{
 			ContratoTarefas.Colunas.PROJETO,
 			ContratoTarefas.Colunas.CONCLUIDA);
 	
-//	private static final String SQL_CREATE_PROJETO = String.format(
-//			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//			"%s TEXT NOT NULL, %s TEXT, %s TEXT NOT NULL)", 
-//			ContratoProjetos.NOME_TABELA,
-//			ContratoProjetos.Colunas._ID, 
-//			ContratoProjetos.Colunas.NOME,
-//			ContratoProjetos.Colunas.DESCRICAO, 
-//			ContratoProjetos.Colunas.DATA_ENTREGA
-//			);
-	
 	
 	private static final String SQL_CREATE_PROJETO = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
