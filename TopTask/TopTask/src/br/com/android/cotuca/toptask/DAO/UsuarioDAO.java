@@ -61,8 +61,8 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
-	public Usuario getUsuario (String _id) {
-		Cursor c = db.query(ContratoUsuarios.NOME_TABELA,colunas, ContratoUsuarios.Colunas._ID + " = ? ", new String[]{_id},
+	public Usuario getUsuario (String email) {
+		Cursor c = db.query(ContratoUsuarios.NOME_TABELA,colunas, ContratoUsuarios.Colunas.EMAIL + " = ? ", new String[]{email},
 				null, null, null);
 		
 		Usuario u = null; 
@@ -70,6 +70,8 @@ public class UsuarioDAO {
 			if (c.moveToFirst()) {
 					u = UsuarioDAO.getCursor(c);
 			}
+			else
+				u = new Usuario("", "", "", "");
 
 		} finally {
 			c.close();

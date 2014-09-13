@@ -37,20 +37,6 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovoUsuario);
 		edtSenha = (EditText) findViewById(R.id.edt_senhaNovoUsuario);
 		edtEmail = (EditText) findViewById(R.id.edt_emailNovoUsuario);
-		Bundle dados = getIntent().getExtras();
-
-		if (dados != null) {
-			String nome = dados.getString(ContratoUsuarios.Colunas.NOME);
-			String email = dados.getString(ContratoUsuarios.Colunas.EMAIL);
-			String senha = dados.getString(ContratoUsuarios.Colunas.SENHA);
-			idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
-			
-			edtNome.setText(nome);
-			edtEmail.setText(email);
-			edtSenha.setText(senha);
-			
-			dados = null; 
-			}
 	}
 
 	@Override
