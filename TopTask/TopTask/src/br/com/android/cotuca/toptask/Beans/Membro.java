@@ -48,6 +48,10 @@ public class Membro {
 		this.permissao = permissao;
 	}
 	
+	public void setID(int _id){
+		id = _id;
+	}
+	
 	
 	
 }

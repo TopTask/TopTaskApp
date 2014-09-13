@@ -3,15 +3,17 @@ package br.com.android.cotuca.toptask.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoMembros;
-import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Membro;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class MembroDAO {
 
@@ -20,7 +22,7 @@ public class MembroDAO {
 	private SQLiteDatabase db;
 	private String[] colunas = new String[] {
 			ContratoMembros.Colunas._ID,
-			ContratoMembros.Colunas.ID_PROJETOS,
+			ContratoMembros.Colunas.ID_PROJETO,
 			ContratoMembros.Colunas.ID_USUARIO,
 			ContratoMembros.Colunas.ID_USUARIO};
 	
@@ -62,9 +64,21 @@ public class MembroDAO {
 		return membros;
 	}
 	
-	public static Membro getMembro(int id){
-		
+	public Membro getMembro(String _id){
+		Cursor c = db.query(ContratoMembros.NOME_TABELA,colunas, ContratoMembros.Colunas._ID + " = ? ", new String[]{_id},
+				null, null, ContratoUsuarios.Colunas.NOME);
+		//PODE ESTAR DANDO ERRO AQUI
+		Membro m = null;
+		try {
+		if (c.moveToFirst()){
+			m = MembroDAO.getCursor(c);
+		}
+		}finally {
+			c.close();
+		}
+		return m;
 	}
+	
 	
 	public static Membro getCursor(Cursor c) {
 
@@ -72,7 +86,7 @@ public class MembroDAO {
 		
 		int idUsuario = c.getInt(c.getColumnIndex(ContratoMembros.Colunas.ID_USUARIO));
 		
-		int idProjeto = c.getInt(c.getColumnIndex(ContratoMembros.Colunas.ID_PROJETOS));
+		int idProjeto = c.getInt(c.getColumnIndex(ContratoMembros.Colunas.ID_PROJETO));
 		
 		Membro.Permissao permissao;
 		int p = c.getInt(c.getColumnIndex(ContratoMembros.Colunas.PERMISSAO));
@@ -91,6 +105,38 @@ public class MembroDAO {
 		}
 		
 		return new Membro(_id, idUsuario, idProjeto, permissao);
+	}
+
+	
+	public void save(Membro membro) {
+		ContentValues values = new ContentValues();
+		values.put(ContratoMembros.Colunas._ID, membro.getId());
+		values.put(ContratoMembros.Colunas.ID_USUARIO,membro.getIdUsuario());
+		values.put(ContratoMembros.Colunas.ID_PROJETO, membro.getIdProjeto());
+		
+		int permissao = 0;
+		switch (membro.getPermissao()){
+		
+		case PO:
+			permissao = 0;
+			break;
+			
+		case SM:
+			permissao = 1;
+			break;
+			
+		case PR:
+			permissao = 2;
+			
+		}
+		values.put(ContratoMembros.Colunas.PERMISSAO, permissao);
+
+		
+		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
+		
+		long id = db.insert(ContratoMembros.NOME_TABELA, null, values);
+		
+		membro.setID((int) id);
 	}
 	
 }
