@@ -133,7 +133,7 @@ DateDialog.SetDateListener {
 				//Integer resposta = manip.executaAcoes(projetoAtu, ManipTarefaTask.ALTERAR_PROJETO);
 			}
 			Toast.makeText(getApplicationContext(), "Projeto criado com sucesso", Toast.LENGTH_SHORT).show();
-			Intent i = new Intent(this, MSimplesActivity.class);
+			Intent i = new Intent(this, ProjetosActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			
 			startActivity(i);

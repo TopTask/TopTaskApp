@@ -17,6 +17,7 @@ import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Activitys.CadastroTarefa;
 import br.com.android.cotuca.toptask.Adapter.AdapterTarefa;
+import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -26,10 +27,8 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 	private AdapterTarefa adapter;
 	private ListenerClickTarefa listener;
 	
+	private int idProjeto;
 	
-
-
-
 	@Override
 	public void onAttach(Activity activity) { 
 		super.onAttach(activity);
@@ -58,9 +57,16 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 //		int idProjeto = savedInstanceState.getInt("ID_PROJETO");
 //		Log.d("FRAGMENT_TAREFAS", idProjeto+"");
 		
+		Intent intentDadosRecebidos = getActivity().getIntent();
+		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
+		idProjeto = dadosRecebidos.getInt("ID_PROJETO");
+		
+		Log.d("FRAGMENT_TAREFAS", "Id do projeto na pagina de tarefas: "+idProjeto);
+
+		
 		TarefaDAO tarefas = TarefaDAO.getInstance(getActivity()); 
 		
-		adapter = new AdapterTarefa(getActivity(), tarefas.getNaoConcluidas());
+		adapter = new AdapterTarefa(getActivity(), tarefas.getNaoConcluidasDoProjeto(idProjeto));
 		//adapter = new TarefaAdapter(getActivity(), tarefas.getTarefas());
 		setListAdapter(adapter);
 		
@@ -96,7 +102,14 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 		
 		
 		if (id == R.id.action_add_nova_tarefa) {
+			
 			Intent i = new Intent(getActivity(),CadastroTarefa.class);
+			
+			Bundle dados = new Bundle();
+			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjeto);
+			dados.putInt("ACAO",0);
+			
+			i.putExtras(dados);
 			startActivity(i);
 		}
 		

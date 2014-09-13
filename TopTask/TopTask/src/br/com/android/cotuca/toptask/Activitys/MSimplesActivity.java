@@ -16,7 +16,6 @@
 
 package br.com.android.cotuca.toptask.Activitys;
 
-
 /**
  * @author jvgengo
  */
@@ -61,10 +60,12 @@ public class MSimplesActivity extends Activity implements
 	private String[] mPaginaTitulo;
 
 	private boolean actionModeAtivado = false;
-	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma tarefa for clicada no fragment de tarefas
-	
+	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma
+										// tarefa for clicada no fragment de
+										// tarefas
+
 	private int idProjetoSelecionado;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_menu);
@@ -95,7 +96,7 @@ public class MSimplesActivity extends Activity implements
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
 				invalidateOptionsMenu(); // Cria chamada para
-										// onPrepareOptionsMenu()
+											// onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
@@ -105,25 +106,24 @@ public class MSimplesActivity extends Activity implements
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		
-		
+
 		Intent intentDadosRecebidos = getIntent();
 		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
-		
+
 		if (dadosRecebidos == null) {
 			selectItem(0);
 		} else {
-			
+
 			idProjetoSelecionado = dadosRecebidos.getInt("ID_PROJETO");
-			
-			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado na main: "+ idProjetoSelecionado); 
-			
+
+			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado na main: "
+					+ idProjetoSelecionado);
+
 			selectItem(0);
 		}
-		
+
 		super.onCreate(savedInstanceState);
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -154,6 +154,12 @@ public class MSimplesActivity extends Activity implements
 		switch (item.getItemId()) {
 		case R.id.action_add:
 			Intent i = new Intent(this, CadastroTarefa.class);
+
+			Bundle dados = new Bundle();
+			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
+			dados.putInt("ACAO", 0);
+
+			i.putExtras(dados);
 			startActivity(i);
 			return true;
 		default:
@@ -176,20 +182,23 @@ public class MSimplesActivity extends Activity implements
 		// Criacao dos Fragments de cadas item
 		// ======================================
 		FragmentManager fm = getFragmentManager();
-		
+
 		if (posicao == 0) {
 			Fragment f_tarefas = new FragmentTarefas();
-			
-			Bundle dadosProjeto = new Bundle();
-			dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
-			
-			f_tarefas.setArguments(dadosProjeto);
-			Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "+ idProjetoSelecionado);
-			
-			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
+			if (idProjetoSelecionado != 0) {
+				Bundle dadosProjeto = new Bundle();
+				dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
+
+				f_tarefas.setArguments(dadosProjeto);
+				Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "
+						+ idProjetoSelecionado);
+			}
+			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
+					.commit();
 		} else if (posicao == 5) {
 			Fragment f_membros = new FragmentMembros();
-			fm.beginTransaction().replace(R.id.content_frame,f_membros).commit();
+			fm.beginTransaction().replace(R.id.content_frame, f_membros)
+					.commit();
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
@@ -203,8 +212,8 @@ public class MSimplesActivity extends Activity implements
 	}
 
 	/**
-	 * Ao usar o ActionBarDrawerToggle, você deve chamá-lo durante
-	 * OnPostCreate () e onConfigurationChanged () ...
+	 * Ao usar o ActionBarDrawerToggle, você deve chamá-lo durante OnPostCreate
+	 * () e onConfigurationChanged () ...
 	 */
 
 	@Override
@@ -223,38 +232,42 @@ public class MSimplesActivity extends Activity implements
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		int id = item.getItemId();
 		TarefaDAO tarefas = TarefaDAO.getInstance(this);
-		
+
 		if (id == R.id.acction_concluir_tarefa) {
 			tarefas.concluirTarefa(tarefaSelecionada);
 			tarefaSelecionada = null;
 			this.selectItem(0);
 			mode.finish();
 			return true;
-			
+
 		} else if (id == R.id.acction_editar_tarefa) {
 			Intent iEditar = new Intent(this, CadastroTarefa.class);
 			Bundle dados = new Bundle();
-			dados.putString(ContratoTarefas.Colunas.NOME,tarefaSelecionada.getNome());
-			dados.putString(ContratoTarefas.Colunas.DESCRICAO,tarefaSelecionada.getDescricao());
-			dados.putString(ContratoTarefas.Colunas.DATA_ENTREGA,tarefaSelecionada.getDataEntrega());
-			dados.putInt(ContratoTarefas.Colunas._ID,tarefaSelecionada.getID());
-			
+			dados.putString(ContratoTarefas.Colunas.NOME,
+					tarefaSelecionada.getNome());
+			dados.putString(ContratoTarefas.Colunas.DESCRICAO,
+					tarefaSelecionada.getDescricao());
+			dados.putString(ContratoTarefas.Colunas.DATA_ENTREGA,
+					tarefaSelecionada.getDataEntrega());
+			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
+
 			iEditar.putExtras(dados);
-			
+
 			startActivity(iEditar);
 			tarefaSelecionada = null;
 			this.selectItem(0);
 			mode.finish();
 			return true;
-			
+
 		} else if (id == R.id.acction_excluir_tarefa) {
 
-			Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + tarefaSelecionada.getID());
-			
+			Log.d(Tags.TOPTASK_ACTIVITY,
+					"ID tarefa:" + tarefaSelecionada.getID());
+
 			tarefas.delete(tarefaSelecionada);
 			tarefaSelecionada = null;
 			this.selectItem(0);
-			
+
 			mode.finish();
 			return true;
 		}
@@ -289,14 +302,13 @@ public class MSimplesActivity extends Activity implements
 
 	@Override
 	public void onTaskLongClick(Tarefa tarefa) {
-		
+
 		tarefaSelecionada = tarefa;
-		
+
 		Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + tarefaSelecionada.getID());
-		
+
 		startActionMode(this);
 		actionModeAtivado = true;
 	}
-
 
 }
