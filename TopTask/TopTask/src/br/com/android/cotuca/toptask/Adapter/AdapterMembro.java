@@ -3,6 +3,7 @@ package br.com.android.cotuca.toptask.Adapter;
 import java.util.List;
 
 import br.com.android.cotuca.toptask.Beans.Membro;
+import br.com.android.cotuca.toptask.Beans.Usuario;
 import android.R;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -63,15 +64,28 @@ public class AdapterMembro extends BaseAdapter{
 			}
 			
 			Membro membro = membros.get(position);
-//			UsuarioDAO
-			List<Usuario> usuarios = UsuarioDao.getUsuarios(); 
+		    Usuario u = UsuarioDAO.getUsuario(membro.getIdUsuario());
+			
 			
 			holder.id.setText(membro.getId());
-			holder.nome.setText(membro.getIdUsuario()); 
-			holder.email.setText(text);
-			holder.permissao.setText(text);
-		
+			holder.nome.setText(u.getNome()); 
+			holder.email.setText(u.getEmail());
+			String permissao = "";
+			switch(membro.getPermissao()){
+			case PO:
+				permissao = "Project Owner";
+				break;
 				
+			case SM:
+				permissao = "Scrum Master";
+				break;
+				
+			case PR:
+				permissao = "Programador";
+			}
+			holder.permissao.setText(permissao);
+		
+			
 		return view;
 	}
 	
