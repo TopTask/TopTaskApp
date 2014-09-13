@@ -12,15 +12,14 @@ import br.com.android.cotuca.toptask.BD.ContratoMembros;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Membro;
-import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class MembroDAO {
 
 	private static MembroDAO instancia;
 	private DBHelper dbHelper;
-	private SQLiteDatabase db;
-	private String[] colunas = new String[] {
+	private static SQLiteDatabase db;
+	private static String[] colunas = new String[] {
 			ContratoMembros.Colunas._ID,
 			ContratoMembros.Colunas.ID_PROJETO,
 			ContratoMembros.Colunas.ID_USUARIO,
@@ -40,7 +39,7 @@ public class MembroDAO {
 		
 	}
 	
-	public List<Membro> getMembros() {
+	public static List<Membro> getMembros() {
 
 
 		Cursor c = db.query(ContratoMembros.NOME_TABELA,colunas, null, null,
@@ -52,7 +51,7 @@ public class MembroDAO {
 		try {
 			if (c.moveToFirst()) {
 				do {
-					Membro m = MembroDAO.getCursor(c);
+					Membro m = getCursor(c);
 					membros.add(m);
 				} while (c.moveToNext());
 			}
@@ -64,14 +63,14 @@ public class MembroDAO {
 		return membros;
 	}
 	
-	public Membro getMembro(String _id){
+	public static Membro getMembro(String _id){
 		Cursor c = db.query(ContratoMembros.NOME_TABELA,colunas, ContratoMembros.Colunas._ID + " = ? ", new String[]{_id},
 				null, null, ContratoUsuarios.Colunas.NOME);
 		//PODE ESTAR DANDO ERRO AQUI
 		Membro m = null;
 		try {
 		if (c.moveToFirst()){
-			m = MembroDAO.getCursor(c);
+			m = getCursor(c);
 		}
 		}finally {
 			c.close();
@@ -80,7 +79,7 @@ public class MembroDAO {
 	}
 	
 	
-	public static Membro getCursor(Cursor c) {
+	private static Membro getCursor(Cursor c) {
 
 		int _id = c.getInt(c.getColumnIndex(ContratoMembros.Colunas._ID));
 		

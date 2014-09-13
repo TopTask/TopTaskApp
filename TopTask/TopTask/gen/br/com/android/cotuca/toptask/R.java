@@ -111,13 +111,14 @@ public final class R {
         public static final int activity_login_usuario=0x7f030005;
         public static final int activity_menu=0x7f030006;
         public static final int activity_projetos=0x7f030007;
-        public static final int adapter_projeto=0x7f030008;
-        public static final int adapter_tarefa=0x7f030009;
-        public static final int drawer_list_item=0x7f03000a;
-        public static final int fragment_cadastro_projeto=0x7f03000b;
-        public static final int fragment_cadastro_usuario=0x7f03000c;
-        public static final int fragment_login_usuario=0x7f03000d;
-        public static final int fragment_sem_projetos=0x7f03000e;
+        public static final int adapter_membro=0x7f030008;
+        public static final int adapter_projeto=0x7f030009;
+        public static final int adapter_tarefa=0x7f03000a;
+        public static final int drawer_list_item=0x7f03000b;
+        public static final int fragment_cadastro_projeto=0x7f03000c;
+        public static final int fragment_cadastro_usuario=0x7f03000d;
+        public static final int fragment_login_usuario=0x7f03000e;
+        public static final int fragment_sem_projetos=0x7f03000f;
     }
     public static final class menu {
         public static final int actionmode_tarefa=0x7f090000;
