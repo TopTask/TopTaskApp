@@ -99,7 +99,7 @@ DateDialog.SetDateListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		Log.i("ENTROU NO CLICK", "ENTROU NO CLICK");
-		if (id == R.id.action_accept_projeto) {
+		if (id == R.id.action_accept) {
 			Log.i("ENTROU NO IF", "ENTROU NO IF");
 			String nome = edtNome.getText().toString();
 			String descricao = edtDescricao.getText().toString();
@@ -112,13 +112,14 @@ DateDialog.SetDateListener {
 			
 			if (!ehAtu) {
 				Log.i("criarei um proj novo", "criarei um proj novo");
-				//Projeto novoProjeto = new Projeto(nome, descricao,data,1,1,"urlPic");
+				Projeto novoProjeto = new Projeto(nome, descricao,data,1,1,"urlPic");
 				
-				Projeto novoProjeto = new Projeto(nome, descricao,data);
+//				Projeto novoProjeto = new Projeto(nome, descricao,data,1,1,"");
 				
 				
 				//TEREMOS Q CRIAR UMA CLASSE QUE SALVARA EM JSON O idUsuario e idProjeto
 				//PRA N TER QUE FICAR PESQUISANDO QND FOR INSERIR/ALTERAR/ETC 
+				
 				dao.save(novoProjeto); 
 				//Integer resposta = manip.executaAcoes(novoProjeto, ManipProjetoTask.ADD_PROJETO);
 				} else {

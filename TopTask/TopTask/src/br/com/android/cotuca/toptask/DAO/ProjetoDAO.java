@@ -123,9 +123,9 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.NOME, projeto.getNome());
 		values.put(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
 		values.put(ContratoProjetos.Colunas.DATA_ENTREGA,projeto.getDataEntrega());
-		//values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
-		//values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
-		//values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
+		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
+		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
 		
 		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
 		
