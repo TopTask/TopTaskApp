@@ -62,8 +62,8 @@ public class AdapterProjeto extends BaseAdapter{
 		
 		Projeto projeto = projetos.get(position);
 		holder.nomeProjeto.setText(projeto.getNome());
-		holder.dataTermino.setText(projeto.getData());
-		holder.descrProjeto.setText(projeto.getDescr());
+		holder.dataTermino.setText(projeto.getDataEntrega());
+		holder.descrProjeto.setText(projeto.getDescricao());
 	
 		//holder.imgDono.setImageBitmap(); colocar aqui a imagem de acordo com o icone do dono 
 		

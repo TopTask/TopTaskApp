@@ -81,7 +81,7 @@ public class ManipTarefaTask {
 				soap.addProperty(ContratoTarefas.Colunas.PRIORIDADE, tarefa.getPrioridade());
 				soap.addProperty(ContratoTarefas.Colunas.PROJETO, tarefa.getIdProjeto());
 				soap.addProperty(ContratoTarefas.Colunas.CONCLUIDA, tarefa.getConcluida());
-				soap.addProperty(ContratoTarefas.Colunas.FOTO, tarefa.getFoto());
+				//soap.addProperty(ContratoTarefas.Colunas.FOTO, tarefa.getFoto());
 				
 			} else if (op == EXCLUIR_TAREFA) {
 
@@ -96,7 +96,7 @@ public class ManipTarefaTask {
 				soap.addProperty(ContratoTarefas.Colunas.PRIORIDADE, tarefa.getPrioridade());
 				soap.addProperty(ContratoTarefas.Colunas.PROJETO, tarefa.getIdProjeto());
 				soap.addProperty(ContratoTarefas.Colunas.CONCLUIDA, tarefa.getConcluida());
-				soap.addProperty(ContratoTarefas.Colunas.FOTO, tarefa.getFoto());
+				//soap.addProperty(ContratoTarefas.Colunas.FOTO, tarefa.getFoto());
 
 			} else {
 				
