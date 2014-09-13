@@ -1,51 +1,59 @@
 package br.com.android.cotuca.toptask.Beans;
 
-import android.media.Image;
+/**
+ * 
+ * @author laistardelli
+ * Bean projeto
+ *
+ */
 
 public class Projeto {
-	
+
+	//========================================
 	private int id;
-	private int idUsuario; 
-	private String nome;      
-	private String email;   
-	private String descr;     
-	private Image foto;
-	private String data;
+	private String nome;
+	private String dataEntrega;
+	private String descricao;
+	private int dono;
+	private int concluida;
+	private String foto;
+	//========================================
 	
 	
-	public Projeto(int id, int idUsuario, String nome, String email,
-			String descr, String data) {
+	public Projeto(String nome, String descricao, String dataEntrega) {
 		super();
-		this.id = id;
-		this.idUsuario = idUsuario;
 		this.nome = nome;
-		this.email = email;
-		this.descr = descr;
-		this.data = data;
+		this.dataEntrega = dataEntrega;
+		this.descricao = descricao;
 	}
 	
-	public Projeto(int id, int idUsuario, String nome, String email,
-			String descr, Image foto, String data) {
+	
+	public Projeto(String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {
 		super();
-		this.id = id;
-		this.idUsuario = idUsuario;
 		this.nome = nome;
-		this.email = email;
-		this.descr = descr;
+		this.dataEntrega = dataEntrega;
+		this.descricao = descricao;
+		this.dono = dono;
+		this.concluida = concluida;
 		this.foto = foto;
-		this.data = data;
 	}
+	
+	public Projeto(int id,String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataEntrega = dataEntrega;
+		this.descricao = descricao;
+		this.dono = dono;
+		this.concluida = concluida;
+		this.foto = foto;
+	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
 	}
 	public String getNome() {
 		return nome;
@@ -53,31 +61,34 @@ public class Projeto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getEmail() {
-		return email;
+	public String getDataEntrega() {
+		return dataEntrega;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDataEntrega(String dataEntrega) {
+		this.dataEntrega = dataEntrega;
 	}
-	public String getDescr() {
-		return descr;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescr(String descr) {
-		this.descr = descr;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	public Image getFoto() {
+	public int getDono() {
+		return dono;
+	}
+	public void setDono(int dono) {
+		this.dono = dono;
+	}
+	public int getConcluida() {
+		return concluida;
+	}
+	public void setConcluida(int concluida) {
+		this.concluida = concluida;
+	}
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(Image foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
-	}  
-	
-	public String getData() {
-		return data;
 	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	
-
 }
