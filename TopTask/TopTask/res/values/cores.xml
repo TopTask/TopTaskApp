@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="padrao_laranja">#FA820C</color>
-
+	<color name="cinza_claro">#D3D3D3</color>
+	<color name="cinza">#BEBEBE</color>
 </resources>

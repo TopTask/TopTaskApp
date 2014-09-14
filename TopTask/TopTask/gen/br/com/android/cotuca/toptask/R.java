@@ -19,6 +19,8 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int cinza=0x7f060002;
+        public static final int cinza_claro=0x7f060001;
         public static final int padrao_laranja=0x7f060000;
     }
     public static final class dimen {
