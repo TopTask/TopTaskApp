@@ -75,8 +75,14 @@ public final class R {
         public static final int edt_data=0x7f0a0019;
         public static final int edt_data_tarefa=0x7f0a0005;
         public static final int edt_descricaoNovaTarefa=0x7f0a0004;
+<<<<<<< HEAD
         public static final int edt_emailLogin=0x7f0a001d;
         public static final int edt_emailNovoProjeto=0x7f0a001b;
+=======
+        public static final int edt_emailLogin=0x7f0a0022;
+        public static final int edt_emailNovoUsuario=0x7f0a0020;
+        public static final int edt_msg=0x7f0a000a;
+>>>>>>> TTLais
         public static final int edt_nomeNovaTarefa=0x7f0a0003;
         public static final int edt_nomeNovoProjeto=0x7f0a0017;
         public static final int edt_nomeNovoUsuario=0x7f0a001a;

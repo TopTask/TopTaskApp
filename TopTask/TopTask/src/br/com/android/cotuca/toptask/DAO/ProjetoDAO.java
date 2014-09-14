@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -125,6 +124,11 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
 		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
 		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+<<<<<<< HEAD
+=======
+		
+		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
+>>>>>>> TTLais
 		
 		long id = db.insert(ContratoProjetos.NOME_TABELA, null, values);
 		
@@ -136,12 +140,12 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.NOME, projeto.getNome());
 		values.put(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
 		values.put(ContratoProjetos.Colunas.DATA_ENTREGA,projeto.getDataEntrega());
-		//values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
-		//values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
-		//values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
+		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
+		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
 		
-		db.update(ContratoTarefas.NOME_TABELA, values,
-				ContratoTarefas.Colunas._ID + " = ? ",
+		db.update(ContratoProjetos.NOME_TABELA, values,
+				ContratoProjetos.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(projeto.getId()) });
 	}
 

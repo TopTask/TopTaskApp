@@ -19,15 +19,6 @@ public class Projeto {
 	private String foto;
 	//========================================
 	
-	
-	public Projeto(String nome, String descricao, String dataEntrega) {
-		super();
-		this.nome = nome;
-		this.dataEntrega = dataEntrega;
-		this.descricao = descricao;
-	}
-	
-	
 	public Projeto(String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {
 		super();
 		this.nome = nome;

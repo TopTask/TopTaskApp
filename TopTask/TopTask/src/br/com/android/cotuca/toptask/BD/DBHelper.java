@@ -1,6 +1,6 @@
 package br.com.android.cotuca.toptask.BD;
 
-import java.io.InputStream;
+//import java.io.InputStream;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +10,40 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	private static DBHelper instancia;
 	private static final String DB_NOME = "DB_Toptask";
+<<<<<<< HEAD
 	private static final int DB_VERSAO =18;
 //	private static final String SQL_CREATE_1 = "";
+=======
+	private static final int DB_VERSAO =17;
+>>>>>>> TTLais
 	
-	private static final String SQL_DROP_TAREFA = "DROP TABLE IF EXISTS " + ContratoTarefas.NOME_TABELA;
+	private static final String SQL_DROP_USUARIO = "DROP TABLE IF EXISTS " + ContratoUsuarios.NOME_TABELA;
 	private static final String SQL_DROP_PROJETO = "DROP TABLE IF EXISTS " + ContratoProjetos.NOME_TABELA;
+	private static final String SQL_DROP_TAREFA = "DROP TABLE IF EXISTS " + ContratoTarefas.NOME_TABELA;
+	
+	private static final String SQL_CREATE_USUARIO = String.format(
+			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			"%s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT)", 
+			ContratoUsuarios.NOME_TABELA,
+			ContratoUsuarios.Colunas._ID, 
+			ContratoUsuarios.Colunas.NOME,
+			ContratoUsuarios.Colunas.EMAIL,
+			ContratoUsuarios.Colunas.SENHA, 
+			ContratoUsuarios.Colunas.FOTO
+			);
+
+	private static final String SQL_CREATE_PROJETO = String.format(
+			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			"%s TEXT NOT NULL, %s TEXT, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s TEXT)", 
+			ContratoProjetos.NOME_TABELA,
+			ContratoProjetos.Colunas._ID, 
+			ContratoProjetos.Colunas.NOME,
+			ContratoProjetos.Colunas.DESCRICAO, 
+			ContratoProjetos.Colunas.DATA_ENTREGA,
+			ContratoProjetos.Colunas.DONO,
+			ContratoProjetos.Colunas.CONCLUIDA,
+			ContratoProjetos.Colunas.FOTO
+			);
 	
 	private static final String SQL_CREATE_TAREFA = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -29,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper{
 			ContratoTarefas.Colunas.PROJETO,
 			ContratoTarefas.Colunas.CONCLUIDA);
 	
+<<<<<<< HEAD
 	
 	private static final String SQL_CREATE_PROJETO = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -43,6 +73,8 @@ public class DBHelper extends SQLiteOpenHelper{
 			ContratoProjetos.Colunas.FOTO
 			);
 	
+=======
+>>>>>>> TTLais
 	private DBHelper(Context context){
 		super(context, DB_NOME, null, DB_VERSAO);
 		
@@ -60,8 +92,14 @@ public class DBHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_DROP_TAREFA);
 		db.execSQL(SQL_DROP_PROJETO);
+<<<<<<< HEAD
 		db.execSQL(SQL_CREATE_TAREFA);
+=======
+		db.execSQL(SQL_DROP_USUARIO);
+		db.execSQL(SQL_CREATE_USUARIO);
+>>>>>>> TTLais
 		db.execSQL(SQL_CREATE_PROJETO);
+		db.execSQL(SQL_CREATE_TAREFA);
 	}
 
 	@Override
@@ -69,8 +107,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		onCreate(db);
 	}
 	
-	private void lerBanco(InputStream in) {
-
-	}
+	//private void lerBanco(InputStream in) {
+	//}
 
 }

@@ -2,21 +2,29 @@ package br.com.android.cotuca.toptask.Beans;
 
 public class Usuario {
 	
+	//========================================
 	private int id;
 	private String nome;
 	private String email;
 	private String senha;
-	private String descricao;
-	//private Image foto;
+	private String foto;
+	//========================================
 	
-
-	public Usuario(String nome, String email, String senha,
-			String descricao) {
+	public Usuario(int id, String nome, String email, String senha, String foto) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.foto = foto;
+	}
+	
+	public Usuario(String nome, String email, String senha, String foto) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.descricao = descricao;
+		this.foto = foto;
 	}
 
 	public int getId() {
@@ -47,14 +55,10 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getDescricao() {
-		return descricao;
+	public String getFoto() {
+		return foto;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
-	
-	
-	
-	
 }
