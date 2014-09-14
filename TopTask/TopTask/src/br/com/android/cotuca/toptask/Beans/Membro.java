@@ -6,6 +6,7 @@ public class Membro {
 	private int idUsuario;
 	private int idProjeto;
 	private Permissao permissao;
+	//private Image foto;
 	public static enum Permissao{
 		PO,SM,PR
 		// Product Owner
@@ -28,29 +29,42 @@ public class Membro {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 	public int getIdProjeto() {
 		return idProjeto;
 	}
+	
+//	public Image getFoto(){
+//		return foto;
+//	}
 
-	public void setIdProjeto(int idProjeto) {
-		this.idProjeto = idProjeto;
-	}
-
+	
 	public Permissao getPermissao() {
 		return permissao;
-	}
-
-	public void setPermissao(Permissao permissao) {
-		this.permissao = permissao;
 	}
 	
 	public void setID(int _id){
 		id = _id;
 	}
+	
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	public void setIdProjeto(int idProjeto) {
+		this.idProjeto = idProjeto;
+	}
+	
+//	public void setFoto(Image novaFoto){
+//		foto = novaFoto;
+//	}
+
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
+	
+	
 	
 	
 	

@@ -29,7 +29,6 @@ public class AdapterTarefa extends BaseAdapter{
 	
 	@Override
 	public int getCount() {
-		
 		return tarefas.size();
 	}
 
