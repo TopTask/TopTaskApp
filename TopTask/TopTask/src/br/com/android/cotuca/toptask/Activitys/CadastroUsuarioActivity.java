@@ -66,26 +66,39 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 			String email = edtEmail.getText().toString();
 			String senha = edtSenha.getText().toString();
 			
-			if(nome == null || nome.equals("") || email == null || email.equals("") || senha == null || senha.equals("")){
-				Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-				return false;
-				}
-			Log.i("criarei um usu novo", "criarei um usu novo");
-			Usuario novoUsuario = new Usuario(nome, email,senha,"urlPic");
+//			String validacaoEmail = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//			
+//			if(nome == null || nome.equals("") || email == null || email.equals("") || senha == null || senha.equals("")){
+//				Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+//				return false;
+//				}
+//            Boolean ehValido = email.matches(validacaoEmail);
+//            if (ehValido == false) {
+//            	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
+//				return false;
+//            }
+//            if(senha.length()<7){
+//            	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
+//				return false;
+//            }
 			
-			dao.save(novoUsuario); 
+			if(validaCampos(nome, email, senha)){
+				Log.i("criarei um usu novo", "criarei um usu novo");
+				Usuario novoUsuario = new Usuario(nome, email,senha,"urlPic");
+			
+				dao.save(novoUsuario); 
 			
 			//ManipUsuarioTask task= new ManipUsuarioTask();
 			//Integer resposta = task.executaAcoes(usu, ManipUsuarioTask.ADD_USU);
 			
 			
-			Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-			Intent i = new Intent(this, LoginUsuarioActivity.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(i);
+				Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(this, LoginUsuarioActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
 			
-			return true;
-			
+				return true;
+			}
 		} else if (id == android.R.id.home) {
 			Intent i = new Intent (getApplicationContext(), EntradaActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -96,6 +109,28 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public boolean validaCampos(String nome, String email, String senha){
+		String validacaoEmail = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		
+		if(nome == null || nome.equals("") || email == null || email.equals("") || senha == null || senha.equals("")){
+			Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		
+        Boolean emailEhValido = email.matches(validacaoEmail);
+        
+        if (emailEhValido == false) {
+        	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
+			return false;
+        }
+        
+        if(senha.length()<6){
+        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
+			return false;
+        }
+        return true;
 	}
 
 }

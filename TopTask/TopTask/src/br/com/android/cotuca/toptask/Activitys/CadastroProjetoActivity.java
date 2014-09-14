@@ -99,7 +99,7 @@ DateDialog.SetDateListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		Log.i("ENTROU NO CLICK", "ENTROU NO CLICK");
-		if (id == R.id.action_accept_projeto) {
+		if (id == R.id.action_accept) {
 			Log.i("ENTROU NO IF", "ENTROU NO IF");
 			String nome = edtNome.getText().toString();
 			String descricao = edtDescricao.getText().toString();
