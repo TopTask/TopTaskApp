@@ -63,7 +63,7 @@ public class MSimplesActivity extends Activity implements
 										// tarefa for clicada no fragment de
 										// tarefas
 
-	private int idProjetoSelecionado;
+	private int idProjetoSelecionado = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +114,6 @@ public class MSimplesActivity extends Activity implements
 		} else {
 
 			idProjetoSelecionado = dadosRecebidos.getInt("ID_PROJETO");
-
-			Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado na main: "
-					+ idProjetoSelecionado);
 
 			selectItem(0);
 		}
@@ -192,8 +189,7 @@ public class MSimplesActivity extends Activity implements
 				Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "
 						+ idProjetoSelecionado);
 			}
-			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
-					.commit();
+			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
 		} else if (posicao == 5) {
 			Fragment f_membros = new FragmentMembros();
 			fm.beginTransaction().replace(R.id.content_frame, f_membros)

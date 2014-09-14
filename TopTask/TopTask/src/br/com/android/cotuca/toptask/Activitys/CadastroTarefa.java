@@ -43,7 +43,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private PendingIntent pi;
 
 	private int dia, mes, ano;
-
+	private String dataOriginal;
 	private int idProjeto;
 
 	@Override
@@ -139,11 +139,13 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 	@Override
 	public void onSet(int ano, int mes, int dia) {
-
-		edtData.setText(dia + "/" + mes + "/" + ano);
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
+		dataOriginal = (dia + "/" + mes + "/" + ano);
+		mes += 1;
+		edtData.setText(dia + "/" + mes + "/" + ano);
+		
 
 	}
 
@@ -154,7 +156,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		if (R.id.action_criar_tarefa == id) {
 			String nome = edtNome.getText().toString();
 			String descricao = edtDescricao.getText().toString();
-			String data = edtData.getText().toString();
+			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem().toString());
 
 			if (!ehAtu) {
@@ -208,13 +210,14 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		// setar a data atual
 		c.set(ano, mes, dia);
 
-		Intent i = new Intent(getApplicationContext(),
-				NotificacaoSimplesReceiver.class);
+		Intent i = new Intent(this,NotificacaoSimplesReceiver.class);
 
 		Bundle dados = new Bundle();
 
 		dados.putString("titulo", titulo);
 		dados.putString("descricao", descricao);
+		dados.putInt("ID_PROJETO", idProjeto);
+		
 		i.putExtras(dados);
 
 		pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);

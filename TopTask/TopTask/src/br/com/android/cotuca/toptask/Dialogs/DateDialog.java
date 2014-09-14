@@ -19,7 +19,7 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
 		super.onAttach(activity);
 		
 		if (!(activity instanceof SetDateListener)) {
-			Log.e("DateDialog", "NÃo implementa SetDateListener");
+			Log.e("DateDialog", "Nï¿½o implementa SetDateListener");
 			throw new RuntimeException("Activity nÃ£o implementa a interface SetDateListener");
 		} else {
 			listener = (SetDateListener) activity;
@@ -39,8 +39,6 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-		//Toast.makeText(getActivity(), year + "-" + (monthOfYear + 1) + "-" + dayOfMonth, Toast.LENGTH_LONG).show();
-		
 		listener.onSet(year, monthOfYear, dayOfMonth);
 	}
 	

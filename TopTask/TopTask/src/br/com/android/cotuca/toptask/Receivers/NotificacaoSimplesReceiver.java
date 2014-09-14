@@ -27,9 +27,11 @@ public class NotificacaoSimplesReceiver extends BroadcastReceiver{
 		Bundle dados = intent.getExtras();
 		String titulo = dados.getString("titulo");
 		String descricao = dados.getString("descricao");
+		int idProjeto = dados.getInt("ID_PROJETO");
+		Log.d("ID_PROJETO", idProjeto+"");
 		
 		//envia notificao
-		notificar(context,titulo, descricao);
+		notificar(context,titulo, descricao,idProjeto);
 	}
 	
 	/**
@@ -39,20 +41,26 @@ public class NotificacaoSimplesReceiver extends BroadcastReceiver{
 	 * @param descricao o que essa notificao significa
 	 * @param context contexto da aplicacao
 	 */
-	public void notificar(Context context, String titulo, String descricao) {
+	public void notificar(Context context, String titulo, String descricao,int idProjeto) {
 		
-		Log.d(Tags.TOPTASK_TAG,"ENTROU NO NOTIFICAR");
 		//o que contera a notificao 
 		Notification.Builder builder = new Notification.Builder(context);
+		
 		builder.setContentTitle("Sua tarefa termina hoje!");
 		builder.setContentText(titulo);
-		builder.setSmallIcon(android.R.drawable.ic_dialog_info);
+		builder.setSmallIcon(android.R.drawable.ic_menu_today);
 		
 		//preparando para enviar
 		Intent i = new Intent(context, MSimplesActivity.class);
-		PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
+
+		Bundle b = new Bundle();
+		b.putInt("ID_PROJETO", idProjeto);
+		i.putExtras(b);
+		
+		PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
 		builder.setContentIntent(pi);
 		builder.setAutoCancel(true);
+		
 		
 		//cria a notificao
 		Notification n = builder.build();
@@ -62,10 +70,7 @@ public class NotificacaoSimplesReceiver extends BroadcastReceiver{
 		
 		//envia a notificao
 		manager.notify(5128,n);
-		Log.d(Tags.TOPTASK_TAG,"NOTIFICOU");
 
-		//Toast.makeText(context, "Notificacao enviada", Toast.LENGTH_LONG).show();
-		
 	}
 
 }

@@ -40,9 +40,9 @@ public class ProjetosActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		getActionBar().setTitle("Projetos");
 		setContentView(R.layout.activity_projetos);
-		
+
 		selecionaFragmentAdequado();
-		
+
 	}
 
 	@Override
@@ -58,8 +58,11 @@ public class ProjetosActivity extends Activity implements
 		// ao clicar no botao de criar novo projeto
 		// abrir dialog com opções de Simples ou Scrum
 
-		chamarDialog();
+		// chamarDialog();
 
+		Intent iCadastro = new Intent(this,
+				CadastroProjetoActivity.class);
+		startActivity(iCadastro);
 	}
 
 	@Override
@@ -135,7 +138,7 @@ public class ProjetosActivity extends Activity implements
 			projetoSelecionado = null;
 			selecionaFragmentAdequado();
 			mode.finish();
-			
+
 			return true;
 
 		} else if (idItem == R.id.action_editar_projeto) {
@@ -163,7 +166,7 @@ public class ProjetosActivity extends Activity implements
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	private void selecionaFragmentAdequado() {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
 		List<Projeto> listProjetos = projetos.getProjetos();
@@ -182,6 +185,5 @@ public class ProjetosActivity extends Activity implements
 		ft.commit();
 
 	}
-
 
 }
