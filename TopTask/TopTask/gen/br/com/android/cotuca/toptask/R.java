@@ -55,6 +55,7 @@ public final class R {
         public static final int ic_launcher=0x7f02000c;
         public static final int icon=0x7f02000d;
         public static final int new_task=0x7f02000e;
+        public static final int selector_name=0x7f02000f;
     }
     public static final class id {
         public static final int acction_concluir_tarefa=0x7f0b0024;

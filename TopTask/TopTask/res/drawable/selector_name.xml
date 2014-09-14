@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Pressed State -->
+    <item android:state_pressed="true" android:color="@color/padrao_laranja"/>
+    
+    <item android:state_activated="true" android:color="@color/padrao_laranja" />
+
+    <!-- Default State -->
+    <item android:color="@color/cinza_claro"/>
+
+</selector>
