@@ -66,22 +66,6 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 			String email = edtEmail.getText().toString();
 			String senha = edtSenha.getText().toString();
 			
-//			String validacaoEmail = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-//			
-//			if(nome == null || nome.equals("") || email == null || email.equals("") || senha == null || senha.equals("")){
-//				Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-//				return false;
-//				}
-//            Boolean ehValido = email.matches(validacaoEmail);
-//            if (ehValido == false) {
-//            	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
-//				return false;
-//            }
-//            if(senha.length()<7){
-//            	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
-//				return false;
-//            }
-			
 			if(validaCampos(nome, email, senha)){
 				Log.i("criarei um usu novo", "criarei um usu novo");
 				Usuario novoUsuario = new Usuario(nome, email,senha,"urlPic");

@@ -124,11 +124,9 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
 		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
 		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
-<<<<<<< HEAD
-=======
 		
 		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
->>>>>>> TTLais
+
 		
 		long id = db.insert(ContratoProjetos.NOME_TABELA, null, values);
 		

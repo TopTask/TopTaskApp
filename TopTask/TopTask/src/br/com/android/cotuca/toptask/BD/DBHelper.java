@@ -10,12 +10,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	private static DBHelper instancia;
 	private static final String DB_NOME = "DB_Toptask";
-<<<<<<< HEAD
 	private static final int DB_VERSAO =18;
-//	private static final String SQL_CREATE_1 = "";
-=======
-	private static final int DB_VERSAO =17;
->>>>>>> TTLais
 	
 	private static final String SQL_DROP_USUARIO = "DROP TABLE IF EXISTS " + ContratoUsuarios.NOME_TABELA;
 	private static final String SQL_DROP_PROJETO = "DROP TABLE IF EXISTS " + ContratoProjetos.NOME_TABELA;
@@ -58,23 +53,6 @@ public class DBHelper extends SQLiteOpenHelper{
 			ContratoTarefas.Colunas.PROJETO,
 			ContratoTarefas.Colunas.CONCLUIDA);
 	
-<<<<<<< HEAD
-	
-	private static final String SQL_CREATE_PROJETO = String.format(
-			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			"%s TEXT NOT NULL, %s TEXT, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s TEXT)", 
-			ContratoProjetos.NOME_TABELA,
-			ContratoProjetos.Colunas._ID, 
-			ContratoProjetos.Colunas.NOME,
-			ContratoProjetos.Colunas.DESCRICAO, 
-			ContratoProjetos.Colunas.DATA_ENTREGA,
-			ContratoProjetos.Colunas.DONO,
-			ContratoProjetos.Colunas.CONCLUIDA,
-			ContratoProjetos.Colunas.FOTO
-			);
-	
-=======
->>>>>>> TTLais
 	private DBHelper(Context context){
 		super(context, DB_NOME, null, DB_VERSAO);
 		
@@ -90,8 +68,10 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(SQL_DROP_USUARIO);
 		db.execSQL(SQL_DROP_TAREFA);
 		db.execSQL(SQL_DROP_PROJETO);
+		db.execSQL(SQL_CREATE_USUARIO);
 		db.execSQL(SQL_CREATE_PROJETO);
 		db.execSQL(SQL_CREATE_TAREFA);
 	}
