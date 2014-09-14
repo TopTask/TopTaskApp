@@ -87,8 +87,9 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
 
-			} else {
+			} else if (acao == 1){
 				ehAtu = true;
+				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados
 						.getString(ContratoTarefas.Colunas.DESCRICAO);
@@ -167,7 +168,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				tarefaAtu.setDescricao(descricao);
 				tarefaAtu.setDataEntrega(data);
 				tarefaAtu.setPrioridade(prioridade);
-
+				
 				dao.update(tarefaAtu);
 
 			}

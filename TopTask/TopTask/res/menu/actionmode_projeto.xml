@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_entrar_projeto"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Entrar Projeto"/>
+    
+    <item
+        android:id="@+id/action_excluir_projeto"
+        android:icon="@drawable/ic_action_discard"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Excluir Projeto"/>
+    
+    <item
+        android:id="@+id/action_editar_projeto"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="Editar Projeto"/>
+
+</menu>

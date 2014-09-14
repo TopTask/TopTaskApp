@@ -39,14 +39,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
-//import android.widget.Toast;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.tags.Tags;
+//import android.widget.Toast;
 
 public class MSimplesActivity extends Activity implements
 		FragmentTarefas.ListenerClickTarefa, Callback {
@@ -243,6 +242,8 @@ public class MSimplesActivity extends Activity implements
 		} else if (id == R.id.acction_editar_tarefa) {
 			Intent iEditar = new Intent(this, CadastroTarefa.class);
 			Bundle dados = new Bundle();
+			
+			dados.putInt("ACAO", 1);
 			dados.putString(ContratoTarefas.Colunas.NOME,
 					tarefaSelecionada.getNome());
 			dados.putString(ContratoTarefas.Colunas.DESCRICAO,
@@ -250,7 +251,8 @@ public class MSimplesActivity extends Activity implements
 			dados.putString(ContratoTarefas.Colunas.DATA_ENTREGA,
 					tarefaSelecionada.getDataEntrega());
 			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
-
+			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
+			
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);
