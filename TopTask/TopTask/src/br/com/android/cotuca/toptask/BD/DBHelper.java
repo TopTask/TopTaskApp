@@ -92,12 +92,6 @@ public class DBHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_DROP_TAREFA);
 		db.execSQL(SQL_DROP_PROJETO);
-<<<<<<< HEAD
-		db.execSQL(SQL_CREATE_TAREFA);
-=======
-		db.execSQL(SQL_DROP_USUARIO);
-		db.execSQL(SQL_CREATE_USUARIO);
->>>>>>> TTLais
 		db.execSQL(SQL_CREATE_PROJETO);
 		db.execSQL(SQL_CREATE_TAREFA);
 	}
