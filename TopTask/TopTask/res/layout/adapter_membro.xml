@@ -5,44 +5,38 @@
     android:orientation="horizontal"
     android:padding="6dp" >
 
-    <FrameLayout
-        android:layout_weight="1"
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:padding="2dp" >
-
-        <ImageView
-            android:id="@+id/img_projeto"
-            android:src="@drawable/ic_action_new" 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
         android:padding="6dp" >
 
         <TextView
-            android:id="@+id/txt_nomeProjeto"
+            android:id="@+id/txt_indice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:hint="@string/g_nome" />
+            android:hint="@string/g_indice" />
 
         <TextView
-            android:id="@+id/txt_descricaoProjeto"
+            android:id="@+id/txt_nome_membro"
+            android:layout_toRightOf="@+id/txt_indice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/g_descricao" />
-    </LinearLayout>
+            android:hint="@string/g_nome" />
+        
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_below="@+id/txt_indice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/g_email" />
+    </RelativeLayout>
 	
     <TextView
+        android:id="@+id/txt_permissao"
+        android:layout_gravity="center"
         android:layout_weight="1" 
-        android:id="@+id/txt_dataTermino"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:hint="@string/g_data_termino"/>
+        android:hint="@string/g_situacao"/>
     
 </LinearLayout>

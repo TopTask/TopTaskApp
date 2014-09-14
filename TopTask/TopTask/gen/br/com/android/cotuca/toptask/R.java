@@ -51,21 +51,21 @@ public final class R {
         public static final int new_task=0x7f02000d;
     }
     public static final class id {
-        public static final int acction_concluir_tarefa=0x7f0a0026;
-        public static final int acction_editar_tarefa=0x7f0a0028;
-        public static final int acction_excluir_tarefa=0x7f0a0027;
-        public static final int action_accept=0x7f0a0029;
-        public static final int action_accept_projeto=0x7f0a002f;
-        public static final int action_add=0x7f0a002e;
-        public static final int action_add_nova_tarefa=0x7f0a0031;
-        public static final int action_criar_tarefa=0x7f0a002a;
-        public static final int action_criar_usuario=0x7f0a002b;
-        public static final int action_entrar=0x7f0a002d;
-        public static final int action_sair_conta=0x7f0a0030;
+        public static final int acction_concluir_tarefa=0x7f0a002a;
+        public static final int acction_editar_tarefa=0x7f0a002c;
+        public static final int acction_excluir_tarefa=0x7f0a002b;
+        public static final int action_accept=0x7f0a002d;
+        public static final int action_accept_projeto=0x7f0a0033;
+        public static final int action_add=0x7f0a0032;
+        public static final int action_add_nova_tarefa=0x7f0a0035;
+        public static final int action_criar_tarefa=0x7f0a002e;
+        public static final int action_criar_usuario=0x7f0a002f;
+        public static final int action_entrar=0x7f0a0031;
+        public static final int action_sair_conta=0x7f0a0034;
         public static final int background=0x7f0a000c;
         public static final int btn_cadastrar=0x7f0a000d;
-        public static final int btn_criarProjeto=0x7f0a0024;
-        public static final int btn_data=0x7f0a001d;
+        public static final int btn_criarProjeto=0x7f0a0028;
+        public static final int btn_data=0x7f0a0021;
         public static final int btn_data_tarefa=0x7f0a0006;
         public static final int btn_entrar=0x7f0a000e;
         public static final int btn_enviar=0x7f0a000b;
@@ -73,34 +73,38 @@ public final class R {
         public static final int container=0x7f0a0000;
         public static final int content_frame=0x7f0a0011;
         public static final int drawer_layout=0x7f0a0010;
-        public static final int edt_DescricaoNovoProjeto=0x7f0a001b;
-        public static final int edt_data=0x7f0a001e;
+        public static final int edt_DescricaoNovoProjeto=0x7f0a001f;
+        public static final int edt_data=0x7f0a0022;
         public static final int edt_data_tarefa=0x7f0a0005;
         public static final int edt_descricaoNovaTarefa=0x7f0a0004;
-        public static final int edt_emailLogin=0x7f0a0022;
-        public static final int edt_emailNovoProjeto=0x7f0a0020;
+        public static final int edt_emailLogin=0x7f0a0026;
+        public static final int edt_emailNovoProjeto=0x7f0a0024;
         public static final int edt_msg=0x7f0a000a;
         public static final int edt_nomeNovaTarefa=0x7f0a0003;
-        public static final int edt_nomeNovoProjeto=0x7f0a001c;
-        public static final int edt_nomeNovoUsuario=0x7f0a001f;
-        public static final int edt_senhaLogin=0x7f0a0023;
-        public static final int edt_senhaNovoUsuario=0x7f0a0021;
-        public static final int entrada=0x7f0a002c;
+        public static final int edt_nomeNovoProjeto=0x7f0a0020;
+        public static final int edt_nomeNovoUsuario=0x7f0a0023;
+        public static final int edt_senhaLogin=0x7f0a0027;
+        public static final int edt_senhaNovoUsuario=0x7f0a0025;
+        public static final int entrada=0x7f0a0030;
         public static final int flay_img_tarefa=0x7f0a0001;
         public static final int frag_conversa=0x7f0a0008;
         public static final int imgIcone=0x7f0a000f;
-        public static final int imgProjeto=0x7f0a0025;
-        public static final int img_donoTarefa=0x7f0a0017;
-        public static final int img_projeto=0x7f0a0013;
+        public static final int imgProjeto=0x7f0a0029;
+        public static final int img_donoTarefa=0x7f0a001b;
+        public static final int img_projeto=0x7f0a0017;
         public static final int img_tarefa=0x7f0a0002;
         public static final int left_drawer=0x7f0a0012;
         public static final int s_prioridade=0x7f0a0007;
-        public static final int txt_dataTermino=0x7f0a0016;
-        public static final int txt_descricaoProjeto=0x7f0a0015;
-        public static final int txt_descricaoTarefa=0x7f0a0019;
-        public static final int txt_list=0x7f0a001a;
-        public static final int txt_nomeProjeto=0x7f0a0014;
-        public static final int txt_nomeTarefa=0x7f0a0018;
+        public static final int txt_dataTermino=0x7f0a001a;
+        public static final int txt_descricaoProjeto=0x7f0a0019;
+        public static final int txt_descricaoTarefa=0x7f0a001d;
+        public static final int txt_email=0x7f0a0015;
+        public static final int txt_indice=0x7f0a0013;
+        public static final int txt_list=0x7f0a001e;
+        public static final int txt_nomeProjeto=0x7f0a0018;
+        public static final int txt_nomeTarefa=0x7f0a001c;
+        public static final int txt_nome_membro=0x7f0a0014;
+        public static final int txt_permissao=0x7f0a0016;
     }
     public static final class layout {
         public static final int activity_cadastro_projeto=0x7f030000;
@@ -135,49 +139,51 @@ public final class R {
         public static final int tabelas=0x7f040000;
     }
     public static final class string {
-        public static final int action_accept_projeto=0x7f070014;
-        public static final int action_accept_tarefa=0x7f070016;
-        public static final int action_accept_usuario=0x7f070017;
-        public static final int action_criar_novo_projeto=0x7f070015;
+        public static final int action_accept_projeto=0x7f070016;
+        public static final int action_accept_tarefa=0x7f070018;
+        public static final int action_accept_usuario=0x7f070019;
+        public static final int action_criar_novo_projeto=0x7f070017;
         /**  substituir 
          */
-        public static final int action_entrar=0x7f070019;
-        public static final int action_enviar=0x7f07001b;
-        public static final int action_sair_conta=0x7f07001a;
+        public static final int action_entrar=0x7f07001b;
+        public static final int action_enviar=0x7f07001d;
+        public static final int action_sair_conta=0x7f07001c;
         /**  String Actions 
          */
-        public static final int action_settings=0x7f070013;
-        public static final int action_websearch=0x7f070018;
+        public static final int action_settings=0x7f070015;
+        public static final int action_websearch=0x7f07001a;
         public static final int app_name=0x7f070000;
-        public static final int app_not_available=0x7f07001e;
-        public static final int btn_cadastrar=0x7f070009;
+        public static final int app_not_available=0x7f070020;
+        public static final int btn_cadastrar=0x7f07000b;
         /**  Strings Botões 
          */
-        public static final int btn_entrar=0x7f070008;
-        public static final int btn_novo_projeto=0x7f07000a;
-        public static final int cadastro_titulo_novo_projeto=0x7f070012;
-        public static final int drawer_close=0x7f07001d;
+        public static final int btn_entrar=0x7f07000a;
+        public static final int btn_novo_projeto=0x7f07000c;
+        public static final int cadastro_titulo_novo_projeto=0x7f070014;
+        public static final int drawer_close=0x7f07001f;
         /**  Outros 
          */
-        public static final int drawer_open=0x7f07001c;
+        public static final int drawer_open=0x7f07001e;
         public static final int g_data=0x7f070005;
         public static final int g_data_termino=0x7f070006;
         public static final int g_descricao=0x7f070004;
         public static final int g_email=0x7f070002;
+        public static final int g_indice=0x7f070008;
         /**  Strings Gerais 
          */
         public static final int g_nome=0x7f070001;
         public static final int g_senha=0x7f070003;
         public static final int g_set=0x7f070007;
-        public static final int title_activity_cadastro_projeto=0x7f07000e;
-        public static final int title_activity_cadastro_tarefa=0x7f070011;
-        public static final int title_activity_cadastro_usuario=0x7f07000f;
+        public static final int g_situacao=0x7f070009;
+        public static final int title_activity_cadastro_projeto=0x7f070010;
+        public static final int title_activity_cadastro_tarefa=0x7f070013;
+        public static final int title_activity_cadastro_usuario=0x7f070011;
         /**  Títulos de Activities 
          */
-        public static final int title_activity_entrada=0x7f07000b;
-        public static final int title_activity_fragment_tarefas=0x7f07000c;
-        public static final int title_activity_login_usuario=0x7f070010;
-        public static final int title_activity_projetos=0x7f07000d;
+        public static final int title_activity_entrada=0x7f07000d;
+        public static final int title_activity_fragment_tarefas=0x7f07000e;
+        public static final int title_activity_login_usuario=0x7f070012;
+        public static final int title_activity_projetos=0x7f07000f;
     }
     public static final class style {
         /**  ActionBar styles 
