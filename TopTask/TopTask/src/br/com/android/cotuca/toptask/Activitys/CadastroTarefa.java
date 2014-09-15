@@ -77,6 +77,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		ehAtu = false;
 
 		Bundle dados = getIntent().getExtras();
+		
 		if (dados != null) {
 			
 			int acao = dados.getInt("ACAO");
@@ -91,10 +92,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				ehAtu = true;
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
-				String descricao = dados
-						.getString(ContratoTarefas.Colunas.DESCRICAO);
-				String data = dados
-						.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
+				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
+				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
 				idTarefa = dados.getInt(ContratoTarefas.Colunas._ID);
 
 				edtNome.setText(nome);
@@ -170,6 +169,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				tarefaAtu.setDescricao(descricao);
 				tarefaAtu.setDataEntrega(data);
 				tarefaAtu.setPrioridade(prioridade);
+				tarefaAtu.setIdProjeto(idProjeto);
 				
 				dao.update(tarefaAtu);
 

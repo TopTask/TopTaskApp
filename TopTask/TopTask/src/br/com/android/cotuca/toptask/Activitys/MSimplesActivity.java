@@ -250,6 +250,7 @@ public class MSimplesActivity extends Activity implements
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);
+			
 			tarefaSelecionada = null;
 			this.selectItem(0);
 			mode.finish();
