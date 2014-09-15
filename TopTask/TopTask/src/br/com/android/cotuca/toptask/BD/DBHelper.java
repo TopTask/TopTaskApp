@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	
 	private static final String SQL_CREATE_TAREFA = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			"%s TEXT NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL,%s INTEGER NOT NULL)", 
+			"%s TEXT NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s INTEGER NOT NULL,%s INTEGER NOT NULL)", 
 			ContratoTarefas.NOME_TABELA,
 			ContratoTarefas.Colunas._ID, 
 			ContratoTarefas.Colunas.NOME,

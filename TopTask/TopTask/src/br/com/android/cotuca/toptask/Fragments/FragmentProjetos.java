@@ -46,17 +46,11 @@ public class FragmentProjetos extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Aqui sera feita a logica de pegar os projetos do webService
-
-		// adapter = new ProjetoAdapter(getActivity(),
-		// ManipProjetos.getProjetos(int idDoLogin));
-
 		ProjetoDAO projetos = ProjetoDAO.getInstance(getActivity());
 		
 		Bundle dadosRecebidos = getActivity().getIntent().getExtras();
 		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
 		
-//		adapter = new AdapterProjeto(getActivity(), projetos.getProjetos());
 		adapter = new AdapterProjeto(getActivity(), projetos.getProjetosDoUsuario(idUsuario));
 		setListAdapter(adapter);
 

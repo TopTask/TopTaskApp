@@ -123,20 +123,10 @@ public class CadastroProjetoActivity extends Activity implements
 			}
 
 			if (!ehAtu) {
-				Projeto novoProjeto = new Projeto(nome, descricao, data, 1, 1,
-						"urlPic");
-
-				// TEREMOS Q CRIAR UMA CLASSE QUE SALVARA EM JSON O idUsuario e
-				// idProjeto
-				// PRA N TER QUE FICAR PESQUISANDO QND FOR INSERIR/ALTERAR/ETC
+				Projeto novoProjeto = new Projeto(nome, descricao, data,idUsuario, 1,"");
 
 				dao.save(novoProjeto);
-
-				// Integer resposta = manip.executaAcoes(novoProjeto,
-				// ManipProjetoTask.ADD_PROJETO);
 			} else {
-				Log.d(Tags.TOPTASK_ACTIVITY, "ID projeto:" + idProjeto);
-
 				Projeto projetoAtu = dao.getProjeto(String.valueOf(idProjeto));
 
 				projetoAtu.setNome(nome);
@@ -145,12 +135,7 @@ public class CadastroProjetoActivity extends Activity implements
 
 				dao.update(projetoAtu);
 
-				// ManipTarefaTask manip = new ManipProjetoTask();
-				// Integer resposta = manip.executaAcoes(projetoAtu,
-				// ManipTarefaTask.ALTERAR_PROJETO);
 			}
-			Toast.makeText(getApplicationContext(),
-					"Projeto criado com sucesso", Toast.LENGTH_SHORT).show();
 			Intent i = new Intent(this, ProjetosActivity.class);
 			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
