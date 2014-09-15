@@ -1,19 +1,16 @@
 package br.com.android.cotuca.toptask.Activitys;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
@@ -25,7 +22,6 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 	
 	private EditText edtEmail;
 	private EditText edtSenha;
-	private int idUsuario;
 	
 	@Override
 	protected void onCreate(Bundle estado) {
@@ -68,17 +64,20 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
 				return false;
 				}
-			Log.i("Vamo logar saporra", "Vamo logar saporra");
 			Usuario u = dao.getUsuario(email);
 			if(u.getEmail().equals("")||u.getEmail()==""){
-				Log.i("Email inexistente", "Email inexistente");
 				Toast.makeText(getApplicationContext(), "E-mail inexistente na base de dados", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			if(u.getSenha().equals(senha)||u.getSenha()==senha){
-				Log.i("Dados corretos", "Dados corretos");
 				Toast.makeText(getApplicationContext(), "Logado com sucesso", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(this, ProjetosActivity.class);
+				Bundle dadoIdUsuario = new Bundle();
+				
+				Log.d("ID DO USUARIO",u.getId()+"");
+				
+				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,u.getId());
+				i.putExtras(dadoIdUsuario);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
 			

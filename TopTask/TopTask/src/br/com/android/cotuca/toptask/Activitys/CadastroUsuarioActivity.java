@@ -8,11 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
 import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
 
@@ -23,7 +22,7 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 	private EditText edtNome;
 	private EditText edtEmail;
 	private EditText edtSenha;
-	private int idUsuario;
+//	private int idUsuario;
 	
 	@Override
 	protected void onCreate(Bundle estado) {
@@ -106,12 +105,12 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
         Boolean emailEhValido = email.matches(validacaoEmail);
         
         if (emailEhValido == false) {
-        	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "E-mail invï¿½lido", Toast.LENGTH_SHORT).show();
 			return false;
         }
         
         if(senha.length()<6){
-        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dï¿½gitos", Toast.LENGTH_SHORT).show();
 			return false;
         }
         return true;

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -100,6 +101,28 @@ public class ProjetoDAO {
 
 		return p;
 		
+	}
+	
+	public List<Projeto> getProjetosDoUsuario (int _id) {
+		Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, ContratoUsuarios.Colunas._ID + " = ? ", new String[]{String.valueOf(_id)},
+				null, null, ContratoProjetos.Colunas.DATA_ENTREGA);
+		
+
+		List<Projeto> projetos = new ArrayList<Projeto>();
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					Projeto p = ProjetoDAO.getCursor(c);
+					projetos.add(p);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return projetos;
 	}
 
 	public static Projeto getCursor(Cursor c) {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
@@ -33,6 +34,8 @@ public class CadastroProjetoActivity extends Activity implements
 	
 	private String dataOriginal;
 
+	private int idUsuario;
+	
 	@Override
 	protected void onCreate(Bundle estado) {
 		super.onCreate(estado);
@@ -47,8 +50,9 @@ public class CadastroProjetoActivity extends Activity implements
 		edtData = (EditText) findViewById(R.id.edt_data);
 		ehAtu = false;
 		Bundle dados = getIntent().getExtras();
-
-		if (dados != null) {
+		
+		int acao = dados.getInt("ACAO");
+		if (acao == 1) {
 			ehAtu = true;
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);
 			String descricao = dados
@@ -61,9 +65,11 @@ public class CadastroProjetoActivity extends Activity implements
 			edtDescricao.setText(descricao);
 			edtData.setText(data);
 
-			dados = null; // ==> n sei se isso dar� certo; Objetivo n hora que
-							// voltar para essa activity zerar os dados
-
+			dados = null;
+		} else {
+			if (acao == 0) {
+				idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+			}
 		}
 	}
 
@@ -117,7 +123,6 @@ public class CadastroProjetoActivity extends Activity implements
 			}
 
 			if (!ehAtu) {
-				Log.i("criarei um proj novo", "criarei um proj novo");
 				Projeto novoProjeto = new Projeto(nome, descricao, data, 1, 1,
 						"urlPic");
 
@@ -147,6 +152,7 @@ public class CadastroProjetoActivity extends Activity implements
 			Toast.makeText(getApplicationContext(),
 					"Projeto criado com sucesso", Toast.LENGTH_SHORT).show();
 			Intent i = new Intent(this, ProjetosActivity.class);
+			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 			startActivity(i);

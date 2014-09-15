@@ -3,7 +3,6 @@ package br.com.android.cotuca.toptask.Activitys;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -15,15 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
-import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
-import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
+import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
-import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos.ListenerClickNovoProjeto;
 import br.com.android.cotuca.toptask.tags.Tags;
 
@@ -35,13 +32,18 @@ public class ProjetosActivity extends Activity implements
 	private Projeto projetoSelecionado;
 	private boolean actionModeAtivado = false;
 
+	private Bundle dadosRecebidos;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getActionBar().setTitle("Projetos");
 		setContentView(R.layout.activity_projetos);
-
-		selecionaFragmentAdequado();
+		
+		Bundle dados = getIntent().getExtras();
+		dadosRecebidos = dados;
+		
+		selecionaFragmentAdequado(dadosRecebidos);
 
 	}
 
@@ -62,6 +64,8 @@ public class ProjetosActivity extends Activity implements
 
 		Intent iCadastro = new Intent(this,
 				CadastroProjetoActivity.class);
+		dadosRecebidos.putInt("ACAO", 0);
+		iCadastro.putExtras(dadosRecebidos);
 		startActivity(iCadastro);
 	}
 
@@ -72,7 +76,14 @@ public class ProjetosActivity extends Activity implements
 
 		switch (item.getItemId()) {
 		case R.id.action_accept_projeto:
-			chamarDialog();
+			//chamarDialog();
+			
+			Intent iCadastro = new Intent(this,
+					CadastroProjetoActivity.class);
+			dadosRecebidos.putInt("ACAO",0);
+			iCadastro.putExtras(dadosRecebidos);
+			
+			startActivity(iCadastro);
 			return true;
 
 		case R.id.action_sair_conta:
@@ -104,7 +115,6 @@ public class ProjetosActivity extends Activity implements
 		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
 		Bundle dados = new Bundle();
 		dados.putInt("ID_PROJETO", idProjetoSelecionado);
-
 		i.putExtras(dados);
 		startActivity(i);
 	}
@@ -136,7 +146,7 @@ public class ProjetosActivity extends Activity implements
 			// deletar todas as tarefas com o id do projeto
 			projetosDAO.delete(projetoSelecionado);
 			projetoSelecionado = null;
-			selecionaFragmentAdequado();
+			selecionaFragmentAdequado(dadosRecebidos);
 			mode.finish();
 
 			return true;
@@ -167,15 +177,17 @@ public class ProjetosActivity extends Activity implements
 		return false;
 	}
 
-	private void selecionaFragmentAdequado() {
+	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
-		List<Projeto> listProjetos = projetos.getProjetos();
+		int idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 
 		if (!listProjetos.isEmpty()) {
 			FragmentProjetos fp = new FragmentProjetos();
+			fp.setArguments(dados);
 			ft.replace(R.id.container, fp, "fp");
 		} else {
 			FragmentSemProjetos fsp = new FragmentSemProjetos();

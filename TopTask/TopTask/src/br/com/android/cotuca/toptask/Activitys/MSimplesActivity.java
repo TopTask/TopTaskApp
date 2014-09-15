@@ -186,8 +186,6 @@ public class MSimplesActivity extends Activity implements
 				dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
 
 				f_tarefas.setArguments(dadosProjeto);
-				Log.i(Tags.TOPTASK_ACTIVITY, "id sendo enviado: "
-						+ idProjetoSelecionado);
 			}
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
 		} else if (posicao == 5) {

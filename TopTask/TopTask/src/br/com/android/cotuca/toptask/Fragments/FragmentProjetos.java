@@ -9,12 +9,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Activitys.CadastroProjetoActivity;
 import br.com.android.cotuca.toptask.Adapter.AdapterProjeto;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 
@@ -53,8 +52,12 @@ public class FragmentProjetos extends ListFragment implements
 		// ManipProjetos.getProjetos(int idDoLogin));
 
 		ProjetoDAO projetos = ProjetoDAO.getInstance(getActivity());
-
-		adapter = new AdapterProjeto(getActivity(), projetos.getProjetos());
+		
+		Bundle dadosRecebidos = getActivity().getIntent().getExtras();
+		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
+		
+//		adapter = new AdapterProjeto(getActivity(), projetos.getProjetos());
+		adapter = new AdapterProjeto(getActivity(), projetos.getProjetosDoUsuario(idUsuario));
 		setListAdapter(adapter);
 
 	}
