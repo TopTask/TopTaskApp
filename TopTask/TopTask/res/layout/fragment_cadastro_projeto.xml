@@ -19,26 +19,15 @@
             android:hint="@string/g_descricao"
             android:inputType="textMultiLine" />
 
-        <Button
-            android:id="@+id/btn_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_DescricaoNovoProjeto"
-            android:layout_toRightOf="@+id/edt_data"
-            android:onClick="setarData"
-            android:text="@string/g_set" />
-
         <EditText
             android:id="@+id/edt_data"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btn_data"
             android:layout_alignLeft="@+id/edt_DescricaoNovoProjeto"
             android:hint="@string/g_data_termino"
-            android:onClick="setarData"
-            android:inputType="date" />
+            android:inputType="date"
+            android:onClick="setarData" />
 
-        
         <EditText
             android:id="@+id/edt_nomeNovoProjeto"
             android:layout_width="match_parent"
