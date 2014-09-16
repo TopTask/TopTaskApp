@@ -115,10 +115,8 @@ public class CadastroProjetoActivity extends Activity implements
 			String descricao = edtDescricao.getText().toString();
 			String data = dataOriginal;
 
-			if (nome == null || nome.equals("") || descricao == null
-					|| descricao.equals("") || data == null || data.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Preencha todos os campos", Toast.LENGTH_SHORT).show();
+			if (nome == null || nome.equals("") || data == null || data.equals("")) {
+				Toast.makeText(getApplicationContext(),"Preencha todos os campos", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 
