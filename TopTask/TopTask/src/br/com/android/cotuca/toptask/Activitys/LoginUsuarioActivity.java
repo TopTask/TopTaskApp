@@ -78,7 +78,7 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				
 				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,u.getId());
 				i.putExtras(dadoIdUsuario);
-				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(i);
 			
 				return true;

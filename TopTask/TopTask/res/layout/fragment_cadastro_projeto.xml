@@ -34,13 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/btn_data"
             android:layout_alignLeft="@+id/edt_DescricaoNovoProjeto"
-            android:ems="10"
             android:hint="@string/g_data_termino"
-            android:inputType="date" >
+            android:inputType="date" />
 
-            <requestFocus />
-        </EditText>
-
+        
         <EditText
             android:id="@+id/edt_nomeNovoProjeto"
             android:layout_width="match_parent"

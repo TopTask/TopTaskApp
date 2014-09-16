@@ -145,12 +145,13 @@ public class CadastroProjetoActivity extends Activity implements
 			return true;
 
 		} else if (id == android.R.id.home) {
-			Intent i = new Intent(getApplicationContext(),
-					MSimplesActivity.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(i);
+			
+			Intent i = new Intent(this, ProjetosActivity.class);
+			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+			startActivity(i);
+			
 			return true;
 
 		}

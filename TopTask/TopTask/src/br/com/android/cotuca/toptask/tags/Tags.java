@@ -6,4 +6,9 @@ public final class Tags {
 	public static final String TOPTASK_FRAGMENT = "Toptask.Fragment";
 	public static final String TOPTASK_BD = "Toptask.bd";
 	public static final String TOPTASK_ADAPTER = "Toptask.adapter";
+	
+	
+	//Tags de bundles
+	public static final String B_ACAO = "ACAO"; 
+	
 }
