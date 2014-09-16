@@ -45,9 +45,10 @@
 
         <EditText
             android:id="@+id/edt_data_tarefa"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/edt_descricaoNovaTarefa"
+            android:layout_below="@+id/edt_descricaoNovaTarefa"
             android:hint="@string/g_data"
             android:inputType="date"
             android:onClick="onClickSetarData" >

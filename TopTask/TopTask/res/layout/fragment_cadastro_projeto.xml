@@ -19,15 +19,19 @@
             android:hint="@string/g_descricao"
             android:inputType="textMultiLine" />
 
+
+
         <EditText
             android:id="@+id/edt_data"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_DescricaoNovoProjeto"
             android:layout_alignLeft="@+id/edt_DescricaoNovoProjeto"
             android:hint="@string/g_data_termino"
-            android:inputType="date"
-            android:onClick="setarData" />
+            android:onClick="setarData"
+            android:inputType="date" />
 
+        
         <EditText
             android:id="@+id/edt_nomeNovoProjeto"
             android:layout_width="match_parent"
