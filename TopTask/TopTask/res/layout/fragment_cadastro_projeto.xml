@@ -35,6 +35,7 @@
             android:layout_alignBottom="@+id/btn_data"
             android:layout_alignLeft="@+id/edt_DescricaoNovoProjeto"
             android:hint="@string/g_data_termino"
+            android:onClick="setarData"
             android:inputType="date" />
 
         

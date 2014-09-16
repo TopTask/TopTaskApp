@@ -189,8 +189,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			return true;
 
 		} else if (id == android.R.id.home) {
-			Intent i = new Intent(getApplicationContext(),
-					MSimplesActivity.class);
+			Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 

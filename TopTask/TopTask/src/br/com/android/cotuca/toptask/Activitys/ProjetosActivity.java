@@ -152,6 +152,8 @@ public class ProjetosActivity extends Activity implements
 			return true;
 
 		} else if (idItem == R.id.action_editar_projeto) {
+			//Fazer a parte de update de projeto
+			
 			return true;
 		}
 
