@@ -29,11 +29,8 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 	protected void onCreate(Bundle estado) {
 		super.onCreate(estado);
 		setContentView(R.layout.fragment_cadastro_usuario);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
 		dao = UsuarioDAO.getInstance(this);
-
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovoUsuario);
 		edtSenha = (EditText) findViewById(R.id.edt_senhaNovoUsuario);
 		edtEmail = (EditText) findViewById(R.id.edt_emailNovoUsuario);

@@ -193,6 +193,10 @@ public class MSimplesActivity extends Activity implements
 			fm.beginTransaction().replace(R.id.content_frame, f_membros)
 					.commit();
 		}
+		else if (posicao == 2) { //gráficos
+			Intent i = new Intent(this, GraficosActivity.class);
+            startActivity(i);
+		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
 		mDrawerLayout.closeDrawer(mDrawerList);

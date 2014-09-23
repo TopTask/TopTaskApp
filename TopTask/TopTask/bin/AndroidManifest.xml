@@ -64,6 +64,17 @@
             android:label="@string/title_activity_login_usuario"
             tools:ignore="InnerclassSeparator" >
         </activity>
+        
+        <activity
+            android:name="br.com.android.cotuca.toptask.Activitys.GraficosActivity"
+            android:label="@string/title_activity_graficos"
+            tools:ignore="InnerclassSeparator" >
+        </activity>
+        <activity
+            android:name="br.com.android.cotuca.toptask.Fragments.FragmentTabGraficoTarefa"
+            android:label="@string/title_activity_graficos"
+            tools:ignore="InnerclassSeparator" >
+        </activity>
         <receiver android:name=".Receivers.NotificacaoSimplesReceiver"></receiver>
     </application>
 
