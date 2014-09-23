@@ -64,6 +64,30 @@ public class TarefaDAO {
 		return tarefas;
 	}
 	
+	public List<Tarefa> getTarefasProjetos(int idProjeto){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
+
+		List<Tarefa> tarefas = new ArrayList<Tarefa>();
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					Tarefa t = TarefaDAO.getCursor(c);
+					tarefas.add(t);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return tarefas;
+
+ 
+	}
+	
 	public List<Tarefa> getNaoConcluidas(){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
 				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
