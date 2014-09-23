@@ -51,7 +51,7 @@ public class AdapterProjeto extends BaseAdapter{
 			holder = new ViewHolder();
 			holder.nomeProjeto = (TextView) view.findViewById(R.id.txt_nomeProjeto);
 			holder.descrProjeto = (TextView) view.findViewById(R.id.txt_descricaoProjeto);
-			holder.foto = (ImageView) view.findViewById(R.id.img_projeto);
+			//holder.foto = (ImageView) view.findViewById(R.id.img_projeto);
 			holder.dataTermino = (TextView) view.findViewById(R.id.txt_dataTermino);
 			
 			view.setTag(holder);
@@ -74,7 +74,7 @@ public class AdapterProjeto extends BaseAdapter{
 	private static class ViewHolder {
 		TextView nomeProjeto;
 		TextView descrProjeto;
-		ImageView foto;
+		//ImageView foto;
 		TextView dataTermino;
 		
 	}

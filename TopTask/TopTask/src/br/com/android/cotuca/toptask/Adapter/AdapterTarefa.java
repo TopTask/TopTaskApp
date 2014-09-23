@@ -56,7 +56,7 @@ public class AdapterTarefa extends BaseAdapter{
 			holder = new ViewHolder();
 			holder.nomeTarefa = (TextView) view.findViewById(R.id.txt_nomeTarefa);
 			holder.discricaoTarefa = (TextView) view.findViewById(R.id.txt_descricaoTarefa);
-			holder.imgDono = (ImageView) view.findViewById(R.id.img_donoTarefa);
+			//holder.imgDono = (ImageView) view.findViewById(R.id.img_donoTarefa);
 			holder.dataTermino = (TextView) view.findViewById(R.id.txt_dataTermino);
 			
 			view.setTag(holder);
@@ -78,7 +78,7 @@ public class AdapterTarefa extends BaseAdapter{
 	private static class ViewHolder {
 		TextView  nomeTarefa;
 		TextView  discricaoTarefa;
-		ImageView imgDono;
+		//ImageView imgDono;
 		TextView  dataTermino;
 	}
 

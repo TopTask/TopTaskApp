@@ -11,7 +11,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin" >
 
-        <FrameLayout
+<!--         <FrameLayout
             android:id="@+id/flay_img_tarefa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_action_good" />
-        </FrameLayout>
+        </FrameLayout> -->
 
         <EditText
             android:id="@+id/edt_nomeNovaTarefa"
