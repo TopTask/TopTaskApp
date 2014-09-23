@@ -104,7 +104,7 @@ public class ProjetoDAO {
 	}
 	
 	public List<Projeto> getProjetosDoUsuario (int _id) {
-		Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, ContratoUsuarios.Colunas._ID + " = ? ", new String[]{String.valueOf(_id)},
+		Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, ContratoProjetos.Colunas.DONO + " = ? ", new String[]{String.valueOf(_id)},
 				null, null, ContratoProjetos.Colunas.DATA_ENTREGA);
 		
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import br.com.android.cotuca.toptask.Adapter.AdapterProjeto;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class FragmentProjetos extends ListFragment implements
 		OnMenuItemClickListener {
@@ -49,8 +51,9 @@ public class FragmentProjetos extends ListFragment implements
 		ProjetoDAO projetos = ProjetoDAO.getInstance(getActivity());
 		
 		Bundle dadosRecebidos = getActivity().getIntent().getExtras();
-		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
 		
+		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
+
 		adapter = new AdapterProjeto(getActivity(), projetos.getProjetosDoUsuario(idUsuario));
 		setListAdapter(adapter);
 

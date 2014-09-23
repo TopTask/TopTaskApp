@@ -9,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
@@ -124,7 +124,6 @@ public class CadastroProjetoActivity extends Activity implements
 
 			if (!ehAtu) {
 				Projeto novoProjeto = new Projeto(nome, descricao, data,idUsuario, 1,"");
-
 				dao.save(novoProjeto);
 			} else {
 				Projeto projetoAtu = dao.getProjeto(String.valueOf(idProjeto));
