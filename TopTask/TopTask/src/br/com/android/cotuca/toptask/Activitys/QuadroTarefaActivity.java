@@ -8,6 +8,9 @@ import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.PopupMenu;
 
 public class QuadroTarefaActivity extends Activity{
 
@@ -35,6 +38,12 @@ public class QuadroTarefaActivity extends Activity{
 			
 			
 		}
+	}
+	
+	public void showPopup(View v){
+		PopupMenu pop = new PopupMenu(this, v);
+		MenuInflater inflater = pop.getMenuInflater();
+		inflater.inflate(R.menu.);
 	}
 	
 }
