@@ -198,8 +198,6 @@ public class ProjetosActivity extends Activity implements
 		idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
 		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 
-		Log.d(Tags.ID_USUARIO, idUsuario+" no projetosActivity");
-		
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 

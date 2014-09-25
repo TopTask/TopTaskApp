@@ -60,8 +60,6 @@ public class CadastroProjetoActivity extends Activity implements
 			idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
 			idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
 			
-			Log.d(Tags.ID_USUARIO, idUsuario+"");
-			
 			edtNome.setText(nome);
 			edtDescricao.setText(descricao);
 			edtData.setText(data);
