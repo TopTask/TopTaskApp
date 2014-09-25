@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
 import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
 
@@ -28,11 +29,8 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 	protected void onCreate(Bundle estado) {
 		super.onCreate(estado);
 		setContentView(R.layout.fragment_cadastro_usuario);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
 		dao = UsuarioDAO.getInstance(this);
-
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovoUsuario);
 		edtSenha = (EditText) findViewById(R.id.edt_senhaNovoUsuario);
 		edtEmail = (EditText) findViewById(R.id.edt_emailNovoUsuario);
@@ -71,12 +69,18 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 			
 				dao.save(novoUsuario); 
 			
-			//ManipUsuarioTask task= new ManipUsuarioTask();
-			//Integer resposta = task.executaAcoes(usu, ManipUsuarioTask.ADD_USU);
+			    //ManipUsuarioTask task= new ManipUsuarioTask();
+			    //Integer resposta = task.executaAcoes(usu, ManipUsuarioTask.ADD_USU);
 			
 			
 				Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-				Intent i = new Intent(this, LoginUsuarioActivity.class);
+				Intent i = new Intent(this, ProjetosActivity.class);
+				Bundle dadoIdUsuario = new Bundle();
+				
+				Log.d("ID DO USUARIO",novoUsuario.getId()+"");
+				
+				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,novoUsuario.getId());
+				i.putExtras(dadoIdUsuario);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
 			
@@ -105,14 +109,28 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
         Boolean emailEhValido = email.matches(validacaoEmail);
         
         if (emailEhValido == false) {
-        	Toast.makeText(getApplicationContext(), "E-mail invï¿½lido", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
+        	edtEmail.requestFocus();
+			edtEmail.setText("");
 			return false;
         }
         
         if(senha.length()<6){
-        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dï¿½gitos", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
+        	edtSenha.requestFocus();
+        	edtSenha.setText("");
 			return false;
         }
+        
+        Usuario u = dao.getUsuario(email);
+        
+        if(!u.getEmail().equals("")||u.getEmail()!=""){
+			Toast.makeText(getApplicationContext(), "E-mail já cadastrado no TopTask", Toast.LENGTH_SHORT).show();
+			edtEmail.requestFocus();
+			edtEmail.setText("");
+			return false;
+		}
+        
         return true;
 	}
 

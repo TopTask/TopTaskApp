@@ -64,9 +64,13 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
 				return false;
 				}
+			
 			Usuario u = dao.getUsuario(email);
+			
 			if(u.getEmail().equals("")||u.getEmail()==""){
-				Toast.makeText(getApplicationContext(), "E-mail inexistente na base de dados", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "E-mail não cadastrado no TopTask", Toast.LENGTH_SHORT).show();
+				edtEmail.requestFocus();
+				edtEmail.setText("");
 				return false;
 			}
 			if(u.getSenha().equals(senha)||u.getSenha()==senha){
@@ -86,6 +90,8 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 			else{
 				Log.i("Senha incorreta", "Senha incorreta");
 				Toast.makeText(getApplicationContext(), "Senha incorreta", Toast.LENGTH_SHORT).show();
+				edtSenha.requestFocus();
+				edtSenha.setText("");
 				return false;
 			}
 			
