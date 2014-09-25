@@ -2,8 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
     
     <!--  A definir -->
-
+    <fragment 
+        android:id="@+id/fragment_fazer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:name="br.com.android.cotuca.toptask.Fragments.FragmentQuadroTarefaFazer"      
+        android:layout_weight="1"/>
+    <fragment 
+        android:id="@+id/fragment_fazendo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:name="br.com.android.cotuca.toptask.Fragments.FragmentQuadroTarefaFazendo"      
+        android:layout_weight="1"/>
+    
+    <fragment 
+        android:id="@+id/fragment_feito"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:name="br.com.android.cotuca.toptask.Fragments.FragmentQuadroTarefaFeito"      
+        android:layout_weight="1"/>
+    
 </LinearLayout>

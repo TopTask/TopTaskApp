@@ -112,6 +112,7 @@ public class TarefaDAO {
  
 	}
 	
+	
 	//Nao concluido tarefa com Coluna.Concluida <> 2
 	public List<Tarefa> getNaoConcluidasDoProjeto(int idProjeto){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
@@ -139,6 +140,50 @@ public class TarefaDAO {
 		return tarefas;
 	}
 	
+    public List<Tarefa> getFazendoDoProjeto(int idProjeto){
+			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto)},
+					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
+
+			List<Tarefa> tarefas = new ArrayList<Tarefa>();
+
+			try {
+				if (c.moveToFirst()) {
+					do {
+						Tarefa t = TarefaDAO.getCursor(c);
+						tarefas.add(t);
+					} while (c.moveToNext());
+				}
+
+			} finally {
+				c.close();
+			}
+
+			return tarefas;
+	 }
+	
+		public List<Tarefa> getConcluidasDoProjeto(int idProjeto){
+			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(2),String.valueOf(idProjeto)},
+					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
+
+			List<Tarefa> tarefas = new ArrayList<Tarefa>();
+
+			try {
+				if (c.moveToFirst()) {
+					do {
+						Tarefa t = TarefaDAO.getCursor(c);
+						tarefas.add(t);
+					} while (c.moveToNext());
+				}
+
+			} finally {
+				c.close();
+			}
+
+			return tarefas;
+		}		
+		
 	public Tarefa getTarefa (String _id) {
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, ContratoTarefas.Colunas._ID + " = ? ", new String[]{_id},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
