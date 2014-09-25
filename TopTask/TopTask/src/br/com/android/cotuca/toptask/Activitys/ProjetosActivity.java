@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
+import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
@@ -31,6 +33,7 @@ public class ProjetosActivity extends Activity implements
 
 	private Projeto projetoSelecionado;
 	private boolean actionModeAtivado = false;
+	private int idUsuario;
 
 	private Bundle dadosRecebidos;
 	
@@ -76,8 +79,6 @@ public class ProjetosActivity extends Activity implements
 
 		switch (item.getItemId()) {
 		case R.id.action_accept_projeto:
-			//chamarDialog();
-			
 			Intent iCadastro = new Intent(this,
 					CadastroProjetoActivity.class);
 			dadosRecebidos.putInt("ACAO",0);
@@ -89,7 +90,7 @@ public class ProjetosActivity extends Activity implements
 		case R.id.action_sair_conta:
 			Intent i = new Intent(getApplication(), EntradaActivity.class);
 			startActivity(i);
-
+		
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -152,8 +153,21 @@ public class ProjetosActivity extends Activity implements
 			return true;
 
 		} else if (idItem == R.id.action_editar_projeto) {
-			//Fazer a parte de update de projeto
+			Intent iEditar = new Intent(this, CadastroProjetoActivity.class);
 			
+			dadosRecebidos.putInt("ACAO", 1);
+			dadosRecebidos.putString(ContratoProjetos.Colunas.NOME,projetoSelecionado.getNome());
+			dadosRecebidos.putString(ContratoProjetos.Colunas.DESCRICAO,projetoSelecionado.getDescricao());
+			dadosRecebidos.putString(ContratoProjetos.Colunas.DATA_ENTREGA,projetoSelecionado.getDataEntrega());
+			dadosRecebidos.putInt(ContratoProjetos.Colunas._ID,projetoSelecionado.getId());
+			dadosRecebidos.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+			
+			iEditar.putExtras(dadosRecebidos);
+			projetoSelecionado = null;
+			mode.finish();
+			
+			startActivity(iEditar);
+
 			return true;
 		}
 
@@ -181,9 +195,11 @@ public class ProjetosActivity extends Activity implements
 
 	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
-		int idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
 		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 
+		Log.d(Tags.ID_USUARIO, idUsuario+" no projetosActivity");
+		
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 

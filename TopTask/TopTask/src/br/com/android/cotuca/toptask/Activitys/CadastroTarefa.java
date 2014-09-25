@@ -84,11 +84,11 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			
 			Log.i("ACAO","Acao a ser realizada: " + acao);
 			
-			if (acao == 0) {
+			if (acao == 0) { //Adicao
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
 
-			} else if (acao == 1){
+			} else if (acao == 1){ //Alteracao
 				ehAtu = true;
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
@@ -99,7 +99,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				edtNome.setText(nome);
 				edtDescricao.setText(descricao);
 				edtData.setText(data);
-				// colocar o spinner na posicao certa
 			}
 
 			dados = null; 

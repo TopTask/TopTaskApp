@@ -55,12 +55,13 @@ public class CadastroProjetoActivity extends Activity implements
 		if (acao == 1) {
 			ehAtu = true;
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);
-			String descricao = dados
-					.getString(ContratoProjetos.Colunas.DESCRICAO);
-			String data = dados
-					.getString(ContratoProjetos.Colunas.DATA_ENTREGA);
+			String descricao = dados.getString(ContratoProjetos.Colunas.DESCRICAO);
+			String data = dados.getString(ContratoProjetos.Colunas.DATA_ENTREGA);
 			idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
-
+			idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+			
+			Log.d(Tags.ID_USUARIO, idUsuario+"");
+			
 			edtNome.setText(nome);
 			edtDescricao.setText(descricao);
 			edtData.setText(data);
@@ -129,7 +130,8 @@ public class CadastroProjetoActivity extends Activity implements
 				projetoAtu.setNome(nome);
 				projetoAtu.setDescricao(descricao);
 				projetoAtu.setDataEntrega(data);
-
+				
+				ehAtu = false;
 				dao.update(projetoAtu);
 
 			}

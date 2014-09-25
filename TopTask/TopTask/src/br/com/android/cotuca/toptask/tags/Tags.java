@@ -11,6 +11,7 @@ public final class Tags {
 	
 	
 	//Tags de bundles
-	public static final String B_ACAO = "ACAO"; 
+	public static final String B_ACAO = "ACAO";
+	public static final String ID_USUARIO = "idUsuario";
 	
 }
