@@ -197,6 +197,10 @@ public class MSimplesActivity extends Activity implements
 			Intent i = new Intent(this, GraficosActivity.class);
             startActivity(i);
 		}
+		else if (posicao == 1){
+			Intent i = new Intent(this,QuadroTarefaActivity.class);
+			startActivity(i);
+		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
 		mDrawerLayout.closeDrawer(mDrawerList);
