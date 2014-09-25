@@ -41,6 +41,5 @@ public class FragmentQuadroTarefaFazendo extends ListFragment{
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.tarefas, menu); // Menu lateral
 		super.onCreateOptionsMenu(menu, inflater);
-		
 	}
 }

@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:name="br.com.android.cotuca.toptask.Fragments.FragmentQuadroTarefaFazer"      
         android:layout_weight="1"/>
+    
     <fragment 
         android:id="@+id/fragment_fazendo"
         android:layout_width="0dp"
