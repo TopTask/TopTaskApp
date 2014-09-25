@@ -17,6 +17,7 @@ import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Activitys.CadastroTarefa;
 import br.com.android.cotuca.toptask.Adapter.AdapterTarefa;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
@@ -56,7 +57,7 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 		
 		Intent intentDadosRecebidos = getActivity().getIntent();
 		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
-		idProjeto = dadosRecebidos.getInt("ID_PROJETO");
+		idProjeto = dadosRecebidos.getInt(ContratoProjetos.Colunas._ID);
 		
 		TarefaDAO tarefas = TarefaDAO.getInstance(getActivity()); 
 		

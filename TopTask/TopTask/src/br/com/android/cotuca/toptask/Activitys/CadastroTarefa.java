@@ -18,7 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
@@ -45,6 +47,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private int dia, mes, ano;
 	private String dataOriginal;
 	private int idProjeto;
+	private int idDono;
 
 	@Override
 	protected void onCreate(Bundle estado) {
@@ -86,11 +89,14 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			
 			if (acao == 0) { //Adicao
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
+				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
+				
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
 
 			} else if (acao == 1){ //Alteracao
 				ehAtu = true;
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
+				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
 				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
@@ -156,7 +162,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			int prioridade = Integer.valueOf(spinner.getSelectedItem().toString());
 
 			if (!ehAtu) {
-				dao.save(new Tarefa(nome, descricao, 1, data, prioridade,idProjeto, 0));
+				dao.save(new Tarefa(nome, descricao, idDono, data, prioridade,idProjeto, 0));
 			} else {
 				Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 
@@ -167,6 +173,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				tarefaAtu.setDataEntrega(data);
 				tarefaAtu.setPrioridade(prioridade);
 				tarefaAtu.setIdProjeto(idProjeto);
+				tarefaAtu.setDono(idDono);
 				
 				dao.update(tarefaAtu);
 
@@ -177,7 +184,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			Intent i = new Intent(this, MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
 			
-			dadosBundle.putInt("ID_PROJETO", idProjeto);
+			dadosBundle.putInt(ContratoProjetos.Colunas._ID, idProjeto);
+			dadosBundle.putInt(ContratoUsuarios.Colunas._ID, idDono);
 			i.putExtras(dadosBundle);
 			
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -188,7 +196,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		} else if (id == android.R.id.home) {
 			Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
-			dadosBundle.putInt("ID_PROJETO", idProjeto);
+			dadosBundle.putInt(ContratoProjetos.Colunas._ID, idProjeto);
 			i.putExtras(dadosBundle);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);

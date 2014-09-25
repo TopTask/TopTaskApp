@@ -53,7 +53,9 @@ public class FragmentProjetos extends ListFragment implements
 		Bundle dadosRecebidos = getActivity().getIntent().getExtras();
 		
 		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
-
+		
+		Log.d(Tags.ID_USUARIO, idUsuario +" no fragment projetos");
+		
 		adapter = new AdapterProjeto(getActivity(), projetos.getProjetosDoUsuario(idUsuario));
 		setListAdapter(adapter);
 

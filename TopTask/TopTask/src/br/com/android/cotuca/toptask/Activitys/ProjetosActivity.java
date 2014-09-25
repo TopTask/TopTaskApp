@@ -109,9 +109,6 @@ public class ProjetosActivity extends Activity implements
 
 		int idProjetoSelecionado = projeto.getId();
 
-		Log.i(Tags.TOPTASK_ACTIVITY, "ID do projeto selecionado: "
-				+ idProjetoSelecionado);
-
 		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
 		Bundle dados = new Bundle();
 		
@@ -198,6 +195,9 @@ public class ProjetosActivity extends Activity implements
 	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
 		idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		
+		Log.d(Tags.ID_USUARIO, idUsuario + " no projetosAcitivy");
+		
 		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 
 		FragmentManager fm = getFragmentManager();

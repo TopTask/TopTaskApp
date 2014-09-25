@@ -15,6 +15,7 @@ import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
 import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class LoginUsuarioActivity extends Activity implements OnItemSelectedListener {
 
@@ -54,9 +55,7 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		Log.i("ENTROU NO CLICK LOGAR", "ENTROU NO CLICK LOGAR");
 		if (id == R.id.action_entrar) {
-			Log.i("ENTROU NO IF", "ENTROU NO IF");
 			String email = edtEmail.getText().toString();
 			String senha = edtSenha.getText().toString();
 			
@@ -78,9 +77,10 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				Intent i = new Intent(this, ProjetosActivity.class);
 				Bundle dadoIdUsuario = new Bundle();
 				
-				Log.d("ID DO USUARIO",u.getId()+"");
-				
 				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,u.getId());
+				
+				Log.d(Tags.ID_USUARIO, u.getId()+" no login usuario");
+				
 				i.putExtras(dadoIdUsuario);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(i);
@@ -88,7 +88,6 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				return true;
 			}
 			else{
-				Log.i("Senha incorreta", "Senha incorreta");
 				Toast.makeText(getApplicationContext(), "Senha incorreta", Toast.LENGTH_SHORT).show();
 				edtSenha.requestFocus();
 				edtSenha.setText("");

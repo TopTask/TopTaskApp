@@ -116,8 +116,11 @@ public class MSimplesActivity extends Activity implements
 			selectItem(0);
 		} else {
 
-			idProjetoSelecionado = dadosRecebidos.getInt("ID_PROJETO");
-
+			idProjetoSelecionado = dadosRecebidos.getInt(ContratoProjetos.Colunas._ID);
+			idUsuarioSelecionado = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
+			
+			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
+			
 			selectItem(0);
 		}
 
@@ -156,6 +159,7 @@ public class MSimplesActivity extends Activity implements
 
 			Bundle dados = new Bundle();
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
+			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
 			dados.putInt("ACAO", 0);
 
 			i.putExtras(dados);
@@ -177,33 +181,24 @@ public class MSimplesActivity extends Activity implements
 
 	private void selectItem(int posicao) {
 
-		// ======================================
-		// Criacao dos Fragments de cadas item
-		// ======================================
 		FragmentManager fm = getFragmentManager();
 
 		if (posicao == 0) {
 			Fragment f_tarefas = new FragmentTarefas();
 			if (idProjetoSelecionado != 0) {
 				Bundle dadosProjeto = new Bundle();
-				dadosProjeto.putInt("ID_PROJETO", idProjetoSelecionado);
+				dadosProjeto.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
 
 				f_tarefas.setArguments(dadosProjeto);
 			}
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
-		} else if (posicao == 5) {
-			Fragment f_membros = new FragmentMembros();
-			fm.beginTransaction().replace(R.id.content_frame, f_membros)
-					.commit();
-		}else if (posicao == 1){
-			Intent i = new Intent(this,QuadroTarefaActivity.class);
-			startActivity(i);
+		
 		}else if (posicao == 2) { //gráficos
 			Intent i = new Intent(this, GraficosActivity.class);
 			Bundle dados = new Bundle();
 			dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
 			dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
-			
+
             startActivity(i);
 		}
 		mDrawerList.setItemChecked(posicao, true);
@@ -259,6 +254,7 @@ public class MSimplesActivity extends Activity implements
 					tarefaSelecionada.getDataEntrega());
 			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
+			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
 			
 			iEditar.putExtras(dados);
 
