@@ -50,10 +50,10 @@ public class AdapterMembro extends BaseAdapter{
 				view = this.inflater.inflate(R.layout.adapter_membro, null);
 				
 				holder = new ViewHolder();
-				holder.id = (TextView) view.findViewById(R.id.txt_idMembro);
+/*				holder.id = (TextView) view.findViewById(R.id.txt_idMembro);
 				holder.nome = (TextView) view.findViewById(R.id.txt_nomeMembro);
 				holder.email = (TextView) view.findViewById(R.id.txt_emailMembro);
-				holder.permissao = (TextView) view.findViewById(R.id.txt_emailMembro);
+				holder.permissao = (TextView) view.findViewById(R.id.txt_emailMembro);*/
 				
 				view.setTag(holder);
 				
@@ -63,12 +63,12 @@ public class AdapterMembro extends BaseAdapter{
 			}
 			
 			Membro membro = membros.get(position);
-		    Usuario u = UsuarioDAO.getUsuario(membro.getIdUsuario());
+//		    Usuario u = UsuarioDAO.getUsuario(membro.getIdUsuario());
 			
 			
 			holder.id.setText(membro.getId());
-			holder.nome.setText(u.getNome()); 
-			holder.email.setText(u.getEmail());
+//			holder.nome.setText(u.getNome()); 
+//			holder.email.setText(u.getEmail());
 			String permissao = "";
 			switch(membro.getPermissao()){
 			case PO:
