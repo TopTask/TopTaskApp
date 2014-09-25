@@ -18,7 +18,7 @@ import br.com.android.cotuca.toptask.Beans.Tarefa;
 
 public class AdapterTarefa extends BaseAdapter{
 
-	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
+	private List<Tarefa> tarefas;
 	private LayoutInflater inflater;
 	
 	public AdapterTarefa (Context contexto, List<Tarefa> tarefas) {
@@ -29,7 +29,6 @@ public class AdapterTarefa extends BaseAdapter{
 	
 	@Override
 	public int getCount() {
-		
 		return tarefas.size();
 	}
 
@@ -42,7 +41,7 @@ public class AdapterTarefa extends BaseAdapter{
 	@Override
 	public long getItemId(int position) {
 		
-		return 0;
+		return tarefas.get(position).getID();
 	}
 
 	@Override
@@ -55,8 +54,13 @@ public class AdapterTarefa extends BaseAdapter{
 			
 			holder = new ViewHolder();
 			holder.nomeTarefa = (TextView) view.findViewById(R.id.txt_nomeTarefa);
+<<<<<<< HEAD
 			holder.discricaoTarefa = (TextView) view.findViewById(R.id.txt_descricaoTarefa);
 			//holder.imgDono = (ImageView) view.findViewById(R.id.img_donoTarefa);
+=======
+			holder.descricaoTarefa = (TextView) view.findViewById(R.id.txt_descricaoTarefa);
+			holder.imgDono = (ImageView) view.findViewById(R.id.img_donoTarefa);
+>>>>>>> 5280b45523322a45dccc592c24db6892a885881b
 			holder.dataTermino = (TextView) view.findViewById(R.id.txt_dataTermino);
 			
 			view.setTag(holder);
@@ -68,7 +72,7 @@ public class AdapterTarefa extends BaseAdapter{
 		Tarefa tarefa = tarefas.get(position);
 		holder.nomeTarefa.setText(tarefa.getNome());
 		holder.dataTermino.setText(tarefa.getDataEntrega());
-		holder.discricaoTarefa.setText(tarefa.getDescricao());
+		holder.descricaoTarefa.setText(tarefa.getDescricao());
 	
 		//holder.imgDono.setImageBitmap(); colocar aqui a imagem de acordo com o icone do dono 
 		
@@ -77,8 +81,13 @@ public class AdapterTarefa extends BaseAdapter{
 	
 	private static class ViewHolder {
 		TextView  nomeTarefa;
+<<<<<<< HEAD
 		TextView  discricaoTarefa;
 		//ImageView imgDono;
+=======
+		TextView  descricaoTarefa;
+		ImageView imgDono;
+>>>>>>> 5280b45523322a45dccc592c24db6892a885881b
 		TextView  dataTermino;
 	}
 

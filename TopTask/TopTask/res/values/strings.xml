@@ -10,6 +10,8 @@
     <string name="g_data">Data:</string>
     <string name="g_data_termino">Data término:</string>
     <string name="g_set">Editar:</string>
+    <string name="g_indice">Índice:</string>
+    <string name="g_situacao">Situação:</string>
 
     <!-- Strings Botões -->
     <string name="btn_entrar">Entrar</string>
