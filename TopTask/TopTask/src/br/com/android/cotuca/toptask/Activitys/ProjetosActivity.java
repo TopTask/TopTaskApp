@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
@@ -115,7 +114,10 @@ public class ProjetosActivity extends Activity implements
 
 		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
 		Bundle dados = new Bundle();
-		dados.putInt("ID_PROJETO", idProjetoSelecionado);
+		
+		dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
+		dados.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+		
 		i.putExtras(dados);
 		startActivity(i);
 	}

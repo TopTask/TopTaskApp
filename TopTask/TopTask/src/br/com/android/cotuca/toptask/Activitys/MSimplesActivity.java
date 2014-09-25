@@ -39,7 +39,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.android.cotuca.toptask.R;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
+import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
@@ -64,6 +66,7 @@ public class MSimplesActivity extends Activity implements
 										// tarefas
 
 	private int idProjetoSelecionado = 0;
+	private int idUsuarioSelecionado = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -192,14 +195,16 @@ public class MSimplesActivity extends Activity implements
 			Fragment f_membros = new FragmentMembros();
 			fm.beginTransaction().replace(R.id.content_frame, f_membros)
 					.commit();
-		}
-		else if (posicao == 2) { //gráficos
-			Intent i = new Intent(this, GraficosActivity.class);
-            startActivity(i);
-		}
-		else if (posicao == 1){
+		}else if (posicao == 1){
 			Intent i = new Intent(this,QuadroTarefaActivity.class);
 			startActivity(i);
+		}else if (posicao == 2) { //gráficos
+			Intent i = new Intent(this, GraficosActivity.class);
+			Bundle dados = new Bundle();
+			dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
+			dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
+			
+            startActivity(i);
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
