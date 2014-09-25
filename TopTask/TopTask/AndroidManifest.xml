@@ -64,8 +64,7 @@
             android:label="@string/title_activity_login_usuario"
             tools:ignore="InnerclassSeparator" >
         </activity>
-<<<<<<< HEAD
-        
+
         <activity
             android:name="br.com.android.cotuca.toptask.Activitys.GraficosActivity"
             android:label="@string/title_activity_graficos"
@@ -73,12 +72,12 @@
         </activity>
         <activity
             android:name="br.com.android.cotuca.toptask.Fragments.FragmentTabGraficoTarefa"
-            android:label="@string/title_activity_graficos"
-=======
+            android:label="@string/title_activity_graficos">
+        </activity>
+
         <activity
             android:name="br.com.android.cotuca.toptask.Activitys.QuadroTarefaActivity"
             android:label="@string/title_activity_login_usuario"
->>>>>>> 48c2417111f5ba21d1b79ecb352c2c575babfd9b
             tools:ignore="InnerclassSeparator" >
         </activity>
         <receiver android:name=".Receivers.NotificacaoSimplesReceiver"></receiver>

@@ -102,9 +102,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				// colocar o spinner na posicao certa
 			}
 
-			dados = null; // ==> n sei se isso dar� certo; Objetivo n hora que
-							// voltar para essa activity zerar os dados
-
+			dados = null; 
 		}
 
 		// pega o manager para o alarme
