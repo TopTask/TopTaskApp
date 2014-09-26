@@ -152,7 +152,7 @@ public class MSimplesActivity extends Activity implements
 			return true;
 		}
 
-		// acao dos icones do actionbar
+		// acao dos ic1ones do actionbar
 		switch (item.getItemId()) {
 		case R.id.action_add:
 			Intent i = new Intent(this, CadastroTarefa.class);
@@ -212,10 +212,6 @@ public class MSimplesActivity extends Activity implements
 		getActionBar().setTitle(mTitle);
 	}
 
-	/**
-	 * Ao usar o ActionBarDrawerToggle, você deve chamá-lo durante OnPostCreate
-	 * () e onConfigurationChanged () ...
-	 */
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {

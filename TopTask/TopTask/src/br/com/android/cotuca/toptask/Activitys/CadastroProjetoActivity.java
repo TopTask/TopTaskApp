@@ -135,6 +135,7 @@ public class CadastroProjetoActivity extends Activity implements
 			}
 			Intent i = new Intent(this, ProjetosActivity.class);
 			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
+			
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 			startActivity(i);

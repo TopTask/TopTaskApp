@@ -85,8 +85,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			
 			int acao = dados.getInt("ACAO");
 			
-			Log.i("ACAO","Acao a ser realizada: " + acao);
-			
 			if (acao == 0) { //Adicao
 				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
