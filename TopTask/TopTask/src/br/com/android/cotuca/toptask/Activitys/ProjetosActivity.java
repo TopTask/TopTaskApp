@@ -108,8 +108,6 @@ public class ProjetosActivity extends Activity implements
 
 		int idProjetoSelecionado = projeto.getId();
 		
-		Log.d(Tags.CORRECAO_PROJETO, idProjetoSelecionado+ " Projetos activity");
-
 		Intent i = new Intent(this, MSimplesActivity.class);
 		Bundle dados = new Bundle();
 		
@@ -196,8 +194,6 @@ public class ProjetosActivity extends Activity implements
 	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
 		idUsuario = dados.getInt(Tags.ID_USUARIO);
-		
-		Log.d(Tags.ID_USUARIO, idUsuario + " no projetosAcitivy");
 		
 		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 

@@ -17,6 +17,7 @@ import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class CadastroProjetoActivity extends Activity implements
 		OnItemSelectedListener, DateDialog.SetDateListener {
@@ -55,8 +56,8 @@ public class CadastroProjetoActivity extends Activity implements
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);
 			String descricao = dados.getString(ContratoProjetos.Colunas.DESCRICAO);
 			String data = dados.getString(ContratoProjetos.Colunas.DATA_ENTREGA);
-			idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
-			idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+			idProjeto = dados.getInt(Tags.ID_PROJETO);
+			idUsuario = dados.getInt(Tags.ID_USUARIO);
 			
 			edtNome.setText(nome);
 			edtDescricao.setText(descricao);
@@ -65,7 +66,7 @@ public class CadastroProjetoActivity extends Activity implements
 			dados = null;
 		} else {
 			if (acao == 0) {
-				idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+				idUsuario = dados.getInt(Tags.ID_USUARIO);
 			}
 		}
 	}
@@ -132,7 +133,7 @@ public class CadastroProjetoActivity extends Activity implements
 
 			}
 			Intent i = new Intent(this, ProjetosActivity.class);
-			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
+			i.putExtra(Tags.ID_USUARIO,idUsuario);
 			
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -143,7 +144,7 @@ public class CadastroProjetoActivity extends Activity implements
 		} else if (id == android.R.id.home) {
 			
 			Intent i = new Intent(this, ProjetosActivity.class);
-			i.putExtra(ContratoUsuarios.Colunas._ID,idUsuario);
+			i.putExtra(Tags.ID_USUARIO,idUsuario);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 			startActivity(i);

@@ -59,9 +59,7 @@ public class MSimplesActivity extends Activity implements
 	private String[] mPaginaTitulo;
 
 	private boolean actionModeAtivado = false;
-	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma
-										// tarefa for clicada no fragment de
-										// tarefas
+	private Tarefa tarefaSelecionada; 
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
@@ -121,10 +119,6 @@ public class MSimplesActivity extends Activity implements
 			idProjetoSelecionado = dadosRecebidos.getInt(Tags.ID_PROJETO);
 			idUsuarioSelecionado = dadosRecebidos.getInt(Tags.ID_USUARIO);
 
-			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
-			Log.d(Tags.CORRECAO_PROJETO, "id Projeto selecionado :" + idProjetoSelecionado);
-			
-			
 			selectItem(0);
 		}
 
@@ -276,9 +270,6 @@ public class MSimplesActivity extends Activity implements
 
 		} else if (id == R.id.acction_excluir_tarefa) {
 
-			Log.d(Tags.TOPTASK_ACTIVITY,
-					"ID tarefa:" + tarefaSelecionada.getID());
-
 			tarefas.delete(tarefaSelecionada);
 			tarefaSelecionada = null;
 			this.selectItem(0);
@@ -319,8 +310,6 @@ public class MSimplesActivity extends Activity implements
 	public void onTaskLongClick(Tarefa tarefa) {
 
 		tarefaSelecionada = tarefa;
-
-		Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + tarefaSelecionada.getID());
 
 		startActionMode(this);
 		actionModeAtivado = true;
