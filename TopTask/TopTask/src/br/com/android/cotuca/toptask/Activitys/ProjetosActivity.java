@@ -87,6 +87,7 @@ public class ProjetosActivity extends Activity implements
 
 		case R.id.action_sair_conta:
 			Intent i = new Intent(getApplication(), EntradaActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 		
 		default:

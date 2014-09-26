@@ -213,6 +213,7 @@ public class MSimplesActivity extends Activity implements
 			Bundle dados = new Bundle();
 			dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
 			iSairProjetoAtual.putExtras(dados);
+			iSairProjetoAtual.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(iSairProjetoAtual);			
 		}
 		mDrawerList.setItemChecked(posicao, true);

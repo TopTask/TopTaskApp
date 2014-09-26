@@ -175,7 +175,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 			}
 			// agenda o alarme para esse mesmo dia no horario atual
-			agendarNotificacao(nome, descricao, ano, mes, dia);
+//			agendarNotificacao(nome, descricao, ano, mes, dia);
 
 			Intent i = new Intent(this, MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
