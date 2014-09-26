@@ -52,7 +52,7 @@ public class FragmentProjetos extends ListFragment implements
 		
 		Bundle dadosRecebidos = getActivity().getIntent().getExtras();
 		
-		int idUsuario = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
+		int idUsuario = dadosRecebidos.getInt(Tags.ID_USUARIO);
 		
 		Log.d(Tags.ID_USUARIO, idUsuario +" no fragment projetos");
 		

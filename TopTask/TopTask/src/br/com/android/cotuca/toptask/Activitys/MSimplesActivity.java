@@ -45,12 +45,8 @@ import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
-import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
-import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.tags.Tags;
-
-//import android.widget.Toast;
 
 public class MSimplesActivity extends Activity implements
 		FragmentTarefas.ListenerClickTarefa, Callback {
@@ -123,10 +119,8 @@ public class MSimplesActivity extends Activity implements
 			selectItem(0);
 		} else {
 
-			idProjetoSelecionado = dadosRecebidos
-					.getInt(ContratoProjetos.Colunas._ID);
-			idUsuarioSelecionado = dadosRecebidos
-					.getInt(ContratoUsuarios.Colunas._ID);
+			idProjetoSelecionado = dadosRecebidos.getInt(Tags.ID_PROJETO);
+			idUsuarioSelecionado = dadosRecebidos.getInt(Tags.ID_USUARIO);
 
 			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
 			Log.d(Tags.CORRECAO_PROJETO, "id Projeto selecionado :" + idProjetoSelecionado);
@@ -206,19 +200,19 @@ public class MSimplesActivity extends Activity implements
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
 					.commit();
 
-		} else if (posicao == 2) { // gráficos
+		} else if (posicao == 2) { // grï¿½ficos
 
 			if (dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).size() == 0) {
 				Intent i = new Intent(this, GraficosActivity.class);
 				Bundle dados = new Bundle();
-				dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-				dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
+				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
+				dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
 
 				startActivity(i);
 			} else {
 				Toast.makeText(getApplicationContext(),
-						"Você ainda não possui tarefas", Toast.LENGTH_SHORT)
+						"Voce ainda nao possui tarefas", Toast.LENGTH_SHORT)
 						.show();
 			}
 		}
@@ -268,7 +262,7 @@ public class MSimplesActivity extends Activity implements
 					tarefaSelecionada.getDescricao());
 			dados.putString(ContratoTarefas.Colunas.DATA_ENTREGA,
 					tarefaSelecionada.getDataEntrega());
-			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
+			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
 

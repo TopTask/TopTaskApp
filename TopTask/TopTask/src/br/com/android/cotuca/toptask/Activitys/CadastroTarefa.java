@@ -86,19 +86,19 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			int acao = dados.getInt("ACAO");
 			
 			if (acao == 0) { //Adicao
-				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
+				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
 
 			} else if (acao == 1){ //Alteracao
 				ehAtu = true;
-				idProjeto = dados.getInt(ContratoTarefas.Colunas.PROJETO);
+				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
 				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
-				idTarefa = dados.getInt(ContratoTarefas.Colunas._ID);
+				idTarefa = dados.getInt(Tags.ID_TAREFA);
 
 				edtNome.setText(nome);
 				edtDescricao.setText(descricao);
@@ -182,8 +182,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			Intent i = new Intent(this, MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
 			
-			dadosBundle.putInt(ContratoProjetos.Colunas._ID, idProjeto);
-			dadosBundle.putInt(ContratoUsuarios.Colunas._ID, idDono);
+			dadosBundle.putInt(Tags.ID_PROJETO, idProjeto);
+			dadosBundle.putInt(Tags.ID_USUARIO, idDono);
 			i.putExtras(dadosBundle);
 			
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -194,7 +194,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		} else if (id == android.R.id.home) {
 			Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
-			dadosBundle.putInt(ContratoProjetos.Colunas._ID, idProjeto);
+			dadosBundle.putInt(Tags.ID_PROJETO, idProjeto);
 			i.putExtras(dadosBundle);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
@@ -220,7 +220,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 		dados.putString("titulo", titulo);
 		dados.putString("descricao", descricao);
-		dados.putInt("ID_PROJETO", idProjeto);
+		dados.putInt(Tags.ID_PROJETO, idProjeto);
 		
 		i.putExtras(dados);
 

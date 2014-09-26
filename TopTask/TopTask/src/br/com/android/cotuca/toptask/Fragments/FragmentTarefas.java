@@ -57,7 +57,7 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 		
 		Intent intentDadosRecebidos = getActivity().getIntent();
 		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
-		idProjeto = dadosRecebidos.getInt(ContratoProjetos.Colunas._ID);
+		idProjeto = dadosRecebidos.getInt(Tags.ID_PROJETO);
 		
 		Log.d(Tags.CORRECAO_PROJETO, "Id projeto no FragmentTarefas : "+ idProjeto);
 		

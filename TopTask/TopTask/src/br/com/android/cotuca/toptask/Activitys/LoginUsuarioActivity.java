@@ -67,7 +67,7 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 			Usuario u = dao.getUsuario(email);
 			
 			if(u.getEmail().equals("")||u.getEmail()==""){
-				Toast.makeText(getApplicationContext(), "E-mail não cadastrado no TopTask", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "E-mail nï¿½o cadastrado no TopTask", Toast.LENGTH_SHORT).show();
 				edtEmail.requestFocus();
 				edtEmail.setText("");
 				return false;
@@ -77,7 +77,7 @@ public class LoginUsuarioActivity extends Activity implements OnItemSelectedList
 				Intent i = new Intent(this, ProjetosActivity.class);
 				Bundle dadoIdUsuario = new Bundle();
 				
-				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,u.getId());
+				dadoIdUsuario.putInt(Tags.ID_USUARIO,u.getId());
 				
 				Log.d(Tags.ID_USUARIO, u.getId()+" no login usuario");
 				

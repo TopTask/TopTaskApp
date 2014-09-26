@@ -111,11 +111,11 @@ public class ProjetosActivity extends Activity implements
 		
 		Log.d(Tags.CORRECAO_PROJETO, idProjetoSelecionado+ " Projetos activity");
 
-		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
+		Intent i = new Intent(this, MSimplesActivity.class);
 		Bundle dados = new Bundle();
 		
-		dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-		dados.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+		dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
+		dados.putInt(Tags.ID_USUARIO,idUsuario);
 		
 		i.putExtras(dados);
 		startActivity(i);
@@ -160,8 +160,8 @@ public class ProjetosActivity extends Activity implements
 			dadosRecebidos.putString(ContratoProjetos.Colunas.NOME,projetoSelecionado.getNome());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DESCRICAO,projetoSelecionado.getDescricao());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DATA_ENTREGA,projetoSelecionado.getDataEntrega());
-			dadosRecebidos.putInt(ContratoProjetos.Colunas._ID,projetoSelecionado.getId());
-			dadosRecebidos.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+			dadosRecebidos.putInt(Tags.ID_PROJETO,projetoSelecionado.getId());
+			dadosRecebidos.putInt(Tags.ID_USUARIO,idUsuario);
 			
 			iEditar.putExtras(dadosRecebidos);
 			projetoSelecionado = null;
@@ -196,7 +196,7 @@ public class ProjetosActivity extends Activity implements
 
 	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
-		idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		idUsuario = dados.getInt(Tags.ID_USUARIO);
 		
 		Log.d(Tags.ID_USUARIO, idUsuario + " no projetosAcitivy");
 		
