@@ -19,12 +19,12 @@ public class GraficosActivity extends Activity {
 
 	    Tab tab = actionBar.newTab().setText(R.string.tab_g_tarefa)
 	                       .setTabListener(new TabListener<FragmentTabGraficoTarefa>(
-	                               this, "Tarefa", FragmentTabGraficoTarefa.class));
+	                               this, "Tarefas", FragmentTabGraficoTarefa.class));
 	    actionBar.addTab(tab);
 
 	    tab = actionBar.newTab().setText(R.string.tab_g_projeto)
 	                   .setTabListener(new TabListener<FragmentTabGraficoProjeto>(
-	                           this, "Projeto", FragmentTabGraficoProjeto.class));
+	                           this, "Andamento Projeto", FragmentTabGraficoProjeto.class));
 	    actionBar.addTab(tab);
 	}
 }

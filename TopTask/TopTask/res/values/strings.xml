@@ -64,7 +64,7 @@
     </string-array>
     
     <!-- Strings Tabs -->
-    <string name="tab_g_tarefa">Tarefa</string>
-    <string name="tab_g_projeto">Projeto</string>
+    <string name="tab_g_tarefa">Minhas Tarefas</string>
+    <string name="tab_g_projeto">Meu Projeto</string>
     
 </resources>

@@ -88,6 +88,30 @@ public class TarefaDAO {
  
 	}
 	
+	public List<Tarefa> getTarefasDoUsuarioNoProjetos(int idProjeto, int idDono){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? and " +  ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(idProjeto),String.valueOf(idDono)},
+				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
+
+		List<Tarefa> tarefas = new ArrayList<Tarefa>();
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					Tarefa t = TarefaDAO.getCursor(c);
+					tarefas.add(t);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return tarefas;
+
+ 
+	}
+	
 	public List<Tarefa> getNaoConcluidas(){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
 				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
@@ -140,14 +164,10 @@ public class TarefaDAO {
 		return tarefas;
 	}
 	
-	public List<Tarefa> getNaoConcluidasDoMembroNoProjeto(int idProjeto, int idMembro){
+	public List<Tarefa> getNaoConcluidasDoMembroNoProjeto(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.MEMBRO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idMembro)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idDono)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
-		
-//		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-//				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
-//				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 
@@ -188,9 +208,9 @@ public class TarefaDAO {
 			return tarefas;
 	 }
     
-    public List<Tarefa> getFazendoDoMembroNoProjeto(int idProjeto, int idMembro){
+    public List<Tarefa> getFazendoDoMembroNoProjeto(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.MEMBRO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idMembro)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idDono)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -232,9 +252,9 @@ public class TarefaDAO {
 			return tarefas;
 		}		
 		
-		public List<Tarefa> getConcluidasDoMembroNoProjeto(int idProjeto, int idMembro){
+		public List<Tarefa> getConcluidasDoMembroNoProjeto(int idProjeto, int idDono){
 			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.MEMBRO + " = ?", new String[] {String.valueOf(2),String.valueOf(idProjeto),String.valueOf(idMembro)},
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(2),String.valueOf(idProjeto),String.valueOf(idDono)},
 					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 			List<Tarefa> tarefas = new ArrayList<Tarefa>();

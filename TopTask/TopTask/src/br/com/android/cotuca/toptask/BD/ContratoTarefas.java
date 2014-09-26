@@ -13,7 +13,6 @@ public final class ContratoTarefas {
 		public static final String PRIORIDADE = "prioridade";
 		public static final String PROJETO = "idProjeto";
 		public static final String CONCLUIDA = "progresso";
-		public static final String MEMBRO = "idMembro";
 		
 	}
 }

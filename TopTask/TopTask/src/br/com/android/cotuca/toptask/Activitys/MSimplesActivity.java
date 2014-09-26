@@ -38,12 +38,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
+import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -67,6 +69,8 @@ public class MSimplesActivity extends Activity implements
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
+	
+	private TarefaDAO dao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,8 @@ public class MSimplesActivity extends Activity implements
 		mPaginaTitulo = getResources().getStringArray(R.array.menu_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		
+		dao = TarefaDAO.getInstance(this);
 
 		// Sombra ao abrir o Drawer Menu
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -199,12 +205,17 @@ public class MSimplesActivity extends Activity implements
 			Intent i = new Intent(this,QuadroTarefaActivity.class);
 			startActivity(i);
 		}else if (posicao == 2) { //gráficos
-			Intent i = new Intent(this, GraficosActivity.class);
-			Bundle dados = new Bundle();
-			dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-			dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
-			
-            startActivity(i);
+			if(dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado, idUsuarioSelecionado).size()==0){
+				Intent i = new Intent(this, GraficosActivity.class);
+				Bundle dados = new Bundle();
+				dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
+				dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
+				
+	            startActivity(i);
+			}
+			else{
+				Toast.makeText(getApplicationContext(), "Você ainda não possui tarefas", Toast.LENGTH_SHORT).show();
+			}
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
