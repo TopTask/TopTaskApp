@@ -320,5 +320,10 @@ public class MSimplesActivity extends Activity implements
 		startActionMode(this);
 		actionModeAtivado = true;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		//nao pode voltar para a activity de projetos
+	}
 
 }

@@ -210,7 +210,10 @@ public class ProjetosActivity extends Activity implements
 		}
 
 		ft.commit();
-
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		//nao deve voltar para pagina de entrada
+	}
 }

@@ -193,6 +193,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			Intent i = new Intent(getApplicationContext(),MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
 			dadosBundle.putInt(Tags.ID_PROJETO, idProjeto);
+			dadosBundle.putInt(Tags.ID_USUARIO, idDono);
 			i.putExtras(dadosBundle);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
