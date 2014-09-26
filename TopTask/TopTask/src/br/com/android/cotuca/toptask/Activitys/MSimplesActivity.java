@@ -116,8 +116,8 @@ public class MSimplesActivity extends Activity implements
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-		Intent intentDadosRecebidos = getIntent();
-		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
+
+		Bundle dadosRecebidos = this.getIntent().getExtras();
 
 		if (dadosRecebidos == null) {
 			selectItem(0);
@@ -129,7 +129,9 @@ public class MSimplesActivity extends Activity implements
 					.getInt(ContratoUsuarios.Colunas._ID);
 
 			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
-
+			Log.d(Tags.CORRECAO_PROJETO, "id Projeto selecionado :" + idProjetoSelecionado);
+			
+			
 			selectItem(0);
 		}
 

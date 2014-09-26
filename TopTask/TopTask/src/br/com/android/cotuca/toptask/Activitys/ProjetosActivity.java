@@ -108,6 +108,8 @@ public class ProjetosActivity extends Activity implements
 	public void onProjetoClick(Projeto projeto) {
 
 		int idProjetoSelecionado = projeto.getId();
+		
+		Log.d(Tags.CORRECAO_PROJETO, idProjetoSelecionado+ " Projetos activity");
 
 		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
 		Bundle dados = new Bundle();

@@ -59,6 +59,8 @@ public class FragmentTarefas extends ListFragment implements OnMenuItemClickList
 		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
 		idProjeto = dadosRecebidos.getInt(ContratoProjetos.Colunas._ID);
 		
+		Log.d(Tags.CORRECAO_PROJETO, "Id projeto no FragmentTarefas : "+ idProjeto);
+		
 		TarefaDAO tarefas = TarefaDAO.getInstance(getActivity()); 
 		
 		adapter = new AdapterTarefa(getActivity(), tarefas.getNaoConcluidasDoProjeto(idProjeto));
