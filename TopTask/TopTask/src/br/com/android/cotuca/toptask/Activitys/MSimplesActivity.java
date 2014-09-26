@@ -193,7 +193,7 @@ public class MSimplesActivity extends Activity implements
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
 					.commit();
 
-		} else if (posicao == 2) { // gr�ficos
+		} else if (posicao == 2) { 
 
 			if (dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).size() == 0) {
@@ -201,13 +201,19 @@ public class MSimplesActivity extends Activity implements
 				Bundle dados = new Bundle();
 				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
 				dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
-
+				i.putExtras(dados);
 				startActivity(i);
 			} else {
 				Toast.makeText(getApplicationContext(),
 						"Voce ainda nao possui tarefas", Toast.LENGTH_SHORT)
 						.show();
 			}
+		}else if (posicao == 5) {
+			Intent iSairProjetoAtual = new Intent(this, ProjetosActivity.class);
+			Bundle dados = new Bundle();
+			dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
+			iSairProjetoAtual.putExtras(dados);
+			startActivity(iSairProjetoAtual);			
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
