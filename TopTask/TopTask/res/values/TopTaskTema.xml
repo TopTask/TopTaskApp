@@ -9,13 +9,6 @@
         <item name="android:activatedBackgroundIndicator">@drawable/activated_background</item>
     </style>
 
-    <!--
-            <style name="activatedBackgroundIndicator">
-        <item name="android:background">@color/padrao_laranja</item>
-    </style>
-    -->
-
-
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>

@@ -220,15 +220,6 @@ public final class R {
         public static final int title_activity_projetos=0x7f08000f;
     }
     public static final class style {
-        /**  ActionBar styles 
-         */
-        public static final int ActionBar_Style=0x7f050007;
-        /**  ActionBar tabs text styles 
-         */
-        public static final int ActionBar_TabText_Style=0x7f050009;
-        /**  ActionBar title text 
-         */
-        public static final int ActionBar_TitleText_Style=0x7f050008;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -254,12 +245,7 @@ public final class R {
         /**  the theme applied to the application or activity 
          */
         public static final int CustomActionBarTheme=0x7f050000;
-        /** 
-            <style name="activatedBackgroundIndicator">
-        <item name="android:background">@color/padrao_laranja</item>
-    </style>
-    
- ActionBar styles 
+        /**  ActionBar styles 
          */
         public static final int MyActionBar=0x7f050001;
         /**  ActionBar tabs text styles 
@@ -268,8 +254,5 @@ public final class R {
         /**  ActionBar title text 
          */
         public static final int MyActionBarTitleText=0x7f050002;
-        /**  the theme applied to the application or activity 
-         */
-        public static final int TemaAPP=0x7f050006;
     }
 }
