@@ -15,7 +15,7 @@ import br.com.android.cotuca.toptask.tags.Tags;
 
 public class FragmentTabGraficoTarefa extends Fragment {
 	
-	private TarefaDAO dao;
+	//private TarefaDAO dao;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -23,13 +23,22 @@ public class FragmentTabGraficoTarefa extends Fragment {
 
 		ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.view_graph_tarefa); 
 		
-		dao = TarefaDAO.getInstance(getActivity().getApplicationContext());
+		//dao = TarefaDAO.getInstance(getActivity().getApplicationContext());
 		
-		Bundle dados = getActivity().getIntent().getExtras();
-		int idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
-		int idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		//Bundle dados = getActivity().getIntent().getExtras();
+		//int idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
+		//int idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
 		
+		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
+		
+		
+		
+		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),1,2,3);
+		
+<<<<<<< HEAD
 		Log.d(Tags.ID_USUARIO, idUsuario + " no fragmentTabGraficoTarefa");
+=======
+>>>>>>> teste
 		
 				
 //		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
