@@ -2,16 +2,11 @@ package br.com.android.cotuca.toptask.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
-import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Graphs.GraficoPizzaTarefasView;
-import br.com.android.cotuca.toptask.tags.Tags;
 
 public class FragmentTabGraficoTarefa extends Fragment {
 	

@@ -12,7 +12,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
 import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
 import br.com.android.cotuca.toptask.tags.Tags;

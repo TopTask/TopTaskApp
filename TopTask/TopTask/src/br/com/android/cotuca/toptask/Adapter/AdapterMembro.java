@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Beans.Membro;
-import br.com.android.cotuca.toptask.Beans.Usuario;
 
 public class AdapterMembro extends BaseAdapter{
 	

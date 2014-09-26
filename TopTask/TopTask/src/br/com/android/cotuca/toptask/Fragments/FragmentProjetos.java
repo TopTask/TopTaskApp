@@ -14,7 +14,6 @@ import android.widget.ListView;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Activitys.CadastroProjetoActivity;
 import br.com.android.cotuca.toptask.Adapter.AdapterProjeto;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.tags.Tags;

@@ -66,7 +66,7 @@ public class NotificacaoSimplesReceiver extends BroadcastReceiver{
 		Notification n = builder.build();
 	
 		//objeto para enviar a notificao
-		NotificationManager manager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		
 		//envia a notificao
 		manager.notify(5128,n);

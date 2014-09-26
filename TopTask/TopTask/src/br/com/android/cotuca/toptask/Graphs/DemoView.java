@@ -1,10 +1,12 @@
 package br.com.android.cotuca.toptask.Graphs;
 
-import org.afree.ui.RectangleInsets;
+import java.util.EventListener;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.afree.chart.AFreeChart;
+import org.afree.chart.ChartRenderingInfo;
 import org.afree.chart.ChartTouchEvent;
 import org.afree.chart.ChartTouchListener;
-import org.afree.chart.ChartRenderingInfo;
-import org.afree.chart.AFreeChart;
 import org.afree.chart.entity.ChartEntity;
 import org.afree.chart.entity.EntityCollection;
 import org.afree.chart.event.ChartChangeEvent;
@@ -16,12 +18,10 @@ import org.afree.chart.plot.Plot;
 import org.afree.chart.plot.PlotOrientation;
 import org.afree.chart.plot.PlotRenderingInfo;
 import org.afree.chart.plot.Zoomable;
+import org.afree.graphics.SolidColor;
 import org.afree.graphics.geom.Dimension;
 import org.afree.graphics.geom.RectShape;
-import org.afree.graphics.SolidColor;
-
-import java.util.EventListener;
-import java.util.concurrent.CopyOnWriteArrayList;
+import org.afree.ui.RectangleInsets;
 
 import android.content.Context;
 import android.graphics.Canvas;
