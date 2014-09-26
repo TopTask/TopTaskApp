@@ -49,6 +49,7 @@ import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.tags.Tags;
+
 //import android.widget.Toast;
 
 public class MSimplesActivity extends Activity implements
@@ -69,7 +70,7 @@ public class MSimplesActivity extends Activity implements
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
-	
+
 	private TarefaDAO dao;
 
 	@Override
@@ -80,7 +81,7 @@ public class MSimplesActivity extends Activity implements
 		mPaginaTitulo = getResources().getStringArray(R.array.menu_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
-		
+
 		dao = TarefaDAO.getInstance(this);
 
 		// Sombra ao abrir o Drawer Menu
@@ -122,11 +123,13 @@ public class MSimplesActivity extends Activity implements
 			selectItem(0);
 		} else {
 
-			idProjetoSelecionado = dadosRecebidos.getInt(ContratoProjetos.Colunas._ID);
-			idUsuarioSelecionado = dadosRecebidos.getInt(ContratoUsuarios.Colunas._ID);
-			
+			idProjetoSelecionado = dadosRecebidos
+					.getInt(ContratoProjetos.Colunas._ID);
+			idUsuarioSelecionado = dadosRecebidos
+					.getInt(ContratoUsuarios.Colunas._ID);
+
 			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
-			
+
 			selectItem(0);
 		}
 
@@ -193,33 +196,29 @@ public class MSimplesActivity extends Activity implements
 			Fragment f_tarefas = new FragmentTarefas();
 			if (idProjetoSelecionado != 0) {
 				Bundle dadosProjeto = new Bundle();
-				dadosProjeto.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
+				dadosProjeto.putInt(ContratoProjetos.Colunas._ID,
+						idProjetoSelecionado);
 
 				f_tarefas.setArguments(dadosProjeto);
 			}
-			fm.beginTransaction().replace(R.id.content_frame, f_tarefas).commit();
-		
-		}else if (posicao == 2) { //gráficos
-<<<<<<< HEAD
-			Intent i = new Intent(this, GraficosActivity.class);
-			Bundle dados = new Bundle();
-			dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-			dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
+			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
+					.commit();
 
-            startActivity(i);
-=======
-			if(dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado, idUsuarioSelecionado).size()==0){
+		} else if (posicao == 2) { // gráficos
+
+			if (dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
+					idUsuarioSelecionado).size() == 0) {
 				Intent i = new Intent(this, GraficosActivity.class);
 				Bundle dados = new Bundle();
 				dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
 				dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
-				
-	            startActivity(i);
+
+				startActivity(i);
+			} else {
+				Toast.makeText(getApplicationContext(),
+						"Você ainda não possui tarefas", Toast.LENGTH_SHORT)
+						.show();
 			}
-			else{
-				Toast.makeText(getApplicationContext(), "Você ainda não possui tarefas", Toast.LENGTH_SHORT).show();
-			}
->>>>>>> teste
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
@@ -231,7 +230,6 @@ public class MSimplesActivity extends Activity implements
 		mTitle = title;
 		getActionBar().setTitle(mTitle);
 	}
-
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -260,7 +258,7 @@ public class MSimplesActivity extends Activity implements
 		} else if (id == R.id.acction_editar_tarefa) {
 			Intent iEditar = new Intent(this, CadastroTarefa.class);
 			Bundle dados = new Bundle();
-			
+
 			dados.putInt("ACAO", 1);
 			dados.putString(ContratoTarefas.Colunas.NOME,
 					tarefaSelecionada.getNome());
@@ -271,11 +269,11 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-			
+
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);
-			
+
 			tarefaSelecionada = null;
 			this.selectItem(0);
 			mode.finish();

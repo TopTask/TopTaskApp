@@ -31,16 +31,6 @@ public class FragmentTabGraficoTarefa extends Fragment {
 		
 		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
 		
-		
-		
-		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),1,2,3);
-		
-<<<<<<< HEAD
-		Log.d(Tags.ID_USUARIO, idUsuario + " no fragmentTabGraficoTarefa");
-=======
->>>>>>> teste
-		
-				
 //		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
 		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,1,1);
 
