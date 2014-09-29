@@ -17,7 +17,7 @@ public class GraficosActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
-	    Log.d(Tags.ID_USUARIO, getIntent().getExtras().getInt(ContratoUsuarios.Colunas._ID)+ " no graficosActivity");
+	    //Log.d(Tags.ID_USUARIO, getIntent().getExtras().getInt(ContratoUsuarios.Colunas._ID)+ " no graficosActivity");
 
 	    ActionBar actionBar = getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

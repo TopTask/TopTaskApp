@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <item 
+
+    <item
         android:id="@+id/acction_concluir_tarefa"
         android:icon="@drawable/ic_action_good"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Finalizar Tarefa"/>
-
-    <item 
+    <item
         android:id="@+id/acction_excluir_tarefa"
         android:icon="@drawable/ic_action_discard"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Excluir Tarefa"/>
-    
-    <item 
+    <item
+        android:id="@+id/acction_fazendo_tarefa"
+        android:icon="@android:drawable/ic_menu_send"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Em andamento"/>
+    <item
         android:id="@+id/acction_editar_tarefa"
         android:icon="@drawable/ic_action_edit"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Editar tarefa"/>
-    
+
 </menu>

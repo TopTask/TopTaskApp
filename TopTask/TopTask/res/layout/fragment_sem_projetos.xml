@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_criarProjeto"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/new_task" />
+        android:src="@drawable/new_task" 
+        android:onClick="onClickNovo"/>
 
 </RelativeLayout>

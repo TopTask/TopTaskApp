@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
@@ -156,9 +157,14 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			String descricao = edtDescricao.getText().toString();
 			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem().toString());
+			
+			if (nome == null || nome.equals("") || data == null || data.equals("")) {
+				Toast.makeText(getApplicationContext(),"Preencha todos os campos", Toast.LENGTH_SHORT).show();
+				return false;
+			}
 
 			if (!ehAtu) {
-				dao.save(new Tarefa(nome, descricao, idDono, data, prioridade,idProjeto, 0));
+				dao.save(new Tarefa(nome, descricao, idDono, data, prioridade,idProjeto, 0)); //pendente == 0 
 			} else {
 				Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 

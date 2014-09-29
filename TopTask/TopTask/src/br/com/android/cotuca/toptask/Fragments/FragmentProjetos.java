@@ -53,8 +53,6 @@ public class FragmentProjetos extends ListFragment implements
 		
 		int idUsuario = dadosRecebidos.getInt(Tags.ID_USUARIO);
 		
-		Log.d(Tags.ID_USUARIO, idUsuario +" no fragment projetos");
-		
 		adapter = new AdapterProjeto(getActivity(), projetos.getProjetosDoUsuario(idUsuario));
 		setListAdapter(adapter);
 

@@ -5,21 +5,21 @@
         android:id="@+id/action_entrar_projeto"
         android:icon="@drawable/ic_action_read"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Entrar Projeto"/>
     
     <item
         android:id="@+id/action_excluir_projeto"
         android:icon="@drawable/ic_action_discard"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Excluir Projeto"/>
     
     <item
         android:id="@+id/action_editar_projeto"
         android:icon="@drawable/ic_action_edit"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="Editar Projeto"/>
 
 </menu>

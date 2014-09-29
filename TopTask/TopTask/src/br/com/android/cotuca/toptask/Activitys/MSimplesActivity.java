@@ -195,15 +195,19 @@ public class MSimplesActivity extends Activity implements
 
 		} else if (posicao == 2) { 
 
-			if (dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
-					idUsuarioSelecionado).size() == 0) {
+			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
+					idUsuarioSelecionado).isEmpty()) {
+				
+				Log.i("Ha tarefas na lista", "Ha tarefas na lista");
+				
 				Intent i = new Intent(this, GraficosActivity.class);
-				Bundle dados = new Bundle();
+			    Bundle dados = new Bundle();
 				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
 				dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
 				i.putExtras(dados);
 				startActivity(i);
 			} else {
+				Log.i("lista de tarefas vazia", "lista de tarefas vazia");
 				Toast.makeText(getApplicationContext(),
 						"Voce ainda nao possui tarefas", Toast.LENGTH_SHORT)
 						.show();
@@ -265,7 +269,7 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-
+			
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);
@@ -283,6 +287,14 @@ public class MSimplesActivity extends Activity implements
 
 			mode.finish();
 			return true;
+		} else if (id == R.id.acction_fazendo_tarefa) {
+			
+			tarefas.fazendoTarefa(tarefaSelecionada);
+			tarefaSelecionada = null;
+			this.selectItem(0);
+			mode.finish();
+			return true;
+			
 		}
 
 		return false;

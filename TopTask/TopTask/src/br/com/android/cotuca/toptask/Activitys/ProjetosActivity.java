@@ -1,5 +1,6 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -16,7 +17,9 @@ import android.view.View;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
+import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
@@ -133,6 +136,7 @@ public class ProjetosActivity extends Activity implements
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		int idItem = item.getItemId();
 		ProjetoDAO projetosDAO = ProjetoDAO.getInstance(this);
+		TarefaDAO tarefaDAO = TarefaDAO.getInstance(this);
 
 		if (idItem == R.id.action_entrar_projeto) {
 
@@ -143,7 +147,16 @@ public class ProjetosActivity extends Activity implements
 			return true;
 
 		} else if (idItem == R.id.action_excluir_projeto) {
-			// deletar todas as tarefas com o id do projeto
+			List<Tarefa> tarefasProjeto =tarefaDAO.getTarefasProjeto(projetoSelecionado.getId());
+		
+			if(!tarefasProjeto.isEmpty()){
+			
+				for(int i=0;i<tarefasProjeto.size();i++){  
+					Log.d("TAREFAS PROJETO - nº " +i, tarefasProjeto.get(i).getNome());
+					tarefaDAO.delete(tarefasProjeto.get(i));    
+				} 
+			}
+			
 			projetosDAO.delete(projetoSelecionado);
 			projetoSelecionado = null;
 			selecionaFragmentAdequado(dadosRecebidos);

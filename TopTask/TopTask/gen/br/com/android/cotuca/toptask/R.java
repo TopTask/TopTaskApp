@@ -65,19 +65,20 @@ public final class R {
     }
     public static final class id {
         public static final int acction_concluir_tarefa=0x7f0b0033;
-        public static final int acction_editar_tarefa=0x7f0b0035;
+        public static final int acction_editar_tarefa=0x7f0b0036;
         public static final int acction_excluir_tarefa=0x7f0b0034;
-        public static final int action_accept=0x7f0b0036;
-        public static final int action_accept_projeto=0x7f0b003c;
-        public static final int action_add=0x7f0b003b;
-        public static final int action_add_nova_tarefa=0x7f0b003e;
-        public static final int action_criar_tarefa=0x7f0b0037;
-        public static final int action_criar_usuario=0x7f0b0038;
+        public static final int acction_fazendo_tarefa=0x7f0b0035;
+        public static final int action_accept=0x7f0b0037;
+        public static final int action_accept_projeto=0x7f0b003d;
+        public static final int action_add=0x7f0b003c;
+        public static final int action_add_nova_tarefa=0x7f0b003f;
+        public static final int action_criar_tarefa=0x7f0b0038;
+        public static final int action_criar_usuario=0x7f0b0039;
         public static final int action_editar_projeto=0x7f0b0032;
-        public static final int action_entrar=0x7f0b003a;
+        public static final int action_entrar=0x7f0b003b;
         public static final int action_entrar_projeto=0x7f0b0030;
         public static final int action_excluir_projeto=0x7f0b0031;
-        public static final int action_sair_conta=0x7f0b003d;
+        public static final int action_sair_conta=0x7f0b003e;
         public static final int activity_graficos=0x7f0b0009;
         public static final int background=0x7f0b0006;
         public static final int btn_cadastrar=0x7f0b0007;
@@ -97,7 +98,7 @@ public final class R {
         public static final int edt_nomeNovoUsuario=0x7f0b0023;
         public static final int edt_senhaLogin=0x7f0b002b;
         public static final int edt_senhaNovoUsuario=0x7f0b0025;
-        public static final int entrada=0x7f0b0039;
+        public static final int entrada=0x7f0b003a;
         public static final int flay_img_tarefa=0x7f0b0003;
         public static final int fragment_fazendo=0x7f0b000e;
         public static final int fragment_fazer=0x7f0b000d;
