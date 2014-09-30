@@ -7,7 +7,6 @@ import org.afree.chart.plot.PiePlot;
 import org.afree.data.general.DefaultPieDataset;
 import org.afree.data.general.PieDataset;
 import org.afree.graphics.SolidColor;
-
 import android.content.Context;
 
 public class GraficoPizzaTarefasView extends DemoView{
@@ -39,7 +38,7 @@ public class GraficoPizzaTarefasView extends DemoView{
                 true, // legenda
                 false,
                 false);
-
+        
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLabelShadowPaint(new SolidColor(ChartColor.BLACK));
         plot.setLabelGenerator(null);
