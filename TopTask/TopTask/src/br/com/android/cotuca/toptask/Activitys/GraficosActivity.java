@@ -31,5 +31,10 @@ public class GraficosActivity extends Activity {
 	                   .setTabListener(new TabListener<FragmentTabGraficoProjeto>(
 	                           this, "Andamento Projeto", FragmentTabGraficoProjeto.class));
 	    actionBar.addTab(tab);
+	    
+	    tab = actionBar.newTab().setText(R.string.tab_g_burn_down)
+                .setTabListener(new TabListener<FragmentTabGraficoTarefa>(
+                        this, "Burn Down", FragmentTabGraficoTarefa.class));
+	    actionBar.addTab(tab);
 	}
 }
