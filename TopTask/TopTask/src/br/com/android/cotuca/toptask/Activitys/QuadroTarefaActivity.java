@@ -27,7 +27,7 @@ public class QuadroTarefaActivity extends Activity{
 		TarefaDAO tarefas = TarefaDAO.getInstance(this);
 		int idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
 		
-		List<Tarefa> tarefasProjeto = tarefas.getTarefasProjetos(idProjeto);
+		List<Tarefa> tarefasProjeto = tarefas.getTarefasProjeto(idProjeto);
 		
 		if (tarefasProjeto.isEmpty()){ // Carregar o FragmentQuadroTarefasVazio
 		    

@@ -1,22 +1,17 @@
 package br.com.android.cotuca.toptask.Graphs;
 
+import org.afree.chart.AFreeChart;
 import org.afree.chart.ChartColor;
 import org.afree.chart.ChartFactory;
-import org.afree.chart.AFreeChart;
 import org.afree.chart.plot.PiePlot;
-import org.afree.chart.title.TextTitle;
 import org.afree.data.general.DefaultPieDataset;
 import org.afree.data.general.PieDataset;
 import org.afree.graphics.SolidColor;
-import org.afree.graphics.geom.Font;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.view.View;
 
 public class GraficoPizzaTarefasView extends DemoView{
-    static final String TC = "Tarefas concluídas";
+    static final String TC = "Tarefas concluidas";
     static final String TA = "Tarefas em andamento";
     static final String TP = "Tarefas pendentes";
 
@@ -52,7 +47,7 @@ public class GraficoPizzaTarefasView extends DemoView{
         plot.setExplodePercent(TA,0.04);
         plot.setExplodePercent(TP,0.04);
         //plot.setLabelFont(new Font("SansSerif", Typeface.NORMAL, 15));
-        plot.setNoDataMessage("Tarefas não encontradas");
+        plot.setNoDataMessage("Tarefas nao encontradas");
         plot.setCircular(true);
         //plot.setLabelGap(0.02);
         plot.setSectionPaintType(TC, new SolidColor(ChartColor.LIGHT_GREEN));

@@ -1,5 +1,6 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -15,9 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
+import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
@@ -88,6 +90,7 @@ public class ProjetosActivity extends Activity implements
 
 		case R.id.action_sair_conta:
 			Intent i = new Intent(getApplication(), EntradaActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 		
 		default:
@@ -108,12 +111,12 @@ public class ProjetosActivity extends Activity implements
 	public void onProjetoClick(Projeto projeto) {
 
 		int idProjetoSelecionado = projeto.getId();
-
-		Intent i = new Intent(getApplicationContext(), MSimplesActivity.class);
+		
+		Intent i = new Intent(this, MSimplesActivity.class);
 		Bundle dados = new Bundle();
 		
-		dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-		dados.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+		dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
+		dados.putInt(Tags.ID_USUARIO,idUsuario);
 		
 		i.putExtras(dados);
 		startActivity(i);
@@ -133,6 +136,7 @@ public class ProjetosActivity extends Activity implements
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		int idItem = item.getItemId();
 		ProjetoDAO projetosDAO = ProjetoDAO.getInstance(this);
+		TarefaDAO tarefaDAO = TarefaDAO.getInstance(this);
 
 		if (idItem == R.id.action_entrar_projeto) {
 
@@ -143,7 +147,16 @@ public class ProjetosActivity extends Activity implements
 			return true;
 
 		} else if (idItem == R.id.action_excluir_projeto) {
-			// deletar todas as tarefas com o id do projeto
+			List<Tarefa> tarefasProjeto =tarefaDAO.getTarefasProjeto(projetoSelecionado.getId());
+		
+			if(!tarefasProjeto.isEmpty()){
+			
+				for(int i=0;i<tarefasProjeto.size();i++){  
+					Log.d("TAREFAS PROJETO - nº " +i, tarefasProjeto.get(i).getNome());
+					tarefaDAO.delete(tarefasProjeto.get(i));    
+				} 
+			}
+			
 			projetosDAO.delete(projetoSelecionado);
 			projetoSelecionado = null;
 			selecionaFragmentAdequado(dadosRecebidos);
@@ -158,8 +171,8 @@ public class ProjetosActivity extends Activity implements
 			dadosRecebidos.putString(ContratoProjetos.Colunas.NOME,projetoSelecionado.getNome());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DESCRICAO,projetoSelecionado.getDescricao());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DATA_ENTREGA,projetoSelecionado.getDataEntrega());
-			dadosRecebidos.putInt(ContratoProjetos.Colunas._ID,projetoSelecionado.getId());
-			dadosRecebidos.putInt(ContratoUsuarios.Colunas._ID,idUsuario);
+			dadosRecebidos.putInt(Tags.ID_PROJETO,projetoSelecionado.getId());
+			dadosRecebidos.putInt(Tags.ID_USUARIO,idUsuario);
 			
 			iEditar.putExtras(dadosRecebidos);
 			projetoSelecionado = null;
@@ -194,9 +207,7 @@ public class ProjetosActivity extends Activity implements
 
 	private void selecionaFragmentAdequado(Bundle dados) {
 		ProjetoDAO projetos = ProjetoDAO.getInstance(this);
-		idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
-		
-		Log.d(Tags.ID_USUARIO, idUsuario + " no projetosAcitivy");
+		idUsuario = dados.getInt(Tags.ID_USUARIO);
 		
 		List<Projeto> listProjetos = projetos.getProjetosDoUsuario(idUsuario);
 
@@ -213,7 +224,10 @@ public class ProjetosActivity extends Activity implements
 		}
 
 		ft.commit();
-
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		//nao deve voltar para pagina de entrada
+	}
 }

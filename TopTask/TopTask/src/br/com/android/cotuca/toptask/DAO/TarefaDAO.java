@@ -24,6 +24,8 @@ public class TarefaDAO {
 			ContratoTarefas.Colunas.DESCRICAO,
 			ContratoTarefas.Colunas.DONO,
 			ContratoTarefas.Colunas.DATA_ENTREGA,
+			ContratoTarefas.Colunas.TEMPO_LIMITE,
+			ContratoTarefas.Colunas.TEMPO_FEITO,
 			ContratoTarefas.Colunas.PRIORIDADE,
 			ContratoTarefas.Colunas.PROJETO, 
 			ContratoTarefas.Colunas.CONCLUIDA};
@@ -64,7 +66,7 @@ public class TarefaDAO {
 		return tarefas;
 	}
 	
-	public List<Tarefa> getTarefasProjetos(int idProjeto){
+	public List<Tarefa> getTarefasProjeto(int idProjeto){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
 				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
@@ -114,7 +116,7 @@ public class TarefaDAO {
 	
 	public List<Tarefa> getNaoConcluidas(){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.pendente)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -137,16 +139,11 @@ public class TarefaDAO {
 	}
 	
 	
-	//Nao concluido tarefa com Coluna.Concluida <> 2
 	public List<Tarefa> getNaoConcluidasDoProjeto(int idProjeto){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(0),String.valueOf(idProjeto)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.pendente),String.valueOf(idProjeto)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 		
-//		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-//				ContratoTarefas.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
-//				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
-
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 
 		try {
@@ -166,7 +163,7 @@ public class TarefaDAO {
 	
 	public List<Tarefa> getNaoConcluidasDoMembroNoProjeto(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idDono)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.pendente),String.valueOf(idProjeto),String.valueOf(idDono)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -188,7 +185,7 @@ public class TarefaDAO {
 	
     public List<Tarefa> getFazendoDoProjeto(int idProjeto){
 			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto)},
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.andamento),String.valueOf(idProjeto)},
 					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 			List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -210,7 +207,7 @@ public class TarefaDAO {
     
     public List<Tarefa> getFazendoDoMembroNoProjeto(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(1),String.valueOf(idProjeto),String.valueOf(idDono)},
+				ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.andamento),String.valueOf(idProjeto),String.valueOf(idDono)},
 				null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -232,7 +229,7 @@ public class TarefaDAO {
 	
 		public List<Tarefa> getConcluidasDoProjeto(int idProjeto){
 			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(2),String.valueOf(idProjeto)},
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.concluida),String.valueOf(idProjeto)},
 					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 			List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -254,7 +251,7 @@ public class TarefaDAO {
 		
 		public List<Tarefa> getConcluidasDoMembroNoProjeto(int idProjeto, int idDono){
 			Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
-					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(2),String.valueOf(idProjeto),String.valueOf(idDono)},
+					ContratoTarefas.Colunas.CONCLUIDA + " = ? and " + ContratoTarefas.Colunas.PROJETO + " = ? and " + ContratoTarefas.Colunas.DONO + " = ?", new String[] {String.valueOf(ContratoTarefas.StatusTarefa.concluida),String.valueOf(idProjeto),String.valueOf(idDono)},
 					null, null, ContratoTarefas.Colunas.DATA_ENTREGA);
 
 			List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -301,6 +298,7 @@ public class TarefaDAO {
 		String data = c.getString(c
 				.getColumnIndex(ContratoTarefas.Colunas.DATA_ENTREGA));
 		int dono = c.getInt((c.getColumnIndex(ContratoTarefas.Colunas.DONO)));
+		
 		int prioridade = c.getInt(c
 				.getColumnIndex(ContratoTarefas.Colunas.PRIORIDADE));
 		int projeto = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.PROJETO));
@@ -308,8 +306,12 @@ public class TarefaDAO {
 		int _id = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas._ID));
 		
 		int concluida = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.CONCLUIDA));
+		
+		int tempoLimite = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_LIMITE));
+		
+		int tempoFeito = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_FEITO));
 
-		return new Tarefa(_id,nome, descricao,dono,data, prioridade, projeto,concluida);
+		return new Tarefa(_id,nome, descricao,dono,data,tempoLimite, tempoFeito, prioridade, projeto,concluida);
 	}
 
 	public void save(Tarefa tarefa) {
@@ -321,7 +323,8 @@ public class TarefaDAO {
 		values.put(ContratoTarefas.Colunas.PRIORIDADE, tarefa.getPrioridade());
 		values.put(ContratoTarefas.Colunas.PROJETO, tarefa.getIdProjeto());
 		values.put(ContratoTarefas.Colunas.CONCLUIDA, tarefa.getConcluida());
-
+		values.put(ContratoTarefas.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
+		values.put(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
 		
 		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
 		
@@ -340,6 +343,8 @@ public class TarefaDAO {
 		values.put(ContratoTarefas.Colunas.PRIORIDADE, tarefa.getPrioridade());
 		values.put(ContratoTarefas.Colunas.PROJETO, tarefa.getIdProjeto());
 		values.put(ContratoTarefas.Colunas.CONCLUIDA, tarefa.getConcluida());
+		values.put(ContratoTarefas.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
+		values.put(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
 
 		db.update(ContratoTarefas.NOME_TABELA, values,
 				ContratoTarefas.Colunas._ID + " = ? ",
@@ -356,7 +361,7 @@ public class TarefaDAO {
 		int id = tarefa.getID(); //� Concluida quando 0 e concluida qdo != 0
 		
 		ContentValues values = new ContentValues();
-		values.put(ContratoTarefas.Colunas.CONCLUIDA, 1);
+		values.put(ContratoTarefas.Colunas.CONCLUIDA, ContratoTarefas.StatusTarefa.concluida);
 		
 		db.update(ContratoTarefas.NOME_TABELA, values, ContratoTarefas.Colunas._ID + " = ? ", new String[] {String.valueOf(id)});
 		

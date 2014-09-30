@@ -1,20 +1,17 @@
 package br.com.android.cotuca.toptask.Adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-//import android.provider.SyncStateContract.Constants;
-//import android.sax.StartElementListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
+//import android.provider.SyncStateContract.Constants;
+//import android.sax.StartElementListener;
 
 public class AdapterTarefa extends BaseAdapter{
 

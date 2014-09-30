@@ -7,32 +7,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
+import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Graphs.GraficoPizzaTarefasView;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class FragmentTabGraficoTarefa extends Fragment {
 	
-	//private TarefaDAO dao;
+	private TarefaDAO dao;
+	private Bundle dadosRecebidos;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_grafico_tarefa, container, false);
 
 		ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.view_graph_tarefa); 
+		dadosRecebidos = getActivity().getIntent().getExtras(); //idUsu e idProj
 		
-		//dao = TarefaDAO.getInstance(getActivity().getApplicationContext());
+		dao = TarefaDAO.getInstance(getActivity().getApplicationContext());
 		
-		//Bundle dados = getActivity().getIntent().getExtras();
-		//int idProjeto = dados.getInt(ContratoProjetos.Colunas._ID);
-		//int idUsuario = dados.getInt(ContratoUsuarios.Colunas._ID);
+		int idProjeto = dadosRecebidos.getInt(Tags.ID_PROJETO);
+		int idUsuario = dadosRecebidos.getInt(Tags.ID_USUARIO);
 		
-		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
+		int concluidas = dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size();
+		int fazendo = dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size();
+		int pendentes = dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size();
 		
-//		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).size(),dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).size());
-		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,1,1);
+		if(dao.getConcluidasDoMembroNoProjeto(idProjeto, idUsuario).isEmpty())
+			concluidas = 0;
+		if(dao.getFazendoDoMembroNoProjeto(idProjeto, idUsuario).isEmpty())
+			fazendo = 0;
+		if(dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).isEmpty())
+			pendentes = 0;
+		
+		
+		Log.d("Qntidade de tarefas TAREFA", "Tarefas concluidas: "+concluidas);
+		
+		Log.d("Qntidade de tarefas TAREFA", "Tarefas andamento: "+fazendo);
+		
+		Log.d("Qntidade de tarefas TAREFA", "Tarefas pendentes: "+pendentes);
+		
+		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),concluidas,fazendo,pendentes);
+		
+		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,2,3);
 
 		viewGroup.addView(g);
 

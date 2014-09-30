@@ -12,9 +12,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Usuario;
 import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
+import br.com.android.cotuca.toptask.tags.Tags;
 
 public class CadastroUsuarioActivity extends Activity implements OnItemSelectedListener {
 	
@@ -55,7 +55,6 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		Log.i("ENTROU NO CLICK USU", "ENTROU NO CLICK USU");
 		if (id == R.id.action_criar_usuario) {
 			Log.i("ENTROU NO IF", "ENTROU NO IF");
 			
@@ -79,7 +78,7 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
 				
 				Log.d("ID DO USUARIO",novoUsuario.getId()+"");
 				
-				dadoIdUsuario.putInt(ContratoUsuarios.Colunas._ID,novoUsuario.getId());
+				dadoIdUsuario.putInt(Tags.ID_USUARIO,novoUsuario.getId());
 				i.putExtras(dadoIdUsuario);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
@@ -109,14 +108,14 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
         Boolean emailEhValido = email.matches(validacaoEmail);
         
         if (emailEhValido == false) {
-        	Toast.makeText(getApplicationContext(), "E-mail inválido", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "E-mail invï¿½lido", Toast.LENGTH_SHORT).show();
         	edtEmail.requestFocus();
 			edtEmail.setText("");
 			return false;
         }
         
         if(senha.length()<6){
-        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dígitos", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(getApplicationContext(), "Digite uma senha com mais de 6 dï¿½gitos", Toast.LENGTH_SHORT).show();
         	edtSenha.requestFocus();
         	edtSenha.setText("");
 			return false;
@@ -125,7 +124,7 @@ public class CadastroUsuarioActivity extends Activity implements OnItemSelectedL
         Usuario u = dao.getUsuario(email);
         
         if(!u.getEmail().equals("")||u.getEmail()!=""){
-			Toast.makeText(getApplicationContext(), "E-mail já cadastrado no TopTask", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "E-mail jï¿½ cadastrado no TopTask", Toast.LENGTH_SHORT).show();
 			edtEmail.requestFocus();
 			edtEmail.setText("");
 			return false;

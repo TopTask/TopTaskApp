@@ -1,7 +1,5 @@
 package br.com.android.cotuca.toptask.BD;
 
-//import java.io.InputStream;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +8,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	private static DBHelper instancia;
 	private static final String DB_NOME = "DB_Toptask";
-	private static final int DB_VERSAO = 2;
+	private static final int DB_VERSAO = 3;
 	
 	private static final String SQL_DROP_USUARIO = "DROP TABLE IF EXISTS " + ContratoUsuarios.NOME_TABELA;
 	private static final String SQL_DROP_PROJETO = "DROP TABLE IF EXISTS " + ContratoProjetos.NOME_TABELA;
@@ -42,13 +40,15 @@ public class DBHelper extends SQLiteOpenHelper{
 	
 	private static final String SQL_CREATE_TAREFA = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			"%s TEXT NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s INTEGER NOT NULL,%s INTEGER NOT NULL)", 
+			"%s TEXT NOT NULL, %s TEXT, %s INTEGER NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER, %s INTEGER NOT NULL, %s INTEGER NOT NULL,%s INTEGER NOT NULL)", 
 			ContratoTarefas.NOME_TABELA,
 			ContratoTarefas.Colunas._ID, 
 			ContratoTarefas.Colunas.NOME,
 			ContratoTarefas.Colunas.DESCRICAO, 
 			ContratoTarefas.Colunas.DONO,
-			ContratoTarefas.Colunas.DATA_ENTREGA , 
+			ContratoTarefas.Colunas.DATA_ENTREGA,
+			ContratoTarefas.Colunas.TEMPO_LIMITE,
+			ContratoTarefas.Colunas.TEMPO_FEITO,
 			ContratoTarefas.Colunas.PRIORIDADE, 
 			ContratoTarefas.Colunas.PROJETO,
 			ContratoTarefas.Colunas.CONCLUIDA);
@@ -80,8 +80,4 @@ public class DBHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		onCreate(db);
 	}
-	
-	//private void lerBanco(InputStream in) {
-	//}
-
 }

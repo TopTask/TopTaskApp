@@ -42,15 +42,10 @@ import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
-import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
-import br.com.android.cotuca.toptask.DAO.UsuarioDAO;
-import br.com.android.cotuca.toptask.Fragments.FragmentMembros;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
 import br.com.android.cotuca.toptask.tags.Tags;
-
-//import android.widget.Toast;
 
 public class MSimplesActivity extends Activity implements
 		FragmentTarefas.ListenerClickTarefa, Callback {
@@ -64,9 +59,7 @@ public class MSimplesActivity extends Activity implements
 	private String[] mPaginaTitulo;
 
 	private boolean actionModeAtivado = false;
-	private Tarefa tarefaSelecionada; // tarefa que sera setada quando alguma
-										// tarefa for clicada no fragment de
-										// tarefas
+	private Tarefa tarefaSelecionada; 
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
@@ -116,19 +109,15 @@ public class MSimplesActivity extends Activity implements
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-		Intent intentDadosRecebidos = getIntent();
-		Bundle dadosRecebidos = intentDadosRecebidos.getExtras();
+
+		Bundle dadosRecebidos = this.getIntent().getExtras();
 
 		if (dadosRecebidos == null) {
 			selectItem(0);
 		} else {
 
-			idProjetoSelecionado = dadosRecebidos
-					.getInt(ContratoProjetos.Colunas._ID);
-			idUsuarioSelecionado = dadosRecebidos
-					.getInt(ContratoUsuarios.Colunas._ID);
-
-			Log.d(Tags.ID_USUARIO, idUsuarioSelecionado + " no mSimples");
+			idProjetoSelecionado = dadosRecebidos.getInt(Tags.ID_PROJETO);
+			idUsuarioSelecionado = dadosRecebidos.getInt(Tags.ID_USUARIO);
 
 			selectItem(0);
 		}
@@ -204,21 +193,32 @@ public class MSimplesActivity extends Activity implements
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
 					.commit();
 
-		} else if (posicao == 2) { // gráficos
+		} else if (posicao == 2) { 
 
-			if (dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
-					idUsuarioSelecionado).size() == 0) {
+			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
+					idUsuarioSelecionado).isEmpty()) {
+				
+				Log.i("Há tarefas na lista", "Há tarefas na lista");
+				
 				Intent i = new Intent(this, GraficosActivity.class);
-				Bundle dados = new Bundle();
-				dados.putInt(ContratoProjetos.Colunas._ID, idProjetoSelecionado);
-				dados.putInt(ContratoUsuarios.Colunas._ID, idUsuarioSelecionado);
-
+			    Bundle dados = new Bundle();
+				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
+				dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
+				i.putExtras(dados);
 				startActivity(i);
 			} else {
+				Log.i("lista de tarefas vazia", "lista de tarefas vazia");
 				Toast.makeText(getApplicationContext(),
-						"Você ainda não possui tarefas", Toast.LENGTH_SHORT)
+						"Voce ainda nao possui tarefas", Toast.LENGTH_SHORT)
 						.show();
 			}
+		}else if (posicao == 5) {
+			Intent iSairProjetoAtual = new Intent(this, ProjetosActivity.class);
+			Bundle dados = new Bundle();
+			dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);
+			iSairProjetoAtual.putExtras(dados);
+			iSairProjetoAtual.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(iSairProjetoAtual);			
 		}
 		mDrawerList.setItemChecked(posicao, true);
 		setTitle(mPaginaTitulo[posicao]);
@@ -266,10 +266,12 @@ public class MSimplesActivity extends Activity implements
 					tarefaSelecionada.getDescricao());
 			dados.putString(ContratoTarefas.Colunas.DATA_ENTREGA,
 					tarefaSelecionada.getDataEntrega());
-			dados.putInt(ContratoTarefas.Colunas._ID, tarefaSelecionada.getID());
+			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
+			
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);
@@ -280,9 +282,6 @@ public class MSimplesActivity extends Activity implements
 			return true;
 
 		} else if (id == R.id.acction_excluir_tarefa) {
-
-			Log.d(Tags.TOPTASK_ACTIVITY,
-					"ID tarefa:" + tarefaSelecionada.getID());
 
 			tarefas.delete(tarefaSelecionada);
 			tarefaSelecionada = null;
@@ -325,10 +324,13 @@ public class MSimplesActivity extends Activity implements
 
 		tarefaSelecionada = tarefa;
 
-		Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + tarefaSelecionada.getID());
-
 		startActionMode(this);
 		actionModeAtivado = true;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		//nao pode voltar para a activity de projetos
 	}
 
 }
