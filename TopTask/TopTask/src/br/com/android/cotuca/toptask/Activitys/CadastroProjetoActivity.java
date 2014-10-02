@@ -50,7 +50,7 @@ public class CadastroProjetoActivity extends Activity implements
 		ehAtu = false;
 		Bundle dados = getIntent().getExtras();
 		
-		int acao = dados.getInt("ACAO");
+		int acao = dados.getInt(Tags.B_ACAO);
 		if (acao == 1) {
 			ehAtu = true;
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);

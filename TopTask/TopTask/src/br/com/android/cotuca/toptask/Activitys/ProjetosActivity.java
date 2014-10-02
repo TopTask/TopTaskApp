@@ -68,7 +68,7 @@ public class ProjetosActivity extends Activity implements
 
 		Intent iCadastro = new Intent(this,
 				CadastroProjetoActivity.class);
-		dadosRecebidos.putInt("ACAO", 0);
+		dadosRecebidos.putInt(Tags.B_ACAO, 0);
 		iCadastro.putExtras(dadosRecebidos);
 		startActivity(iCadastro);
 	}
@@ -82,7 +82,7 @@ public class ProjetosActivity extends Activity implements
 		case R.id.action_accept_projeto:
 			Intent iCadastro = new Intent(this,
 					CadastroProjetoActivity.class);
-			dadosRecebidos.putInt("ACAO",0);
+			dadosRecebidos.putInt(Tags.B_ACAO,0);
 			iCadastro.putExtras(dadosRecebidos);
 			
 			startActivity(iCadastro);
@@ -167,7 +167,7 @@ public class ProjetosActivity extends Activity implements
 		} else if (idItem == R.id.action_editar_projeto) {
 			Intent iEditar = new Intent(this, CadastroProjetoActivity.class);
 			
-			dadosRecebidos.putInt("ACAO", 1);
+			dadosRecebidos.putInt(Tags.B_ACAO, 1);
 			dadosRecebidos.putString(ContratoProjetos.Colunas.NOME,projetoSelecionado.getNome());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DESCRICAO,projetoSelecionado.getDescricao());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DATA_ENTREGA,projetoSelecionado.getDataEntrega());
@@ -201,7 +201,6 @@ public class ProjetosActivity extends Activity implements
 
 	@Override
 	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

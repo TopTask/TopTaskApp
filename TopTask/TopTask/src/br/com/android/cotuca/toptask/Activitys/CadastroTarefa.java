@@ -37,7 +37,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private Spinner spinner;
 	
 	private EditText edtData;
-	private int dia, mes, ano;
 	private String dataOriginal;
 	
 	private EditText edtTempoLimite;
@@ -89,7 +88,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		
 		if (dados != null) {
 			
-			int acao = dados.getInt("ACAO");
+			int acao = dados.getInt(Tags.B_ACAO);
 			
 			if (acao == 0) { //Adicao
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
@@ -148,9 +147,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 	@Override
 	public void onSet(int ano, int mes, int dia) {
-		this.dia = dia;
-		this.mes = mes;
-		this.ano = ano;
+
 		dataOriginal = (dia + "/" + mes + "/" + ano);
 		mes += 1;
 		edtData.setText(dia + "/" + mes + "/" + ano);
@@ -222,8 +219,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void agendarNotificacao(String titulo, String descricao, int ano,
-			int mes, int dia) {
+	private void agendarNotificacao(String titulo, String descricao, int ano,int mes, int dia) {
 
 		Calendar c = Calendar.getInstance();
 
