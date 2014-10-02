@@ -150,7 +150,6 @@ public class MSimplesActivity extends Activity implements
 			return true;
 		}
 
-		// acao dos ic1ones do actionbar
 		switch (item.getItemId()) {
 		case R.id.action_add:
 			Intent i = new Intent(this, CadastroTarefa.class);
@@ -159,9 +158,6 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
 			dados.putInt(Tags.B_ACAO, Tags.ACAO_CADASTRO);
-			
-			Log.d(Tags.B_ACAO, "Acao a ser realizada: " + Tags.ACAO_CADASTRO);
-
 			
 			i.putExtras(dados);
 			startActivity(i);

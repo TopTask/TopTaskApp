@@ -51,7 +51,7 @@ public class CadastroProjetoActivity extends Activity implements
 		Bundle dados = getIntent().getExtras();
 		
 		int acao = dados.getInt(Tags.B_ACAO);
-		if (acao == 1) {
+		if (acao == Tags.ACAO_EDITAR) {
 			ehAtu = true;
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);
 			String descricao = dados.getString(ContratoProjetos.Colunas.DESCRICAO);
@@ -65,7 +65,7 @@ public class CadastroProjetoActivity extends Activity implements
 
 			dados = null;
 		} else {
-			if (acao == 0) {
+			if (acao == Tags.ACAO_CADASTRO) {
 				idUsuario = dados.getInt(Tags.ID_USUARIO);
 			}
 		}

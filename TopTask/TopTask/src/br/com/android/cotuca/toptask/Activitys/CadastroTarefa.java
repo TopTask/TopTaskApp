@@ -110,20 +110,24 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			
 			if (acao == Tags.ACAO_CADASTRO) {
 				
-				FragmentCadastroTarefa fCadastroTarefa = new FragmentCadastroTarefa();
-				ft.replace(R.id.container, fCadastroTarefa, "fCadastroTarefa");
-				
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
+				
+				FragmentCadastroTarefa fCadastroTarefa = new FragmentCadastroTarefa();
+				ft.replace(R.id.container, fCadastroTarefa);
+				ft.commit();
+				
+				
 
 			} else if (acao == Tags.ACAO_EDITAR){
 				ehAtu = true;
 				
 				FragmentEditarTarefa fEditarTarefa = new FragmentEditarTarefa();
-				ft.replace(R.id.container, fEditarTarefa, "fEditarTarefa");
-
+				ft.replace(R.id.container, fEditarTarefa);
+				ft.commit();
+				
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
