@@ -44,7 +44,7 @@
             android:layout_alignLeft="@+id/edt_data_tarefa"
             android:layout_below="@+id/edt_data_tarefa"
             android:hint="@string/g_tempo_limite"
-            android:inputType="time"
+            android:inputType="number"
             android:onClick="onClickSetarTempo" />
 
         <EditText
@@ -54,7 +54,7 @@
             android:layout_alignLeft="@+id/edt_tempo_limite"
             android:layout_below="@+id/edt_tempo_limite"
             android:hint="@string/g_tempo_feito"
-            android:inputType="time"
+            android:inputType="number"
             android:onClick="onClickSetarTempo" />
 
         <Spinner

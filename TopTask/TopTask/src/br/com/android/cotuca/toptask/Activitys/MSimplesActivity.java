@@ -158,8 +158,11 @@ public class MSimplesActivity extends Activity implements
 			Bundle dados = new Bundle();
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-			dados.putInt(Tags.B_ACAO, 0);
+			dados.putInt(Tags.B_ACAO, Tags.ACAO_CADASTRO);
+			
+			Log.d(Tags.B_ACAO, "Acao a ser realizada: " + Tags.ACAO_CADASTRO);
 
+			
 			i.putExtras(dados);
 			startActivity(i);
 			return true;
@@ -258,7 +261,7 @@ public class MSimplesActivity extends Activity implements
 			Intent iEditar = new Intent(this, CadastroTarefa.class);
 			Bundle dados = new Bundle();
 
-			dados.putInt(Tags.B_ACAO, 1);
+			dados.putInt(Tags.B_ACAO, Tags.ACAO_EDITAR);
 			dados.putString(ContratoTarefas.Colunas.NOME,
 					tarefaSelecionada.getNome());
 			dados.putString(ContratoTarefas.Colunas.DESCRICAO,

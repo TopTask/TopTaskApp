@@ -16,5 +16,7 @@ public final class Tags {
 	public static final String ID_PROJETO = "idProjeto";
 	public static final String ID_TAREFA = "idTarefa";
 	
+	public static final int ACAO_CADASTRO = 0;
+	public static final int ACAO_EDITAR = 1;
 	
 }

@@ -44,16 +44,14 @@
             android:layout_alignLeft="@+id/edt_data_tarefa"
             android:layout_below="@+id/edt_data_tarefa"
             android:hint="@string/g_tempo_limite"
-            android:inputType="time"
-            android:onClick="onClickSetarTempoLimite" />
+            android:inputType="number"
+            android:onClick="onClickSetarTempo" />
 
         <Spinner
             android:id="@+id/s_prioridade"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/edt_data_tarefa" />
-
-        <!-- Colocar o view de dono ainda definir como vai ser -->
 
     </RelativeLayout>
 

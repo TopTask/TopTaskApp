@@ -1,6 +1,5 @@
 package br.com.android.cotuca.toptask.Activitys;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -20,7 +19,6 @@ import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
-import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
@@ -29,8 +27,6 @@ import br.com.android.cotuca.toptask.tags.Tags;
 
 public class ProjetosActivity extends Activity implements
 		ListenerClickNovoProjeto, ListenerClickProjeto, Callback {
-
-	public static final String TAG_DIALOG = "Escolha Modelo";
 
 	private Projeto projetoSelecionado;
 	private boolean actionModeAtivado = false;
@@ -96,14 +92,6 @@ public class ProjetosActivity extends Activity implements
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-
-	}
-
-	public void chamarDialog() {
-		FragmentManager fm = getFragmentManager();
-		ModelosDialogFragment mdf = new ModelosDialogFragment();
-
-		mdf.show(fm, TAG_DIALOG);
 
 	}
 
