@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import br.com.android.cotuca.toptask.R;
-import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Graphs.GraficoPizzaTarefasView;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -40,18 +39,6 @@ public class FragmentTabGraficoTarefa extends Fragment {
 		if(dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).isEmpty())
 			pendentes = 0;
 		
-		
-<<<<<<< HEAD
-		Log.d("Qntidade de tarefas", "Tarefas concluidas: "+concluidas);
-		
-		Log.d("Qntidade de tarefas", "Tarefas andamento: "+fazendo);
-		
-		Log.d("Qntidade de tarefas", "Tarefas pendentes: "+pendentes);
-		
-		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),concluidas,fazendo,pendentes);
-		
-			//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,2,3);
-=======
 		Log.d("Qntidade de tarefas TAREFA", "Tarefas concluidas: "+concluidas);
 		
 		Log.d("Qntidade de tarefas TAREFA", "Tarefas andamento: "+fazendo);
@@ -61,8 +48,6 @@ public class FragmentTabGraficoTarefa extends Fragment {
 		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),concluidas,fazendo,pendentes);
 		
 		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,2,3);
->>>>>>> 19ce0bee67bf5f0adf9d4a32419afd74909651eb
-
 		viewGroup.addView(g);
 
 		return view;
