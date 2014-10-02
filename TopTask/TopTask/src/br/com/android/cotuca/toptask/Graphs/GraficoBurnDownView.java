@@ -1,39 +1,23 @@
 package br.com.android.cotuca.toptask.Graphs;
 
-import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.Date;
 import org.afree.chart.AFreeChart;
-import org.afree.chart.annotations.XYTitleAnnotation;
 import org.afree.chart.axis.AxisLocation;
 import org.afree.chart.axis.DateAxis;
 import org.afree.chart.axis.NumberAxis;
-import org.afree.chart.axis.NumberTickUnit;
-import org.afree.chart.axis.TickUnitSource;
-import org.afree.chart.axis.TickUnits;
 import org.afree.chart.axis.ValueAxis;
 import org.afree.chart.plot.CombinedDomainXYPlot;
 import org.afree.chart.plot.XYPlot;
-import org.afree.chart.renderer.xy.CandlestickRenderer;
 import org.afree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.afree.chart.title.LegendTitle;
 import org.afree.data.time.Day;
 import org.afree.data.time.TimeSeries;
 import org.afree.data.time.TimeSeriesCollection;
-import org.afree.data.xy.DefaultHighLowDataset;
-import org.afree.data.xy.OHLCDataset;
 import org.afree.data.xy.XYDataset;
 import org.afree.graphics.PaintType;
 import org.afree.graphics.SolidColor;
-import org.afree.graphics.geom.Font;
 import org.afree.graphics.geom.LineShape;
-import org.afree.ui.RectangleAnchor;
-import org.afree.ui.RectangleEdge;
 import org.afree.ui.RectangleInsets;
-
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 
 public class GraficoBurnDownView extends DemoView {
 
@@ -47,9 +31,6 @@ public class GraficoBurnDownView extends DemoView {
     private static AFreeChart createChart() {
 
         // declare colors
-        PaintType black = new SolidColor(Color.BLACK);
-        PaintType blue = new SolidColor(Color.BLUE);
-        PaintType red = new SolidColor(Color.RED); 
         PaintType white = new SolidColor(Color.WHITE);
         PaintType gray = new SolidColor(Color.DKGRAY);
 
@@ -107,7 +88,7 @@ public class GraficoBurnDownView extends DemoView {
         subplot1.setOutlinePaintType(gray);
         subplot1.setOutlineStroke(2.0f);
 
-        // setting domain axis
+        
         ValueAxis timeAxis = new DateAxis("");
         timeAxis.setAxisLinePaintType(gray);
         timeAxis.setAxisLineStroke(1);
@@ -121,15 +102,12 @@ public class GraficoBurnDownView extends DemoView {
 
         CombinedDomainXYPlot plot = new CombinedDomainXYPlot(timeAxis);
         plot.setBackgroundPaintType(white);
-        plot.add(subplot2, 1);
-        plot.add(subplot1,1);
+        plot.add(subplot2);
+        plot.add(subplot1);
 
-        AFreeChart chart = new AFreeChart(null,
-                AFreeChart.DEFAULT_TITLE_FONT,
-                plot,
-                false);
+        AFreeChart chart = new AFreeChart(null,AFreeChart.DEFAULT_TITLE_FONT,plot,false);
 
-        // setting chart
+        
         chart.setBackgroundPaintType(white);
 
         return chart;
@@ -164,15 +142,15 @@ public class GraficoBurnDownView extends DemoView {
         TimeSeries s1 = new TimeSeries("");
         
         s1.add(new Day(24, 9, 2014), 10);
-        s1.add(new Day(25, 9, 2014), 8);
-        s1.add(new Day(26, 9, 2014), 6);
-        s1.add(new Day(27, 9, 2014), 6);
-        s1.add(new Day(28, 9, 2014), 5);
-        s1.add(new Day(29, 9, 2014), 5.5);
-        s1.add(new Day(30, 9, 2014), 5);
-        s1.add(new Day(1, 10, 2014), 4.5);
-        s1.add(new Day(2, 10, 2014), 4);
-        s1.add(new Day(3, 10, 2014), 2.5);
+        s1.add(new Day(25, 9, 2014), 7.5);
+        s1.add(new Day(26, 9, 2014), 5);
+        s1.add(new Day(27, 9, 2014), 4);
+        s1.add(new Day(28, 9, 2014), 4.5);
+        s1.add(new Day(29, 9, 2014), 5);
+        s1.add(new Day(30, 9, 2014), 6);
+        s1.add(new Day(1, 10, 2014), 6);
+        s1.add(new Day(2, 10, 2014), 5);
+        s1.add(new Day(3, 10, 2014), 3);
         s1.add(new Day(4, 10, 2014), 0);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
