@@ -11,7 +11,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin" >
 
-
         <EditText
             android:id="@+id/edt_nomeNovaTarefa"
             android:layout_width="match_parent"
@@ -36,8 +35,27 @@
             android:layout_below="@+id/edt_descricaoNovaTarefa"
             android:hint="@string/g_data"
             android:inputType="date"
-            android:onClick="onClickSetarData" >
-        </EditText>
+            android:onClick="onClickSetarData" />
+
+        <EditText
+            android:id="@+id/edt_tempo_limite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edt_data_tarefa"
+            android:layout_below="@+id/edt_data_tarefa"
+            android:hint="@string/g_tempo_limite"
+            android:inputType="time"
+            android:onClick="onClickSetarTempo" />
+
+        <EditText
+            android:id="@+id/edt_tempo_feito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edt_tempo_limite"
+            android:layout_below="@+id/edt_tempo_limite"
+            android:hint="@string/g_tempo_feito"
+            android:inputType="time"
+            android:onClick="onClickSetarTempo" />
 
         <Spinner
             android:id="@+id/s_prioridade"
