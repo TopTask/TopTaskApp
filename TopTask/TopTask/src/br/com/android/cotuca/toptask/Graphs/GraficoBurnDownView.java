@@ -49,17 +49,9 @@ public class GraficoBurnDownView extends DemoView {
         // declare colors
         PaintType black = new SolidColor(Color.BLACK);
         PaintType blue = new SolidColor(Color.BLUE);
-        PaintType red = new SolidColor(Color.RED);
-        PaintType yellow = new SolidColor(Color.YELLOW);
-        PaintType darkGreen = new SolidColor(Color.argb(255, 0, 64, 0));
+        PaintType red = new SolidColor(Color.RED); 
         PaintType white = new SolidColor(Color.WHITE);
-        PaintType gray = new SolidColor(Color.GRAY);
-       
-        //overlaid
-        XYDataset dataset3 = createDataset2();
-        XYLineAndShapeRenderer renderer3 = new XYLineAndShapeRenderer();
-        renderer3.setBaseShapesVisible(false);
-        renderer3.setSeriesPaintType(0, yellow);
+        PaintType gray = new SolidColor(Color.DKGRAY);
 
         XYDataset dataset2 = createDataset2();
         NumberAxis rangeAxis2 = new NumberAxis();
@@ -81,15 +73,13 @@ public class GraficoBurnDownView extends DemoView {
         XYPlot subplot2 = new XYPlot(dataset2, null, rangeAxis2,renderer2);
         subplot2.setDomainGridlinesVisible(true);
         subplot2.setBackgroundPaintType(white);
-        subplot2.setDomainGridlinePaintType(darkGreen);
-        subplot2.setRangeGridlinePaintType(darkGreen);
         subplot2.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
         subplot2.setOutlineVisible(true);
         subplot2.setOutlinePaintType(gray);
         subplot2.setOutlineStroke(2.0f);
 
         // setting domain axis
-        ValueAxis timeAxis = new DateAxis("Date");
+        ValueAxis timeAxis = new DateAxis("");
         timeAxis.setAxisLinePaintType(gray);
         timeAxis.setAxisLineStroke(1);
 
@@ -104,78 +94,15 @@ public class GraficoBurnDownView extends DemoView {
         plot.setBackgroundPaintType(white);
         plot.add(subplot2, 1);
 
-        // add a annotation
-        LegendTitle lt = new LegendTitle(subplot2);
-
-        lt.setItemFont(new Font("Dialog", Typeface.BOLD, 9));
-        lt.setBackgroundPaintType(new SolidColor(Color.argb(0, 0, 0, 0)));
-        lt.setItemPaintType(gray);
-        lt.setPosition(RectangleEdge.TOP);
-        XYTitleAnnotation ta = new XYTitleAnnotation(0.02, 0.98, lt, RectangleAnchor.TOP_LEFT);
-
-        ta.setMaxWidth(0.48);
-        subplot2.addAnnotation(ta);
-
-        AFreeChart chart = new AFreeChart(
-                "Candle Stick Chart Demo 03",
+        AFreeChart chart = new AFreeChart(null,
                 AFreeChart.DEFAULT_TITLE_FONT,
                 plot,
                 false);
 
         // setting chart
-        chart.setBackgroundPaintType(black);
+        chart.setBackgroundPaintType(white);
 
         return chart;
-    }
-
-    /**
-     * Creates a sample high low dataset.
-     * @return a sample high low dataset.
-     */
-    public static OHLCDataset createDataset1() {
-
-        Date[] date = new Date[47];
-        double[] high = new double[47];
-        double[] low = new double[47];
-        double[] open = new double[47];
-        double[] close = new double[47];
-        double[] volume = new double[47];
-
-        int jan = 1;
-        int feb = 2;
-
-        for(int i = 0; i < 47; i++) {
-        	if(i <= 27) {
-        		date[i] = createDate(2001, jan, i+4, 12, 0);
-        	} else {
-        		date[i] = createDate(2001, feb, i-27, 12, 0);
-        	}
-        	high[i] = 45 + Math.random() * 20;
-        	low[i] = high[i] - (Math.random() * 30 + 3);
-        	do {
-	        	open[i] = high[i] - Math.random() * (high[i] - low[i]);
-	        	close[i] = low[i] + Math.random() * (high[i] - low[i]);
-        	} while(Math.abs(open[i] - close[i]) < 1);
-        }
-
-        return new DefaultHighLowDataset("Series 1", date, high, low, open, close, volume);
-    }
-
-    private static final Calendar calendar = Calendar.getInstance();
-
-    /**
-     * Returns a date using the default locale and timezone.
-     * @param y the year (YYYY).
-     * @param m the month (1-12).
-     * @param d the day of the month.
-     * @param hour the hour of the day.
-     * @param min the minute of the hour.
-     * @return A date.
-     */
-    private static Date createDate(int y, int m, int d, int hour, int min) {
-        calendar.clear();
-        calendar.set(y, m - 1, d, hour, min);
-        return calendar.getTime();
     }
 
     /**
@@ -184,70 +111,24 @@ public class GraficoBurnDownView extends DemoView {
      */
     public static XYDataset createDataset2() {
 
-        TimeSeries s1 = new TimeSeries("MACD");
-
-        for(int i = 0; i < 47; i++) {
-        	if(i <= 27) {
-        		s1.add(new Day(i + 4, 1, 2001), Math.random() * 30 + 30);
-        	} else {
-        		s1.add(new Day(i - 27, 2, 2001), Math.random() * 30 + 30);
-        	}
-        }
+        TimeSeries s1 = new TimeSeries("");
+        
+        s1.add(new Day(20, 9, 2014), 10);
+        s1.add(new Day(22, 9, 2014), 8);
+        s1.add(new Day(23, 9, 2014), 6);
+        s1.add(new Day(24, 9, 2014), 4);
+        s1.add(new Day(26, 9, 2014), 6);
+        s1.add(new Day(28, 9, 2014), 8);
+        s1.add(new Day(29, 9, 2014), 8);
+        s1.add(new Day(30, 9, 2014), 7);
+        s1.add(new Day(1, 10, 2014), 4);
+        s1.add(new Day(2, 10, 2014), 3);
+        s1.add(new Day(3, 10, 2014), 6);
+        s1.add(new Day(4, 10, 2014), 7);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(s1);
 
         return dataset;
     }
-
-    public static TickUnitSource createTickUnits() {
-
-        TickUnits units = new TickUnits();
-        DecimalFormat df1 = new DecimalFormat("$0");
-        DecimalFormat df2 = new DecimalFormat("$0.00");
-
-        // we can add the units in any order, the TickUnits collection will
-        // sort them...
-        units.add(new NumberTickUnit(1000000, df1, 0));
-        units.add(new NumberTickUnit(500000, df1, 0));
-        units.add(new NumberTickUnit(200000, df1, 0));
-        units.add(new NumberTickUnit(100000, df1, 0));
-        units.add(new NumberTickUnit(50000, df1, 0));
-        units.add(new NumberTickUnit(20000, df1, 0));
-        units.add(new NumberTickUnit(10000, df1, 0));
-        units.add(new NumberTickUnit(5000, df1, 0));
-        units.add(new NumberTickUnit(2000, df1, 0));
-        units.add(new NumberTickUnit(1000, df1, 0));
-        units.add(new NumberTickUnit(500, df1, 0));
-        units.add(new NumberTickUnit(200, df1, 0));
-        units.add(new NumberTickUnit(100, df1, 0));
-        units.add(new NumberTickUnit(50, df1, 0));
-        units.add(new NumberTickUnit(20, df1, 0));
-        units.add(new NumberTickUnit(10, df1, 0));
-        units.add(new NumberTickUnit(5, df1, 0));
-        units.add(new NumberTickUnit(2, df1, 0));
-        units.add(new NumberTickUnit(1, df1, 0));
-
-        units.add(new NumberTickUnit(0.000001, df2, 0));
-        units.add(new NumberTickUnit(0.0000025, df2, 0));
-        units.add(new NumberTickUnit(0.000005, df2, 0));
-        units.add(new NumberTickUnit(0.00001, df2, 0));
-        units.add(new NumberTickUnit(0.000025, df2, 0));
-        units.add(new NumberTickUnit(0.00005, df2, 0));
-        units.add(new NumberTickUnit(0.0001, df2, 0));
-        units.add(new NumberTickUnit(0.00025, df2, 0));
-        units.add(new NumberTickUnit(0.0005, df2, 0));
-        units.add(new NumberTickUnit(0.001, df2, 0));
-        units.add(new NumberTickUnit(0.0025, df2, 0));
-        units.add(new NumberTickUnit(0.005, df2, 0));
-        units.add(new NumberTickUnit(0.01, df2, 0));
-        units.add(new NumberTickUnit(0.025, df2, 0));
-        units.add(new NumberTickUnit(0.05, df2, 0));
-        units.add(new NumberTickUnit(0.1, df2, 0));
-        units.add(new NumberTickUnit(0.25, df2, 0));
-        units.add(new NumberTickUnit(0.5, df2, 0));
-
-        return units;
-    }
-
 }
