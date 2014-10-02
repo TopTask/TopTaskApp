@@ -1,221 +1,253 @@
 package br.com.android.cotuca.toptask.Graphs;
 
-import org.afree.ui.Drawable;
-import org.afree.util.ObjectUtilities;
-import org.afree.ui.RectangleEdge;
-
-import java.io.Serializable;
-
-import android.graphics.Canvas;
-
-import org.afree.util.PublicCloneable;
-import org.afree.chart.annotations.AbstractXYAnnotation;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
+import org.afree.chart.AFreeChart;
+import org.afree.chart.annotations.XYTitleAnnotation;
+import org.afree.chart.axis.AxisLocation;
+import org.afree.chart.axis.DateAxis;
+import org.afree.chart.axis.NumberAxis;
+import org.afree.chart.axis.NumberTickUnit;
+import org.afree.chart.axis.TickUnitSource;
+import org.afree.chart.axis.TickUnits;
 import org.afree.chart.axis.ValueAxis;
-import org.afree.chart.plot.Plot;
-import org.afree.chart.plot.PlotOrientation;
-import org.afree.chart.plot.PlotRenderingInfo;
+import org.afree.chart.plot.CombinedDomainXYPlot;
 import org.afree.chart.plot.XYPlot;
-import org.afree.graphics.geom.RectShape;
+import org.afree.chart.renderer.xy.CandlestickRenderer;
+import org.afree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.afree.chart.title.LegendTitle;
+import org.afree.data.time.Day;
+import org.afree.data.time.TimeSeries;
+import org.afree.data.time.TimeSeriesCollection;
+import org.afree.data.xy.DefaultHighLowDataset;
+import org.afree.data.xy.OHLCDataset;
+import org.afree.data.xy.XYDataset;
+import org.afree.graphics.PaintType;
+import org.afree.graphics.SolidColor;
+import org.afree.graphics.geom.Font;
+import org.afree.graphics.geom.LineShape;
+import org.afree.ui.RectangleAnchor;
+import org.afree.ui.RectangleEdge;
+import org.afree.ui.RectangleInsets;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 
-/**
- * A general annotation that can be placed on an {@link XYPlot}.
- */
-public class GraficoBurnDownView extends AbstractXYAnnotation
-        implements Cloneable, PublicCloneable, Serializable {
+public class GraficoBurnDownView extends DemoView {
 
-    /** For serialization. */
-    private static final long serialVersionUID = -6540812859722691020L;
+    public GraficoBurnDownView(Context context) {
+        super(context);
 
-    /** The scaling factor. */
-    private double drawScaleFactor;
+        final AFreeChart chart = createChart();
+        setChart(chart);
+    }
 
-    /** The x-coordinate. */
-    private double x;
+    private static AFreeChart createChart() {
 
-    /** The y-coordinate. */
-    private double y;
+        // declare colors
+        PaintType black = new SolidColor(Color.BLACK);
+        PaintType blue = new SolidColor(Color.BLUE);
+        PaintType red = new SolidColor(Color.RED);
+        PaintType yellow = new SolidColor(Color.YELLOW);
+        PaintType darkGreen = new SolidColor(Color.argb(255, 0, 64, 0));
+        PaintType white = new SolidColor(Color.WHITE);
+        PaintType gray = new SolidColor(Color.GRAY);
+       
+        //overlaid
+        XYDataset dataset3 = createDataset2();
+        XYLineAndShapeRenderer renderer3 = new XYLineAndShapeRenderer();
+        renderer3.setBaseShapesVisible(false);
+        renderer3.setSeriesPaintType(0, yellow);
 
-    /** The width. */
-    private double displayWidth;
+        XYDataset dataset2 = createDataset2();
+        NumberAxis rangeAxis2 = new NumberAxis();
+        rangeAxis2.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangeAxis2.setAxisLinePaintType(gray);
+        rangeAxis2.setAxisLineStroke(1);
+        rangeAxis2.setTickMarkPaintType(gray);
+        rangeAxis2.setTickMarkStroke(1);
+        rangeAxis2.setTickMarkOutsideLength(2);
+        rangeAxis2.setLabelPaintType(gray);
+        rangeAxis2.setTickLabelPaintType(gray);
+        rangeAxis2.setTickLabelInsets(new RectangleInsets(10, 0, 10, 0));
+        rangeAxis2.setLimitAble(true);
+        rangeAxis2.setLimitRange(0, 100);
+        XYLineAndShapeRenderer renderer2 = new XYLineAndShapeRenderer();
+        renderer2.setBaseShapesVisible(false);
+        renderer2.setLegendLine(new LineShape());
 
-    /** The height. */
-    private double displayHeight;
+        XYPlot subplot2 = new XYPlot(dataset2, null, rangeAxis2,renderer2);
+        subplot2.setDomainGridlinesVisible(true);
+        subplot2.setBackgroundPaintType(white);
+        subplot2.setDomainGridlinePaintType(darkGreen);
+        subplot2.setRangeGridlinePaintType(darkGreen);
+        subplot2.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        subplot2.setOutlineVisible(true);
+        subplot2.setOutlinePaintType(gray);
+        subplot2.setOutlineStroke(2.0f);
 
-    /** The drawable object. */
-    private Drawable drawable;
+        // setting domain axis
+        ValueAxis timeAxis = new DateAxis("Date");
+        timeAxis.setAxisLinePaintType(gray);
+        timeAxis.setAxisLineStroke(1);
 
-    /**
-     * Creates a new annotation to be displayed within the given area.
-     *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param width  the width of the area.
-     * @param height  the height of the area.
-     * @param drawable  the drawable object (<code>null</code> not permitted).
-     */
-    public GraficoBurnDownView(double x, double y, double width, double height,
-                                Drawable drawable) {
-        this(x, y, width, height, 1.0, drawable);
+        timeAxis.setTickMarkPaintType(gray);
+        timeAxis.setTickMarkStroke(1);
+        timeAxis.setTickMarkOutsideLength(2);
+
+        timeAxis.setLabelPaintType(gray);
+        timeAxis.setTickLabelPaintType(gray);
+
+        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(timeAxis);
+        plot.setBackgroundPaintType(white);
+        plot.add(subplot2, 1);
+
+        // add a annotation
+        LegendTitle lt = new LegendTitle(subplot2);
+
+        lt.setItemFont(new Font("Dialog", Typeface.BOLD, 9));
+        lt.setBackgroundPaintType(new SolidColor(Color.argb(0, 0, 0, 0)));
+        lt.setItemPaintType(gray);
+        lt.setPosition(RectangleEdge.TOP);
+        XYTitleAnnotation ta = new XYTitleAnnotation(0.02, 0.98, lt, RectangleAnchor.TOP_LEFT);
+
+        ta.setMaxWidth(0.48);
+        subplot2.addAnnotation(ta);
+
+        AFreeChart chart = new AFreeChart(
+                "Candle Stick Chart Demo 03",
+                AFreeChart.DEFAULT_TITLE_FONT,
+                plot,
+                false);
+
+        // setting chart
+        chart.setBackgroundPaintType(black);
+
+        return chart;
     }
 
     /**
-     * Creates a new annotation to be displayed within the given area.  If you
-     * specify a <code>drawScaleFactor</code> of 2.0, the <code>drawable</code>
-     * will be drawn at twice the requested display size then scaled down to
-     * fit the space.
-     *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param displayWidth  the width of the area.
-     * @param displayHeight  the height of the area.
-     * @param drawScaleFactor  the scaling factor for drawing.
-     * @param drawable  the drawable object (<code>null</code> not permitted).
-     *
-     * @since JFreeChart 1.0.11
+     * Creates a sample high low dataset.
+     * @return a sample high low dataset.
      */
-    public GraficoBurnDownView(double x, double y, double displayWidth,
-            double displayHeight, double drawScaleFactor, Drawable drawable) {
+    public static OHLCDataset createDataset1() {
 
-        if (drawable == null) {
-            throw new IllegalArgumentException("Null 'drawable' argument.");
+        Date[] date = new Date[47];
+        double[] high = new double[47];
+        double[] low = new double[47];
+        double[] open = new double[47];
+        double[] close = new double[47];
+        double[] volume = new double[47];
+
+        int jan = 1;
+        int feb = 2;
+
+        for(int i = 0; i < 47; i++) {
+        	if(i <= 27) {
+        		date[i] = createDate(2001, jan, i+4, 12, 0);
+        	} else {
+        		date[i] = createDate(2001, feb, i-27, 12, 0);
+        	}
+        	high[i] = 45 + Math.random() * 20;
+        	low[i] = high[i] - (Math.random() * 30 + 3);
+        	do {
+	        	open[i] = high[i] - Math.random() * (high[i] - low[i]);
+	        	close[i] = low[i] + Math.random() * (high[i] - low[i]);
+        	} while(Math.abs(open[i] - close[i]) < 1);
         }
-        this.x = x;
-        this.y = y;
-        this.displayWidth = displayWidth;
-        this.displayHeight = displayHeight;
-        this.drawScaleFactor = drawScaleFactor;
-        this.drawable = drawable;
 
+        return new DefaultHighLowDataset("Series 1", date, high, low, open, close, volume);
+    }
+
+    private static final Calendar calendar = Calendar.getInstance();
+
+    /**
+     * Returns a date using the default locale and timezone.
+     * @param y the year (YYYY).
+     * @param m the month (1-12).
+     * @param d the day of the month.
+     * @param hour the hour of the day.
+     * @param min the minute of the hour.
+     * @return A date.
+     */
+    private static Date createDate(int y, int m, int d, int hour, int min) {
+        calendar.clear();
+        calendar.set(y, m - 1, d, hour, min);
+        return calendar.getTime();
     }
 
     /**
-     * Draws the annotation.
-     *
-     * @param canvas  the graphics device.
-     * @param plot  the plot.
-     * @param dataArea  the data area.
-     * @param domainAxis  the domain axis.
-     * @param rangeAxis  the range axis.
-     * @param rendererIndex  the renderer index.
-     * @param info  if supplied, this info object will be populated with
-     *              entity information.
+     * Creates a dataset.
+     * @return A dataset.
      */
-    public void draw(Canvas canvas, XYPlot plot, RectShape dataArea,
-                     ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex,
-                     PlotRenderingInfo info) {
+    public static XYDataset createDataset2() {
 
-        PlotOrientation orientation = plot.getOrientation();
-        RectangleEdge domainEdge = Plot.resolveDomainAxisLocation(
-                plot.getDomainAxisLocation(), orientation);
-        RectangleEdge rangeEdge = Plot.resolveRangeAxisLocation(
-                plot.getRangeAxisLocation(), orientation);
-        float j2DX = (float) domainAxis.valueToJava2D(this.x, dataArea,
-                domainEdge);
-        float j2DY = (float) rangeAxis.valueToJava2D(this.y, dataArea,
-                rangeEdge);
-        RectShape displayArea = new RectShape(
-                j2DX - this.displayWidth / 2.0,
-                j2DY - this.displayHeight / 2.0, this.displayWidth,
-                this.displayHeight);
+        TimeSeries s1 = new TimeSeries("MACD");
 
-        // here we change the AffineTransform so we can draw the annotation
-        // to a larger area and scale it down into the display area
-        // afterwards, the original transform is restored
-
-        canvas.save();
-        
-        RectShape drawArea = new RectShape(0.0, 0.0,
-                this.displayWidth * this.drawScaleFactor,
-                this.displayHeight * this.drawScaleFactor);
-
-        canvas.scale((float)(1/this.drawScaleFactor), (float)(1/this.drawScaleFactor));
-        canvas.translate((float)((j2DX - this.displayWidth / 2.0) * this.drawScaleFactor),
-                (float)((j2DY - this.displayHeight / 2.0) * this.drawScaleFactor));
-        
-        this.drawable.draw(canvas, drawArea);
-
-        canvas.restore();
-        
-        String toolTip = getToolTipText();
-        String url = getURL();
-        if (toolTip != null || url != null) {
-            addEntity(info, displayArea, rendererIndex, toolTip, url);
+        for(int i = 0; i < 47; i++) {
+        	if(i <= 27) {
+        		s1.add(new Day(i + 4, 1, 2001), Math.random() * 30 + 30);
+        	} else {
+        		s1.add(new Day(i - 27, 2, 2001), Math.random() * 30 + 30);
+        	}
         }
+
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(s1);
+
+        return dataset;
     }
 
-    /**
-     * Tests this annotation for equality with an arbitrary object.
-     *
-     * @param obj  the object to test against.
-     *
-     * @return <code>true</code> or <code>false</code>.
-     */
-    public boolean equals(Object obj) {
+    public static TickUnitSource createTickUnits() {
 
-        if (obj == this) { // simple case
-            return true;
-        }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
-        }
-        if (!(obj instanceof GraficoBurnDownView)) {
-            return false;
-        }
-        GraficoBurnDownView that = (GraficoBurnDownView) obj;
-        if (this.x != that.x) {
-            return false;
-        }
-        if (this.y != that.y) {
-            return false;
-        }
-        if (this.displayWidth != that.displayWidth) {
-            return false;
-        }
-        if (this.displayHeight != that.displayHeight) {
-            return false;
-        }
-        if (this.drawScaleFactor != that.drawScaleFactor) {
-            return false;
-        }
-        if (!ObjectUtilities.equal(this.drawable, that.drawable)) {
-            return false;
-        }
-        // seem to be the same...
-        return true;
+        TickUnits units = new TickUnits();
+        DecimalFormat df1 = new DecimalFormat("$0");
+        DecimalFormat df2 = new DecimalFormat("$0.00");
 
-    }
+        // we can add the units in any order, the TickUnits collection will
+        // sort them...
+        units.add(new NumberTickUnit(1000000, df1, 0));
+        units.add(new NumberTickUnit(500000, df1, 0));
+        units.add(new NumberTickUnit(200000, df1, 0));
+        units.add(new NumberTickUnit(100000, df1, 0));
+        units.add(new NumberTickUnit(50000, df1, 0));
+        units.add(new NumberTickUnit(20000, df1, 0));
+        units.add(new NumberTickUnit(10000, df1, 0));
+        units.add(new NumberTickUnit(5000, df1, 0));
+        units.add(new NumberTickUnit(2000, df1, 0));
+        units.add(new NumberTickUnit(1000, df1, 0));
+        units.add(new NumberTickUnit(500, df1, 0));
+        units.add(new NumberTickUnit(200, df1, 0));
+        units.add(new NumberTickUnit(100, df1, 0));
+        units.add(new NumberTickUnit(50, df1, 0));
+        units.add(new NumberTickUnit(20, df1, 0));
+        units.add(new NumberTickUnit(10, df1, 0));
+        units.add(new NumberTickUnit(5, df1, 0));
+        units.add(new NumberTickUnit(2, df1, 0));
+        units.add(new NumberTickUnit(1, df1, 0));
 
-    /**
-     * Returns a hash code.
-     *
-     * @return A hash code.
-     */
-    public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayWidth);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayHeight);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
+        units.add(new NumberTickUnit(0.000001, df2, 0));
+        units.add(new NumberTickUnit(0.0000025, df2, 0));
+        units.add(new NumberTickUnit(0.000005, df2, 0));
+        units.add(new NumberTickUnit(0.00001, df2, 0));
+        units.add(new NumberTickUnit(0.000025, df2, 0));
+        units.add(new NumberTickUnit(0.00005, df2, 0));
+        units.add(new NumberTickUnit(0.0001, df2, 0));
+        units.add(new NumberTickUnit(0.00025, df2, 0));
+        units.add(new NumberTickUnit(0.0005, df2, 0));
+        units.add(new NumberTickUnit(0.001, df2, 0));
+        units.add(new NumberTickUnit(0.0025, df2, 0));
+        units.add(new NumberTickUnit(0.005, df2, 0));
+        units.add(new NumberTickUnit(0.01, df2, 0));
+        units.add(new NumberTickUnit(0.025, df2, 0));
+        units.add(new NumberTickUnit(0.05, df2, 0));
+        units.add(new NumberTickUnit(0.1, df2, 0));
+        units.add(new NumberTickUnit(0.25, df2, 0));
+        units.add(new NumberTickUnit(0.5, df2, 0));
 
-    /**
-     * Returns a clone of the annotation.
-     *
-     * @return A clone.
-     *
-     * @throws CloneNotSupportedException  if the annotation can't be cloned.
-     */
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        return units;
     }
 
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
+import br.com.android.cotuca.toptask.Fragments.FragmentTabGraficoBurnDown;
 import br.com.android.cotuca.toptask.Fragments.FragmentTabGraficoProjeto;
 import br.com.android.cotuca.toptask.Fragments.FragmentTabGraficoTarefa;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -33,8 +34,8 @@ public class GraficosActivity extends Activity {
 	    actionBar.addTab(tab);
 	    
 	    tab = actionBar.newTab().setText(R.string.tab_g_burn_down)
-                .setTabListener(new TabListener<FragmentTabGraficoTarefa>(
-                        this, "Burn Down", FragmentTabGraficoTarefa.class));
+                .setTabListener(new TabListener<FragmentTabGraficoBurnDown>(
+                        this, "Burn Down", FragmentTabGraficoBurnDown.class));
 	    actionBar.addTab(tab);
 	}
 }
