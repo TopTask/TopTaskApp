@@ -99,25 +99,19 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 			} else if (acao == 1){ //Alteracao
 				ehAtu = true;
-<<<<<<< HEAD
-=======
-				
-				idTarefa = dados.getInt(Tags.ID_TAREFA);
->>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
+
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
 				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
-<<<<<<< HEAD
+
 				idTarefa = dados.getInt(Tags.ID_TAREFA);
 
-=======
 				String tempoLimite = dados.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
 				String tempoFeito = dados.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
-						
->>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
+
 				edtNome.setText(nome);
 				edtDescricao.setText(descricao);
 				edtData.setText(data);
@@ -183,11 +177,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			}
 
 			if (!ehAtu) {
-<<<<<<< HEAD
-				dao.save(new Tarefa(nome, descricao, idDono, data, prioridade,idProjeto, 0)); //pendente == 0 
-=======
+
 				dao.save(new Tarefa(nome, descricao, idDono, data, tempoLimite, prioridade,idProjeto, ContratoTarefas.StatusTarefa.pendente)); 
->>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 			} else {
 				Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 
