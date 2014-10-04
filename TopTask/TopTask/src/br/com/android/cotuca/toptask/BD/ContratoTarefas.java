@@ -13,6 +13,13 @@ public final class ContratoTarefas {
 		public static final String PRIORIDADE = "prioridade";
 		public static final String PROJETO = "idProjeto";
 		public static final String CONCLUIDA = "progresso";
-		
+		public static final String TEMPO_LIMITE = "tempolimite";
+		public static final String TEMPO_FEITO = "tempofeito";
+	}
+	
+	public static final class StatusTarefa {
+		public static final int pendente = 0;
+		public static final int andamento = 1;
+		public static final int concluida = 2;
 	}
 }

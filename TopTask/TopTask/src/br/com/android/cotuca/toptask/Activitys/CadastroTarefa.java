@@ -35,16 +35,22 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private EditText edtNome;
 	private EditText edtDescricao;
 	private Spinner spinner;
+	
 	private EditText edtData;
+	private int dia, mes, ano;
+	private String dataOriginal;
+	
+	private EditText edtTempoLimite;
+	private EditText edtTempoFeito;
+	private String tempoOriginal;
+	
 	private boolean ehAtu;
-	private int idTarefa;
 
 	// variaveis sobre o alarme
 	private AlarmManager am;
 	private PendingIntent pi;
-
-	private int dia, mes, ano;
-	private String dataOriginal;
+	
+	private int idTarefa;
 	private int idProjeto;
 	private int idDono;
 
@@ -75,6 +81,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovaTarefa);
 		edtDescricao = (EditText) findViewById(R.id.edt_descricaoNovaTarefa);
 		edtData = (EditText) findViewById(R.id.edt_data_tarefa);
+		//edtTempoLimite = (EditText) findViewById(R.id.edt_tempo_limite);
 
 		ehAtu = false;
 
@@ -92,16 +99,30 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 			} else if (acao == 1){ //Alteracao
 				ehAtu = true;
+<<<<<<< HEAD
+=======
+				
+				idTarefa = dados.getInt(Tags.ID_TAREFA);
+>>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
+				
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
 				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
+<<<<<<< HEAD
 				idTarefa = dados.getInt(Tags.ID_TAREFA);
 
+=======
+				String tempoLimite = dados.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
+				String tempoFeito = dados.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
+						
+>>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 				edtNome.setText(nome);
 				edtDescricao.setText(descricao);
 				edtData.setText(data);
+				edtTempoFeito.setText(tempoFeito);
+				edtTempoLimite.setText(tempoLimite);
 			}
 
 			dados = null; 
@@ -133,7 +154,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		FragmentManager fm = getFragmentManager();
 		DateDialog dd = new DateDialog();
 		dd.show(fm, "DateDialog");
-
 	}
 
 	@Override
@@ -144,8 +164,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		dataOriginal = (dia + "/" + mes + "/" + ano);
 		mes += 1;
 		edtData.setText(dia + "/" + mes + "/" + ano);
-		
-
 	}
 
 	@Override
@@ -155,6 +173,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		if (R.id.action_criar_tarefa == id) {
 			String nome = edtNome.getText().toString();
 			String descricao = edtDescricao.getText().toString();
+			int tempoLimite = 1; //errado
 			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem().toString());
 			
@@ -164,7 +183,11 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			}
 
 			if (!ehAtu) {
+<<<<<<< HEAD
 				dao.save(new Tarefa(nome, descricao, idDono, data, prioridade,idProjeto, 0)); //pendente == 0 
+=======
+				dao.save(new Tarefa(nome, descricao, idDono, data, tempoLimite, prioridade,idProjeto, ContratoTarefas.StatusTarefa.pendente)); 
+>>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 			} else {
 				Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 
@@ -173,6 +196,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				tarefaAtu.setNome(nome);
 				tarefaAtu.setDescricao(descricao);
 				tarefaAtu.setDataEntrega(data);
+				//tarefaAtu.setTempoFeito(tempoFeito);
+				tarefaAtu.setTempoLimite(tempoLimite);
 				tarefaAtu.setPrioridade(prioridade);
 				tarefaAtu.setIdProjeto(idProjeto);
 				tarefaAtu.setDono(idDono);

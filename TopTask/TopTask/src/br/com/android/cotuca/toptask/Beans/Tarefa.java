@@ -20,31 +20,38 @@ public class Tarefa {
 	private int idProjeto;
 	private int id;
 	private int concluida;
+	private int tempoLimite;
+	private int tempoFeito;
 //========================================
 	
-	public Tarefa(int id,String nome, String descricao, int dono,String dataEntrega, 
+	public Tarefa(int id,String nome, String descricao, int dono,String dataEntrega, int tempoLimite, int tempoFeito,
 			int prioridade, int idProjeto, int conluida) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		DataEntrega = dataEntrega;
+		this.DataEntrega = dataEntrega;
+		this.tempoLimite = tempoLimite;
+		this.tempoFeito = tempoFeito;
 		this.dono = dono;
 		this.prioridade = prioridade;
 		this.idProjeto = idProjeto;
 		this.concluida = conluida;
+		this.tempoFeito = 0;
 	}
 	
-	public Tarefa(String nome, String descricao, int dono,String dataEntrega, 
+	public Tarefa(String nome, String descricao, int dono,String dataEntrega, int tempoLimite,
 			int prioridade, int idProjeto, int concluida) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
-		DataEntrega = dataEntrega;
+		this.DataEntrega = dataEntrega;
+		this.tempoLimite = tempoLimite;
 		this.dono = dono;
 		this.prioridade = prioridade;
 		this.idProjeto = idProjeto;
 		this.concluida = concluida;
+		this.tempoFeito = 0;
 	}
 	
 	public String getNome() {
@@ -99,7 +106,16 @@ public class Tarefa {
 	public void setIdProjeto(int idProjeto) {
 		this.idProjeto = idProjeto;
 	}
-	
-	
-	
+	public int getTempoLimite() {
+		return tempoLimite;
+	}
+	public void setTempoLimite(int tempoLimite) {
+		this.tempoLimite = tempoLimite;
+	}
+	public int getTempoFeito() {
+		return tempoFeito;
+	}
+	public void setTempoFeito(int tempoFeito) {
+		this.tempoFeito = tempoFeito;
+	}
 }

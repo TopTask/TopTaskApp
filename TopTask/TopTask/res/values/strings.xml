@@ -66,5 +66,6 @@
     <!-- Strings Tabs -->
     <string name="tab_g_tarefa">Minhas Tarefas</string>
     <string name="tab_g_projeto">Meu Projeto</string>
+    <string name="tab_g_burn_down">Burn Down</string>
     
 </resources>

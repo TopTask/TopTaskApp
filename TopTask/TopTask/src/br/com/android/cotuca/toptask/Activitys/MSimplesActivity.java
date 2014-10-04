@@ -198,7 +198,11 @@ public class MSimplesActivity extends Activity implements
 			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).isEmpty()) {
 				
+<<<<<<< HEAD
 				Log.i("Ha tarefas na lista", "Ha tarefas na lista");
+=======
+				Log.i("Há tarefas na lista", "Há tarefas na lista");
+>>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 				
 				Intent i = new Intent(this, GraficosActivity.class);
 			    Bundle dados = new Bundle();
@@ -269,6 +273,11 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
+<<<<<<< HEAD
+=======
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
+>>>>>>> 6ed4272b866a8348694baf152d591b11fe3fc6ba
 			
 			iEditar.putExtras(dados);
 
