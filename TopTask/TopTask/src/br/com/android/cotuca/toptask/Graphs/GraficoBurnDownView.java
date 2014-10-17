@@ -30,7 +30,7 @@ public class GraficoBurnDownView extends DemoView {
 
     private static AFreeChart createChart() {
 
-        // declare colors
+        // declaracao cores
         PaintType white = new SolidColor(Color.WHITE);
         PaintType gray = new SolidColor(Color.DKGRAY);
 

@@ -17,6 +17,8 @@ public class Projeto {
 	private int dono;
 	private int concluida;
 	private String foto;
+	private int tempoLimite; //soma dos tempos limites das tarefas do projeto
+	private int tempoFeito; //soma do que já foi feito nas tarefas do projeto
 	//========================================
 	
 	public Projeto(String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {

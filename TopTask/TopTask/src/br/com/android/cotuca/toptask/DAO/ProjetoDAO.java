@@ -63,28 +63,6 @@ public class ProjetoDAO {
 		return projetos;
 	}
 	
-	//public List<Projeto> getNaoConcluidos(){
-	//	Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, 
-	//			ContratoProjetos.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
-	//			null, null, ContratoProjetos.Colunas.DATA_ENTREGA);
-//
-	//	List<Projeto> projetos = new ArrayList<Projeto>();
-
-	//	try {
-	//		if (c.moveToFirst()) {
-	//			do {
-	//				Projeto p = ProjetoDAO.getCursor(c);
-	//				projetos.add(p);
-	//			} while (c.moveToNext());
-	//		}
-//
-	//	} finally {
-	//		c.close();
-	//	}
-
-	//	return projetos;
-	//}
-	
 	public Projeto getProjeto (String _id) {
 		Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, ContratoProjetos.Colunas._ID + " = ? ", new String[]{_id},
 				null, null, ContratoProjetos.Colunas.DATA_ENTREGA);
