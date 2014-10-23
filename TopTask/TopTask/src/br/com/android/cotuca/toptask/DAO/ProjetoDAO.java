@@ -1,6 +1,7 @@
 package br.com.android.cotuca.toptask.DAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -9,10 +10,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoBurnDownProjeto;
+import br.com.android.cotuca.toptask.BD.ContratoBurnDownTarefa;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class ProjetoDAO {
@@ -105,6 +108,7 @@ public class ProjetoDAO {
 
 		return projetos;
 	}
+	
 
 	public static Projeto getCursor(Cursor c) {
 
@@ -155,6 +159,20 @@ public class ProjetoDAO {
 		db.update(ContratoProjetos.NOME_TABELA, values,
 				ContratoProjetos.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(projeto.getId()) });
+		
+		saveBurnDownProjeto(projeto);
+	}
+	
+	public void saveBurnDownProjeto(Projeto projeto){
+		Calendar cal = Calendar.getInstance();
+		
+		ContentValues values = new ContentValues();
+		values.put(ContratoBurnDownProjeto.Colunas.DATA_ATUAL, cal.getTime().toString());
+		values.put(ContratoBurnDownProjeto.Colunas.ID_PROJETO, projeto.getId());
+		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_FEITO, projeto.getTotalFeito());
+		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_LIMITE, projeto.getTotalLimite());
+		
+		db.insert(ContratoBurnDownProjeto.NOME_TABELA, null, values);
 	}
 
 	public void delete(Projeto projeto) {

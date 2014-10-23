@@ -88,9 +88,15 @@ public class TarefaDAO {
 		}
 
 		return tarefas;
-
- 
 	}
+	
+
+//	public int getTotalFeito(int idProjeto){
+//		List<Tarefa> tarefas= getTarefasProjeto(idProjeto);
+//		
+//		Cursor c = db.query(ContratoBurnDownTarefa.NOME_TABELA,ContratoBurnDownTarefa.Colunas.TEMPO_FEITO,
+//		return 10;
+//	}
 	
 	public List<Tarefa> getTarefasDoUsuarioNoProjetos(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
