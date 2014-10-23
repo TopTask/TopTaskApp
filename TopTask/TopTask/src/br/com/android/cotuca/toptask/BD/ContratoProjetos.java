@@ -12,5 +12,7 @@ public class ContratoProjetos {
 		public static final String DONO = "idUsuario";
 		public static final String CONCLUIDA = "progresso";
 		public static final String FOTO = "foto";
+		public static final String TOTAL_FEITO = "tempoFeito";
+		public static final String TOTAL_LIMITE = "tempoLimite";
 	}
 }

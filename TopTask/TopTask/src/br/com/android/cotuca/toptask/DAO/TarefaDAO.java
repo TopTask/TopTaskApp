@@ -1,6 +1,7 @@
 package br.com.android.cotuca.toptask.DAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import br.com.android.cotuca.toptask.BD.ContratoBurnDownTarefa;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
@@ -349,6 +351,21 @@ public class TarefaDAO {
 		db.update(ContratoTarefas.NOME_TABELA, values,
 				ContratoTarefas.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(tarefa.getID()) });
+		
+		saveBurnDownTarefa(tarefa);
+	}
+	
+	
+	public void saveBurnDownTarefa(Tarefa tarefa){
+		Calendar cal = Calendar.getInstance();
+		
+		ContentValues values = new ContentValues();
+		values.put(ContratoBurnDownTarefa.Colunas.DATA_ATUAL, cal.getTime().toString());
+		values.put(ContratoBurnDownTarefa.Colunas.ID_TAREFA, tarefa.getID());
+		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
+		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
+		
+		db.insert(ContratoBurnDownTarefa.NOME_TABELA, null, values);
 	}
 
 	public void delete(Tarefa tarefa) {
@@ -358,7 +375,7 @@ public class TarefaDAO {
 	}
 	
 	public void concluirTarefa (Tarefa tarefa) {
-		int id = tarefa.getID(); //� Concluida quando 0 e concluida qdo != 0
+		int id = tarefa.getID(); 
 		
 		ContentValues values = new ContentValues();
 		values.put(ContratoTarefas.Colunas.CONCLUIDA, ContratoTarefas.StatusTarefa.concluida);

@@ -17,10 +17,12 @@ public class Projeto {
 	private int dono;
 	private int concluida;
 	private String foto;
-	private int tempoLimite; //soma dos tempos limites das tarefas do projeto
-	private int tempoFeito; //soma do que já foi feito nas tarefas do projeto
+	private int totalLimite; //soma dos tempos limites das tarefas do projeto
+	private int totalFeito; //soma do que já foi feito nas tarefas do projeto
 	//========================================
 	
+	
+	//construtor para criação
 	public Projeto(String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {
 		super();
 		this.nome = nome;
@@ -31,7 +33,8 @@ public class Projeto {
 		this.foto = foto;
 	}
 	
-	public Projeto(int id,String nome, String descricao, String dataEntrega, int dono, int concluida, String foto) {
+	//construtor para edição
+	public Projeto(int id,String nome, String descricao, String dataEntrega, int dono, int concluida, String foto, int totalLimite, int totalFeito) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -40,6 +43,8 @@ public class Projeto {
 		this.dono = dono;
 		this.concluida = concluida;
 		this.foto = foto;
+		this.totalFeito = totalFeito;
+		this.totalLimite = totalLimite;
 	}
 	
 	public int getId() {
@@ -83,5 +88,17 @@ public class Projeto {
 	}
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+	public int getTotalFeito() {
+		return totalFeito;
+	}
+	public void setTotalFeito(int totalFeito) {
+		this.totalFeito = totalFeito;
+	}
+	public int getTotalLimite() {
+		return totalLimite;
+	}
+	public void setTotalLimite(int totalLimite) {
+		this.totalLimite = totalLimite;
 	}
 }

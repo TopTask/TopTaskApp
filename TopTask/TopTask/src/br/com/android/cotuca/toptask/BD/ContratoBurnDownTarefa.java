@@ -8,6 +8,7 @@ public static final String NOME_TABELA = "TTBurnDownTarefa";
 		public static final String _ID         = "_id";
 		public static final String ID_TAREFA = "idTarefa";
 		public static final String TEMPO_FEITO = "tempoFeito";
+		public static final String TEMPO_LIMITE = "tempoLimite";
 		public static final String DATA_ATUAL = "data";
 	}
 }

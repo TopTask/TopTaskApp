@@ -24,6 +24,22 @@ public class Tarefa {
 	private int tempoFeito;
 //========================================
 	
+	//criação
+	public Tarefa(String nome, String descricao, int dono,String dataEntrega, int tempoLimite,
+			int prioridade, int idProjeto, int concluida) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.DataEntrega = dataEntrega;
+		this.tempoLimite = tempoLimite;
+		this.dono = dono;
+		this.prioridade = prioridade;
+		this.idProjeto = idProjeto;
+		this.concluida = concluida;
+		this.tempoFeito = 0;
+	}
+	
+	//edição
 	public Tarefa(int id,String nome, String descricao, int dono,String dataEntrega, int tempoLimite, int tempoFeito,
 			int prioridade, int idProjeto, int conluida) {
 		super();
@@ -37,20 +53,6 @@ public class Tarefa {
 		this.prioridade = prioridade;
 		this.idProjeto = idProjeto;
 		this.concluida = conluida;
-		this.tempoFeito = 0;
-	}
-	
-	public Tarefa(String nome, String descricao, int dono,String dataEntrega, int tempoLimite,
-			int prioridade, int idProjeto, int concluida) {
-		super();
-		this.nome = nome;
-		this.descricao = descricao;
-		this.DataEntrega = dataEntrega;
-		this.tempoLimite = tempoLimite;
-		this.dono = dono;
-		this.prioridade = prioridade;
-		this.idProjeto = idProjeto;
-		this.concluida = concluida;
 		this.tempoFeito = 0;
 	}
 	
