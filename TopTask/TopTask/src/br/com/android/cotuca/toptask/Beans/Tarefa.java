@@ -53,13 +53,14 @@ public class Tarefa {
 		this.prioridade = prioridade;
 		this.idProjeto = idProjeto;
 		this.concluida = conluida;
-		this.tempoFeito = 0;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
 
+	
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

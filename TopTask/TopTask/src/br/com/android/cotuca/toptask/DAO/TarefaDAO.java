@@ -91,12 +91,26 @@ public class TarefaDAO {
 	}
 	
 
-//	public int getTotalFeito(int idProjeto){
-//		List<Tarefa> tarefas= getTarefasProjeto(idProjeto);
-//		
-//		Cursor c = db.query(ContratoBurnDownTarefa.NOME_TABELA,ContratoBurnDownTarefa.Colunas.TEMPO_FEITO,
-//		return 10;
-//	}
+	public int getTotalFeito(int idProjeto){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, null);
+		
+		int soma = 0;
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					soma =+ TarefaDAO.getFeito(c);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return soma;
+	}
 	
 	public List<Tarefa> getTarefasDoUsuarioNoProjetos(int idProjeto, int idDono){
 		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
@@ -320,6 +334,11 @@ public class TarefaDAO {
 		int tempoFeito = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_FEITO));
 
 		return new Tarefa(_id,nome, descricao,dono,data,tempoLimite, tempoFeito, prioridade, projeto,concluida);
+	}
+	
+	public static int getFeito(Cursor c){
+		int tempoFeito = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_FEITO));
+		return tempoFeito;
 	}
 
 	public void save(Tarefa tarefa) {
