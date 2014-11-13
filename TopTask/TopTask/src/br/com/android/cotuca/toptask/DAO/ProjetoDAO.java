@@ -159,20 +159,6 @@ public class ProjetoDAO {
 		db.update(ContratoProjetos.NOME_TABELA, values,
 				ContratoProjetos.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(projeto.getId()) });
-		
-		saveBurnDownProjeto(projeto);
-	}
-	
-	public void saveBurnDownProjeto(Projeto projeto){
-		Calendar cal = Calendar.getInstance();
-		
-		ContentValues values = new ContentValues();
-		values.put(ContratoBurnDownProjeto.Colunas.DATA_ATUAL, cal.getTime().toString());
-		values.put(ContratoBurnDownProjeto.Colunas.ID_PROJETO, projeto.getId());
-		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_FEITO, projeto.getTotalFeito());
-		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_LIMITE, projeto.getTotalLimite());
-		
-		db.insert(ContratoBurnDownProjeto.NOME_TABELA, null, values);
 	}
 
 	public void delete(Projeto projeto) {

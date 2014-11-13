@@ -2,6 +2,8 @@ package br.com.android.cotuca.toptask.BD;
 
 public class ContratoBurnDownTarefa {
 
+	//nao será usada
+	
 public static final String NOME_TABELA = "TTBurnDownTarefa";
 	
 	public static final class Colunas{

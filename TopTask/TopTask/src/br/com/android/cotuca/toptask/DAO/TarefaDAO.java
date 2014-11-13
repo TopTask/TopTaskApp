@@ -96,12 +96,12 @@ public class TarefaDAO {
 				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
 				null, null, null);
 		
-		int soma = 0;
+		int somaFeito = 0;
 
 		try {
 			if (c.moveToFirst()) {
 				do {
-					soma =+ TarefaDAO.getFeito(c);
+					somaFeito =+ TarefaDAO.getFeito(c);
 				} while (c.moveToNext());
 			}
 
@@ -109,7 +109,28 @@ public class TarefaDAO {
 			c.close();
 		}
 
-		return soma;
+		return somaFeito;
+	}
+	
+	public int getTotalLimite(int idProjeto){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, null);
+		
+		int somaLimite = 0;
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					somaLimite =+ TarefaDAO.getLimite(c);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return somaLimite;
 	}
 	
 	public List<Tarefa> getTarefasDoUsuarioNoProjetos(int idProjeto, int idDono){
@@ -341,6 +362,11 @@ public class TarefaDAO {
 		return tempoFeito;
 	}
 
+	public static int getLimite(Cursor c){
+		int tempoLimite = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_LIMITE));
+		return tempoLimite;
+	}
+	
 	public void save(Tarefa tarefa) {
 		ContentValues values = new ContentValues();
 		values.put(ContratoTarefas.Colunas.NOME, tarefa.getNome());
@@ -377,21 +403,21 @@ public class TarefaDAO {
 				ContratoTarefas.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(tarefa.getID()) });
 		
-		saveBurnDownTarefa(tarefa);
+		//saveBurnDownTarefa(tarefa);
 	}
 	
 	
-	public void saveBurnDownTarefa(Tarefa tarefa){
-		Calendar cal = Calendar.getInstance();
-		
-		ContentValues values = new ContentValues();
-		values.put(ContratoBurnDownTarefa.Colunas.DATA_ATUAL, cal.getTime().toString());
-		values.put(ContratoBurnDownTarefa.Colunas.ID_TAREFA, tarefa.getID());
-		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
-		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
-		
-		db.insert(ContratoBurnDownTarefa.NOME_TABELA, null, values);
-	}
+//	public void saveBurnDownTarefa(Tarefa tarefa){
+//		Calendar cal = Calendar.getInstance();
+//		
+//		ContentValues values = new ContentValues();
+//		values.put(ContratoBurnDownTarefa.Colunas.DATA_ATUAL, cal.getTime().toString());
+//		values.put(ContratoBurnDownTarefa.Colunas.ID_TAREFA, tarefa.getID());
+//		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
+//		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
+//		
+//		db.insert(ContratoBurnDownTarefa.NOME_TABELA, null, values);
+//	}
 
 	public void delete(Tarefa tarefa) {
 	

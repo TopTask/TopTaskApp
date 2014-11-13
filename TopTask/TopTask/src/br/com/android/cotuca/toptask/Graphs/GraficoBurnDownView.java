@@ -34,8 +34,8 @@ public class GraficoBurnDownView extends DemoView {
         PaintType white = new SolidColor(Color.WHITE);
         PaintType gray = new SolidColor(Color.DKGRAY);
 
-        XYDataset dataset2 = createDataset2();
-        XYDataset dataset1 = createDataset1();
+        XYDataset dataset2 = createGraficoReal();
+        XYDataset dataset1 = createGraficoIdeal();
         
         NumberAxis rangeAxis2 = new NumberAxis();
         rangeAxis2.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -113,8 +113,7 @@ public class GraficoBurnDownView extends DemoView {
         return chart;
     }
 
-    //gráfico ideal
-    public static XYDataset createDataset1() {
+    public static XYDataset createGraficoIdeal() {
 
         TimeSeries s1 = new TimeSeries("");
         
@@ -136,8 +135,7 @@ public class GraficoBurnDownView extends DemoView {
         return dataset;
     }
     
-    //gráfico real
-    public static XYDataset createDataset2() {
+    public static XYDataset createGraficoReal() {
 
         TimeSeries s1 = new TimeSeries("");
         

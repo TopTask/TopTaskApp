@@ -31,9 +31,11 @@ public class Projeto {
 		this.dono = dono;
 		this.concluida = concluida;
 		this.foto = foto;
+		this.totalFeito = 0;
+		this.totalLimite = 0;
 	}
 	
-	//construtor para edição
+	//construtor para edição e retorno
 	public Projeto(int id,String nome, String descricao, String dataEntrega, int dono, int concluida, String foto, int totalLimite, int totalFeito) {
 		super();
 		this.id = id;
