@@ -191,8 +191,8 @@ public class CadastroProjetoActivity extends Activity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-//	public void cancelaAlarmeAtualizaBurnDown() {
-//		alarm.cancel(pi);
-//	}
+	public void cancelaAlarmeAtualizaBurnDown() {
+		alarm.cancel(pi);
+	}
 
 }
