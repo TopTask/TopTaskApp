@@ -27,21 +27,23 @@ import android.graphics.Color;
 
 public class GraficoBurnDownView extends DemoView {
 	
+	private int idProjeto;
 
-    public GraficoBurnDownView(Context context) {
+    public GraficoBurnDownView(Context context, int idProjeto) {
         super(context);
+        this.idProjeto = idProjeto;
 
-        final AFreeChart chart = createChart();
+        final AFreeChart chart = createChart(idProjeto);
         setChart(chart);
     }
 
-    private static AFreeChart createChart() {
+    private static AFreeChart createChart(int idProjeto) {
 
         // declaracao cores
         PaintType white = new SolidColor(Color.WHITE);
         PaintType gray = new SolidColor(Color.DKGRAY);
 
-        XYDataset dataset2 = createGraficoReal();
+        XYDataset dataset2 = createGraficoReal(idProjeto);
         XYDataset dataset1 = createGraficoIdeal();
         
         NumberAxis rangeAxis2 = new NumberAxis();
@@ -142,7 +144,7 @@ public class GraficoBurnDownView extends DemoView {
         return dataset;
     }
     
-    public static XYDataset createGraficoReal() {
+    public static XYDataset createGraficoReal(int idProjeto) {
 
         TimeSeries s1 = new TimeSeries("");
         BurnDownDAO daoBurnDown;
@@ -150,9 +152,8 @@ public class GraficoBurnDownView extends DemoView {
         
         List<BurnDown> burnDowns = new ArrayList<BurnDown>();
         
-        //burnDowns = daoBurnDown.getBurnDownsDoProjeto();
+        burnDowns = daoBurnDown.getBurnDownsDoProjeto(idProjeto);
     	
-        
         s1.add(new Day(24, 9, 2014), 10);
         s1.add(new Day(25, 9, 2014), 7.5);
         s1.add(new Day(26, 9, 2014), 5);

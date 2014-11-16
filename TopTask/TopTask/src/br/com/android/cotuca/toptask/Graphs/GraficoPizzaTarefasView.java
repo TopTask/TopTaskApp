@@ -45,10 +45,8 @@ public class GraficoPizzaTarefasView extends DemoView{
         plot.setExplodePercent(TC,0.04);
         plot.setExplodePercent(TA,0.04);
         plot.setExplodePercent(TP,0.04);
-        //plot.setLabelFont(new Font("SansSerif", Typeface.NORMAL, 15));
         plot.setNoDataMessage("Tarefas nao encontradas");
         plot.setCircular(true);
-        //plot.setLabelGap(0.02);
         plot.setSectionPaintType(TC, new SolidColor(ChartColor.LIGHT_GREEN));
         plot.setSectionPaintType(TA, new SolidColor(ChartColor.LIGHT_YELLOW));
         plot.setSectionPaintType(TP, new SolidColor(ChartColor.LIGHT_RED));
