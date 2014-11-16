@@ -146,6 +146,10 @@ public class CadastroProjetoActivity extends Activity implements
 				calendar.set(Calendar.SECOND, 0);
 
 				Intent i = new Intent(getApplicationContext(), BurnDownReceiver.class);
+			
+				Bundle dados = new Bundle();
+				dados.putInt("id_projeto", novoProjeto.getId());
+				i.putExtras(dados);
 				pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 
 						
