@@ -138,22 +138,21 @@ public class CadastroProjetoActivity extends Activity implements
 						idUsuario, 1, "");
 				dao.save(novoProjeto);
 				
-				//agendamento de alarme para atualizacao das tabelas Burn Down para criação do gráfico
+				//agendamento de alarme para atualizacao das tabelas Burn Down para criaï¿½ï¿½o do grï¿½fico
 				Calendar calendar = Calendar.getInstance();
-				//calendar.setTimeInMillis(System.currentTimeMillis());
-				//calendar.set(Calendar.HOUR_OF_DAY, 1);
-				calendar.set(Calendar.SECOND, 10);
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				calendar.set(Calendar.HOUR_OF_DAY, 17);
+				calendar.set(Calendar.MINUTE, 15);
+				calendar.set(Calendar.SECOND, 0);
 
 				Intent i = new Intent(getApplicationContext(), BurnDownReceiver.class);
 				pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 
-				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
-						5000, pi);
 						
 				Toast.makeText(getApplicationContext(), "agendou alarme",Toast.LENGTH_SHORT).show();
 				
-//				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
-//						AlarmManager.INTERVAL_DAY, pi);
+				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+						AlarmManager.INTERVAL_DAY, pi);
 				
 				
 			} else {
