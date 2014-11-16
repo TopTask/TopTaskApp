@@ -39,11 +39,6 @@ public class FragmentTabGraficoTarefa extends Fragment {
 		if(dao.getNaoConcluidasDoMembroNoProjeto(idProjeto, idUsuario).isEmpty())
 			pendentes = 0;
 		
-<<<<<<< HEAD
-		
-
-=======
->>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 		Log.d("Qntidade de tarefas TAREFA", "Tarefas concluidas: "+concluidas);
 		
 		Log.d("Qntidade de tarefas TAREFA", "Tarefas andamento: "+fazendo);
@@ -53,10 +48,6 @@ public class FragmentTabGraficoTarefa extends Fragment {
 		GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(),concluidas,fazendo,pendentes);
 		
 		//GraficoPizzaTarefasView g = new GraficoPizzaTarefasView(getActivity().getApplicationContext(), 1,2,3);
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 		viewGroup.addView(g);
 
 		return view;

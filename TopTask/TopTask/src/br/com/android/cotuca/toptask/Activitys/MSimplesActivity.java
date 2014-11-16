@@ -196,13 +196,7 @@ public class MSimplesActivity extends Activity implements
 
 			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).isEmpty()) {
-<<<<<<< HEAD
-				
-				Log.i("Há tarefas na lista", "Há tarefas na lista");
-=======
 
-				
->>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 				Intent i = new Intent(this, GraficosActivity.class);
 			    Bundle dados = new Bundle();
 				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
@@ -259,7 +253,7 @@ public class MSimplesActivity extends Activity implements
 			return true;
 
 		} else if (id == R.id.acction_editar_tarefa) {
-			Intent iEditar = new Intent(this, CadastroTarefa.class);
+			Intent iEditar = new Intent(this, EditarTarefa.class);
 			Bundle dados = new Bundle();
 
 			dados.putInt(Tags.B_ACAO, Tags.ACAO_EDITAR);
@@ -272,16 +266,11 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-<<<<<<< HEAD
-			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
-			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
-=======
 
 			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
 			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
 
 			
->>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);

@@ -1,7 +1,5 @@
 package br.com.android.cotuca.toptask.Activitys;
 
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.FragmentManager;
@@ -24,10 +22,9 @@ import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
 import br.com.android.cotuca.toptask.Fragments.ListenerClickCadastroTarefa;
-import br.com.android.cotuca.toptask.Receivers.NotificacaoSimplesReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
 
-public class CadastroTarefa extends Activity implements OnItemSelectedListener,
+public class EditarTarefa extends Activity implements OnItemSelectedListener,
 		DateDialog.SetDateListener, ListenerClickCadastroTarefa {
 
 	private ArrayAdapter<Character> adapter;
@@ -40,12 +37,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private EditText edtData;
 	private String dataOriginal;
 
-	private boolean ehAtu;
-
-	// variaveis sobre o alarme
-	private AlarmManager am;
-	private PendingIntent pi;
-
 	private int idTarefa;
 	private int idProjeto;
 	private int idDono;
@@ -57,7 +48,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	protected void onCreate(Bundle estado) {
 		super.onCreate(estado);
 
-		setContentView(R.layout.activity_cadastro_tarefa);
+		setContentView(R.layout.activity_editar_tarefa);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		dao = TarefaDAO.getInstance(this);
@@ -70,40 +61,46 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 			Log.d(Tags.B_ACAO, "Acao a ser realizada: " + acao);
 
-			if (acao == Tags.ACAO_CADASTRO) {
-				idProjeto = dados.getInt(Tags.ID_PROJETO);
-				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
-				edtNome = (EditText) findViewById(R.id.edt_nomeNovaTarefa);
-				edtDescricao = (EditText) findViewById(R.id.edt_descricaoNovaTarefa);
-				edtData = (EditText) findViewById(R.id.edt_data_tarefa);
-				edtTempoFeito = (EditText) findViewById(R.id.edt_tempo_feito);
-				edtTempoLimite = (EditText) findViewById(R.id.edt_tempo_limite);
+		} else {
+			idProjeto = dados.getInt(Tags.ID_PROJETO);
+			idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
+			String nome = dados.getString(ContratoTarefas.Colunas.NOME);
+			String descricao = dados
+					.getString(ContratoTarefas.Colunas.DESCRICAO);
+			String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
+			idTarefa = dados.getInt(Tags.ID_TAREFA);
+			String tempoLimite = dados
+					.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
+			String tempoFeito = dados
+					.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
 
-				Log.i(ContratoTarefas.Colunas.PROJETO,
-						"Id projeto na pagina de cadastro: " + idProjeto);
+			edtNome = (EditText) findViewById(R.id.edt_nomeNovaTarefa);
+			edtDescricao = (EditText) findViewById(R.id.edt_descricaoNovaTarefa);
+			edtData = (EditText) findViewById(R.id.edt_data_tarefa);
+			edtTempoFeito = (EditText) findViewById(R.id.edt_tempo_feito);
+			edtTempoLimite = (EditText) findViewById(R.id.edt_tempo_limite);
 
-			}
-
-			spinner = (Spinner) findViewById(R.id.s_prioridade);
-
-			adapter = new ArrayAdapter<Character>(this,
-					android.R.layout.simple_spinner_item);
-			adapter.add('1');
-			adapter.add('2');
-			adapter.add('3');
-			adapter.add('4');
-
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-			spinner.setAdapter(adapter);
-			spinner.setOnItemSelectedListener(this);
-
-			dados = null;
+			edtNome.setText(nome);
+			edtDescricao.setText(descricao);
+			edtData.setText(data);
+			edtTempoFeito.setText(tempoFeito);
+			edtTempoLimite.setText(tempoLimite);
 		}
+		spinner = (Spinner) findViewById(R.id.s_prioridade);
 
-		// pega o manager para o alarme
-		am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		adapter = new ArrayAdapter<Character>(this,
+				android.R.layout.simple_spinner_item);
+		adapter.add('1');
+		adapter.add('2');
+		adapter.add('3');
+		adapter.add('4');
 
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(this);
+
+		dados = null;
 	}
 
 	@Override
@@ -152,12 +149,21 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				return false;
 			}
 
-			dao.save(new Tarefa(nome, descricao, idDono, data, tempoLimite,
-					prioridade, idProjeto,
-					ContratoTarefas.StatusTarefa.pendente));
+			Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 
-			// agenda o alarme para esse mesmo dia no horario atual
-			// agendarNotificacao(nome, descricao, ano, mes, dia);
+			Tarefa tarefaAtu = dao.getTarefa(String.valueOf(idTarefa));
+
+			tarefaAtu.setNome(nome);
+			tarefaAtu.setDescricao(descricao);
+			tarefaAtu.setDataEntrega(data);
+			tarefaAtu.setTempoFeito(tempoFeito);
+			tarefaAtu.setTempoLimite(tempoLimite);
+			tarefaAtu.setPrioridade(prioridade);
+			tarefaAtu.setIdProjeto(idProjeto);
+			tarefaAtu.setDono(idDono);
+
+			dao.update(tarefaAtu);
+
 
 			Intent i = new Intent(this, MSimplesActivity.class);
 			Bundle dadosBundle = new Bundle();
@@ -199,32 +205,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	@Override
 	public void onClickSetarTempo(View v) {
 		FragmentManager fm = getFragmentManager();
-
-	}
-
-	private void agendarNotificacao(String titulo, String descricao, int ano,
-			int mes, int dia) {
-
-		Calendar c = Calendar.getInstance();
-
-		// setar a data atual
-		c.set(ano, mes, dia);
-
-		Intent i = new Intent(this, NotificacaoSimplesReceiver.class);
-
-		Bundle dados = new Bundle();
-
-		dados.putString("titulo", titulo);
-		dados.putString("descricao", descricao);
-		dados.putInt(Tags.ID_PROJETO, idProjeto);
-
-		i.putExtras(dados);
-
-		pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-
-		am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
-
-		// sendBroadcast(i);
 
 	}
 
