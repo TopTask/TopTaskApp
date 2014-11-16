@@ -24,22 +24,7 @@ public class Tarefa {
 	private int tempoFeito;
 //========================================
 	
-	public Tarefa(int id,String nome, String descricao, int dono,String dataEntrega, int tempoLimite, int tempoFeito,
-			int prioridade, int idProjeto, int conluida) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.DataEntrega = dataEntrega;
-		this.tempoLimite = tempoLimite;
-		this.tempoFeito = tempoFeito;
-		this.dono = dono;
-		this.prioridade = prioridade;
-		this.idProjeto = idProjeto;
-		this.concluida = conluida;
-		this.tempoFeito = 0;
-	}
-	
+	//criação
 	public Tarefa(String nome, String descricao, int dono,String dataEntrega, int tempoLimite,
 			int prioridade, int idProjeto, int concluida) {
 		super();
@@ -54,10 +39,28 @@ public class Tarefa {
 		this.tempoFeito = 0;
 	}
 	
+	//edição
+	public Tarefa(int id,String nome, String descricao, int dono,String dataEntrega, int tempoLimite, int tempoFeito,
+			int prioridade, int idProjeto, int conluida) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.DataEntrega = dataEntrega;
+		this.tempoLimite = tempoLimite;
+		this.tempoFeito = tempoFeito;
+		this.dono = dono;
+		this.prioridade = prioridade;
+		this.idProjeto = idProjeto;
+		this.concluida = conluida;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
 
+	
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

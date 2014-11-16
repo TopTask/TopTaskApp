@@ -1,6 +1,7 @@
 package br.com.android.cotuca.toptask.DAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -8,10 +9,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import br.com.android.cotuca.toptask.BD.ContratoBurnDownProjeto;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class ProjetoDAO {
@@ -25,7 +28,9 @@ public class ProjetoDAO {
 			ContratoProjetos.Colunas.DATA_ENTREGA,
 			ContratoProjetos.Colunas.DONO,
 			ContratoProjetos.Colunas.CONCLUIDA,
-			ContratoProjetos.Colunas.FOTO
+			ContratoProjetos.Colunas.FOTO,
+			ContratoProjetos.Colunas.TOTAL_FEITO,
+			ContratoProjetos.Colunas.TOTAL_LIMITE
 			};
 	
 	public static ProjetoDAO getInstance(Context contexto) {
@@ -62,28 +67,6 @@ public class ProjetoDAO {
 
 		return projetos;
 	}
-	
-	//public List<Projeto> getNaoConcluidos(){
-	//	Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, 
-	//			ContratoProjetos.Colunas.CONCLUIDA + " = ? ", new String[] {String.valueOf(0)},
-	//			null, null, ContratoProjetos.Colunas.DATA_ENTREGA);
-//
-	//	List<Projeto> projetos = new ArrayList<Projeto>();
-
-	//	try {
-	//		if (c.moveToFirst()) {
-	//			do {
-	//				Projeto p = ProjetoDAO.getCursor(c);
-	//				projetos.add(p);
-	//			} while (c.moveToNext());
-	//		}
-//
-	//	} finally {
-	//		c.close();
-	//	}
-
-	//	return projetos;
-	//}
 	
 	public Projeto getProjeto (String _id) {
 		Cursor c = db.query(ContratoProjetos.NOME_TABELA,colunas, ContratoProjetos.Colunas._ID + " = ? ", new String[]{_id},
@@ -124,6 +107,7 @@ public class ProjetoDAO {
 
 		return projetos;
 	}
+	
 
 	public static Projeto getCursor(Cursor c) {
 
@@ -134,8 +118,10 @@ public class ProjetoDAO {
 		int _id = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas._ID));
 		int concluida = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.CONCLUIDA));
 		String foto = c.getString(c.getColumnIndex(ContratoProjetos.Colunas.FOTO));
+		int tempoFeito = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.TOTAL_FEITO));
+		int tempoLimite = c.getInt(c.getColumnIndex(ContratoProjetos.Colunas.TOTAL_LIMITE));
 		
-		return new Projeto(_id,nome,descricao,data,dono,concluida,foto); 
+		return new Projeto(_id,nome,descricao,data,dono,concluida,foto,tempoFeito,tempoLimite); 
 		
 	}
 
@@ -147,6 +133,8 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
 		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
 		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.TOTAL_FEITO, projeto.getTotalFeito());
+		values.put(ContratoProjetos.Colunas.TOTAL_LIMITE, projeto.getTotalLimite());
 		
 		Log.d(Tags.TOPTASK_BD, "Proximo passo cadastrar");
 
@@ -164,6 +152,8 @@ public class ProjetoDAO {
 		values.put(ContratoProjetos.Colunas.DONO, projeto.getDono());
 		values.put(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
 		values.put(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+		values.put(ContratoProjetos.Colunas.TOTAL_FEITO, projeto.getTotalFeito());
+		values.put(ContratoProjetos.Colunas.TOTAL_LIMITE, projeto.getTotalLimite());
 		
 		db.update(ContratoProjetos.NOME_TABELA, values,
 				ContratoProjetos.Colunas._ID + " = ? ",

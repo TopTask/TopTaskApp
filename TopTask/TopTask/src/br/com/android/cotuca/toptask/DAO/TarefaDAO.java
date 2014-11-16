@@ -1,6 +1,7 @@
 package br.com.android.cotuca.toptask.DAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -82,7 +83,49 @@ public class TarefaDAO {
 		}
 
 		return tarefas;
+	}
+	
 
+	public int getTotalFeito(int idProjeto){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, null);
+		
+		int somaFeito = 0;
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					somaFeito =+ TarefaDAO.getFeito(c);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return somaFeito;
+	}
+	
+	public int getTotalLimite(int idProjeto){
+		Cursor c = db.query(ContratoTarefas.NOME_TABELA,colunas, 
+				ContratoTarefas.Colunas.PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, null);
+		
+		int somaLimite = 0;
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					somaLimite =+ TarefaDAO.getLimite(c);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return somaLimite;
 	}
 
 	public List<Tarefa> getTarefasDoUsuarioNoProjetos(int idProjeto, int idDono) {
@@ -343,7 +386,17 @@ public class TarefaDAO {
 		return new Tarefa(_id, nome, descricao, dono, data, tempoLimite,
 				tempoFeito, prioridade, projeto, concluida);
 	}
+	
+	public static int getFeito(Cursor c){
+		int tempoFeito = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_FEITO));
+		return tempoFeito;
+	}
 
+	public static int getLimite(Cursor c){
+		int tempoLimite = c.getInt(c.getColumnIndex(ContratoTarefas.Colunas.TEMPO_LIMITE));
+		return tempoLimite;
+	}
+	
 	public void save(Tarefa tarefa) {
 		ContentValues values = new ContentValues();
 		values.put(ContratoTarefas.Colunas.NOME, tarefa.getNome());
@@ -383,17 +436,31 @@ public class TarefaDAO {
 		db.update(ContratoTarefas.NOME_TABELA, values,
 				ContratoTarefas.Colunas._ID + " = ? ",
 				new String[] { String.valueOf(tarefa.getID()) });
+		
+		//saveBurnDownTarefa(tarefa);
 	}
+	
+	
+//	public void saveBurnDownTarefa(Tarefa tarefa){
+//		Calendar cal = Calendar.getInstance();
+//		
+//		ContentValues values = new ContentValues();
+//		values.put(ContratoBurnDownTarefa.Colunas.DATA_ATUAL, cal.getTime().toString());
+//		values.put(ContratoBurnDownTarefa.Colunas.ID_TAREFA, tarefa.getID());
+//		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_FEITO, tarefa.getTempoFeito());
+//		values.put(ContratoBurnDownTarefa.Colunas.TEMPO_LIMITE, tarefa.getTempoLimite());
+//		
+//		db.insert(ContratoBurnDownTarefa.NOME_TABELA, null, values);
+//	}
 
 	public void delete(Tarefa tarefa) {
 
 		db.delete(ContratoTarefas.NOME_TABELA, ContratoTarefas.Colunas._ID
 				+ " = ?", new String[] { String.valueOf(tarefa.getID()) });
 	}
-
-	public void concluirTarefa(Tarefa tarefa) {
-		int id = tarefa.getID(); // � Concluida quando 0 e concluida qdo != 0
-
+	public void concluirTarefa (Tarefa tarefa) {
+		int id = tarefa.getID(); 
+		
 		ContentValues values = new ContentValues();
 		values.put(ContratoTarefas.Colunas.CONCLUIDA,
 				ContratoTarefas.StatusTarefa.concluida);

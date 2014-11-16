@@ -80,6 +80,7 @@
             android:label="@string/title_activity_login_usuario"
             tools:ignore="InnerclassSeparator" >
         </activity>
+<<<<<<< HEAD
         <activity
             android:name="br.com.android.cotuca.toptask.Activitys.EditarTarefa"
             android:label="@string/title_activity_editar_tarefa"
@@ -94,5 +95,10 @@
         <receiver android:name=".Receivers.NotificacaoSimplesReceiver" >
         </receiver>
     </application>
+=======
+        <receiver android:name=".Receivers.NotificacaoSimplesReceiver"></receiver>
+        <receiver android:name=".Receivers.BurnDownReceiver"></receiver>
+        </application>
+>>>>>>> 152065c54b2cfe32de2a52e4f4c5e4b25af28144
 
 </manifest>
