@@ -1,6 +1,5 @@
 package br.com.android.cotuca.toptask.Activitys;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -26,6 +25,7 @@ import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickPro
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos.ListenerClickNovoProjeto;
 import br.com.android.cotuca.toptask.tags.Tags;
+import br.com.android.cotuca.toptask.Activitys.CadastroProjetoActivity;
 
 public class ProjetosActivity extends Activity implements
 		ListenerClickNovoProjeto, ListenerClickProjeto, Callback {
@@ -161,6 +161,9 @@ public class ProjetosActivity extends Activity implements
 			projetoSelecionado = null;
 			selecionaFragmentAdequado(dadosRecebidos);
 			mode.finish();
+			
+			//CadastroProjetoActivity c = new CadastroProjetoActivity();
+			//c.cancelaAlarmeAtualizaBurnDown();
 
 			return true;
 

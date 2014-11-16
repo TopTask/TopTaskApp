@@ -70,9 +70,6 @@ public class MSimplesActivity extends Activity implements
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
-	
-	private AlarmManager alarm;
-	private PendingIntent pi;
 
 	private TarefaDAO dao;
 
@@ -86,8 +83,6 @@ public class MSimplesActivity extends Activity implements
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		dao = TarefaDAO.getInstance(this);
-		
-		alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
 
 		// Sombra ao abrir o Drawer Menu
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -349,22 +344,5 @@ public class MSimplesActivity extends Activity implements
 	@Override
 	public void onBackPressed() {
 		//nao pode voltar para a activity de projetos
-	}
-
-	public void alarmeAtualizaBurnDown(View v){
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.set(Calendar.HOUR_OF_DAY, 24);
-		
-		Intent i = new Intent(getApplicationContext(),BurnDownReceiver.class);
-		pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i,0);
-		
-		alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
-		
-	}
-	
-	public void cancelaAlarmeAtualizaBurnDown(View v){
-		alarm.cancel(pi);
 	}
 }

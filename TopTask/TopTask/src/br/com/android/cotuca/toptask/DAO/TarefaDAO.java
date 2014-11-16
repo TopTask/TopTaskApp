@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import br.com.android.cotuca.toptask.BD.ContratoBurnDownTarefa;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
