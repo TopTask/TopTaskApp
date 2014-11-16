@@ -19,9 +19,15 @@ package br.com.android.cotuca.toptask.Activitys;
 /**
  * @author jvgengo
  */
+import java.util.Calendar;
+
+import org.afree.data.time.Day;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -45,6 +51,7 @@ import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
+import br.com.android.cotuca.toptask.Receivers.BurnDownReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class MSimplesActivity extends Activity implements
@@ -63,6 +70,9 @@ public class MSimplesActivity extends Activity implements
 
 	private int idProjetoSelecionado = 0;
 	private int idUsuarioSelecionado = 0;
+	
+	private AlarmManager alarm;
+	private PendingIntent pi;
 
 	private TarefaDAO dao;
 
@@ -76,6 +86,8 @@ public class MSimplesActivity extends Activity implements
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		dao = TarefaDAO.getInstance(this);
+		
+		alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
 
 		// Sombra ao abrir o Drawer Menu
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -339,4 +351,20 @@ public class MSimplesActivity extends Activity implements
 		//nao pode voltar para a activity de projetos
 	}
 
+	public void alarmeAtualizaBurnDown(View v){
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.HOUR_OF_DAY, 24);
+		
+		Intent i = new Intent(getApplicationContext(),BurnDownReceiver.class);
+		pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i,0);
+		
+		alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+		
+	}
+	
+	public void cancelaAlarmeAtualizaBurnDown(View v){
+		alarm.cancel(pi);
+	}
 }
