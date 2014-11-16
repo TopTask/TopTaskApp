@@ -15,8 +15,8 @@ import br.com.android.cotuca.toptask.Beans.Tarefa;
 public class ManipTarefaTask {
 
 	//????
-	private static final String PONTO_FINAL = "http://54.94.188.147/SpringTutorialService/CurrencyServiceWS.asmx";
-	private static final String NAMESPACE = "http://zbra.com.br/springtutorial";
+	private static final String PONTO_FINAL = "http://54.94.188.147:8080/TopTaskWS/services/UsuarioWS";
+	private static final String NAMESPACE = "http://ws";
 	
 	// Metodos
 	public static final String ADD_TAREFA = "inserir";
@@ -56,12 +56,10 @@ public class ManipTarefaTask {
 		protected Integer doInBackground(Object... params) {
 
 			// operacao a ser realizada
-			String op = (String) params[0];
-			Tarefa tarefa = (Tarefa) params[1];
-
-			chamarWebService(tarefa, op);
-
-			return null;
+			Tarefa tarefa = (Tarefa) params[0];
+			String op = (String) params[1];
+			
+			return chamarWebService(tarefa, op);
 		}
 
 		@Override
