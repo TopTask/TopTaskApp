@@ -82,6 +82,7 @@
             tools:ignore="InnerclassSeparator" >
         </activity>
         <receiver android:name=".Receivers.NotificacaoSimplesReceiver"></receiver>
-    </application>
+        <receiver android:name=".Receivers.BurnDownReceiver"></receiver>
+        </application>
 
 </manifest>
