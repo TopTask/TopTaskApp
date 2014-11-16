@@ -150,7 +150,6 @@ public class MSimplesActivity extends Activity implements
 			return true;
 		}
 
-		// acao dos ic1ones do actionbar
 		switch (item.getItemId()) {
 		case R.id.action_add:
 			Intent i = new Intent(this, CadastroTarefa.class);
@@ -158,8 +157,8 @@ public class MSimplesActivity extends Activity implements
 			Bundle dados = new Bundle();
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
-			dados.putInt("ACAO", 0);
-
+			dados.putInt(Tags.B_ACAO, Tags.ACAO_CADASTRO);
+			
 			i.putExtras(dados);
 			startActivity(i);
 			return true;
@@ -197,8 +196,13 @@ public class MSimplesActivity extends Activity implements
 
 			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).isEmpty()) {
+<<<<<<< HEAD
 				
 				Log.i("Há tarefas na lista", "Há tarefas na lista");
+=======
+
+				
+>>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 				Intent i = new Intent(this, GraficosActivity.class);
 			    Bundle dados = new Bundle();
 				dados.putInt(Tags.ID_PROJETO, idProjetoSelecionado);
@@ -258,7 +262,7 @@ public class MSimplesActivity extends Activity implements
 			Intent iEditar = new Intent(this, CadastroTarefa.class);
 			Bundle dados = new Bundle();
 
-			dados.putInt("ACAO", 1);
+			dados.putInt(Tags.B_ACAO, Tags.ACAO_EDITAR);
 			dados.putString(ContratoTarefas.Colunas.NOME,
 					tarefaSelecionada.getNome());
 			dados.putString(ContratoTarefas.Colunas.DESCRICAO,
@@ -268,8 +272,16 @@ public class MSimplesActivity extends Activity implements
 			dados.putInt(Tags.ID_TAREFA, tarefaSelecionada.getID());
 			dados.putInt(ContratoTarefas.Colunas.PROJETO, idProjetoSelecionado);
 			dados.putInt(ContratoTarefas.Colunas.DONO, idUsuarioSelecionado);
+<<<<<<< HEAD
 			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
 			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
+=======
+
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_FEITO, tarefaSelecionada.getTempoFeito());
+			dados.putInt(ContratoTarefas.Colunas.TEMPO_LIMITE, tarefaSelecionada.getTempoLimite());
+
+			
+>>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 			iEditar.putExtras(dados);
 
 			startActivity(iEditar);

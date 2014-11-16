@@ -1,6 +1,5 @@
 package br.com.android.cotuca.toptask.Activitys;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -20,7 +19,6 @@ import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
-import br.com.android.cotuca.toptask.Dialogs.ModelosDialogFragment;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
 import br.com.android.cotuca.toptask.Fragments.FragmentProjetos.ListenerClickProjeto;
 import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
@@ -29,8 +27,6 @@ import br.com.android.cotuca.toptask.tags.Tags;
 
 public class ProjetosActivity extends Activity implements
 		ListenerClickNovoProjeto, ListenerClickProjeto, Callback {
-
-	public static final String TAG_DIALOG = "Escolha Modelo";
 
 	private Projeto projetoSelecionado;
 	private boolean actionModeAtivado = false;
@@ -68,7 +64,7 @@ public class ProjetosActivity extends Activity implements
 
 		Intent iCadastro = new Intent(this,
 				CadastroProjetoActivity.class);
-		dadosRecebidos.putInt("ACAO", 0);
+		dadosRecebidos.putInt(Tags.B_ACAO, 0);
 		iCadastro.putExtras(dadosRecebidos);
 		startActivity(iCadastro);
 	}
@@ -82,7 +78,7 @@ public class ProjetosActivity extends Activity implements
 		case R.id.action_accept_projeto:
 			Intent iCadastro = new Intent(this,
 					CadastroProjetoActivity.class);
-			dadosRecebidos.putInt("ACAO",0);
+			dadosRecebidos.putInt(Tags.B_ACAO,0);
 			iCadastro.putExtras(dadosRecebidos);
 			
 			startActivity(iCadastro);
@@ -96,14 +92,6 @@ public class ProjetosActivity extends Activity implements
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-
-	}
-
-	public void chamarDialog() {
-		FragmentManager fm = getFragmentManager();
-		ModelosDialogFragment mdf = new ModelosDialogFragment();
-
-		mdf.show(fm, TAG_DIALOG);
 
 	}
 
@@ -167,7 +155,7 @@ public class ProjetosActivity extends Activity implements
 		} else if (idItem == R.id.action_editar_projeto) {
 			Intent iEditar = new Intent(this, CadastroProjetoActivity.class);
 			
-			dadosRecebidos.putInt("ACAO", 1);
+			dadosRecebidos.putInt(Tags.B_ACAO, 1);
 			dadosRecebidos.putString(ContratoProjetos.Colunas.NOME,projetoSelecionado.getNome());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DESCRICAO,projetoSelecionado.getDescricao());
 			dadosRecebidos.putString(ContratoProjetos.Colunas.DATA_ENTREGA,projetoSelecionado.getDataEntrega());
@@ -201,7 +189,6 @@ public class ProjetosActivity extends Activity implements
 
 	@Override
 	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

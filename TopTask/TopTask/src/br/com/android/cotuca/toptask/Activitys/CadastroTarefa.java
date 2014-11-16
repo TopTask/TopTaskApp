@@ -1,10 +1,12 @@
 package br.com.android.cotuca.toptask.Activitys;
 
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,14 +22,22 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
+import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
+import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
+import br.com.android.cotuca.toptask.Fragments.FragmentCadastroTarefa;
+import br.com.android.cotuca.toptask.Fragments.FragmentEditarTarefa;
+import br.com.android.cotuca.toptask.Fragments.FragmentProjetos;
+import br.com.android.cotuca.toptask.Fragments.FragmentSemProjetos;
+import br.com.android.cotuca.toptask.Fragments.ListenerClickCadastroTarefa;
+import br.com.android.cotuca.toptask.Fragments.FragmentTarefas.ListenerClickTarefa;
 import br.com.android.cotuca.toptask.Receivers.NotificacaoSimplesReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class CadastroTarefa extends Activity implements OnItemSelectedListener,
-		DateDialog.SetDateListener {
+		DateDialog.SetDateListener, ListenerClickCadastroTarefa {
 
 	private ArrayAdapter<Character> adapter;
 	private TarefaDAO dao;
@@ -37,12 +47,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private Spinner spinner;
 	
 	private EditText edtData;
-	private int dia, mes, ano;
 	private String dataOriginal;
-	
-	private EditText edtTempoLimite;
-	private EditText edtTempoFeito;
-	private String tempoOriginal;
 	
 	private boolean ehAtu;
 
@@ -53,6 +58,9 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	private int idTarefa;
 	private int idProjeto;
 	private int idDono;
+	
+	private EditText edtTempoLimite;
+	private EditText edtTempoFeito;
 
 	@Override
 	protected void onCreate(Bundle estado) {
@@ -81,37 +89,66 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovaTarefa);
 		edtDescricao = (EditText) findViewById(R.id.edt_descricaoNovaTarefa);
 		edtData = (EditText) findViewById(R.id.edt_data_tarefa);
-		//edtTempoLimite = (EditText) findViewById(R.id.edt_tempo_limite);
-
+		edtTempoFeito = (EditText) findViewById(R.id.edt_tempo_feito);
+		edtTempoLimite = (EditText) findViewById(R.id.edt_tempo_limite);
+		
+		
 		ehAtu = false;
 
 		Bundle dados = getIntent().getExtras();
 		
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		
+		
+		
 		if (dados != null) {
 			
-			int acao = dados.getInt("ACAO");
+			int acao = dados.getInt(Tags.B_ACAO);
 			
-			if (acao == 0) { //Adicao
+			Log.d(Tags.B_ACAO, "Acao a ser realizada: " + acao);
+			
+			if (acao == Tags.ACAO_CADASTRO) {
+				
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 				
 				Log.i(ContratoTarefas.Colunas.PROJETO, "Id projeto na pagina de cadastro: " + idProjeto);
+				
+				FragmentCadastroTarefa fCadastroTarefa = new FragmentCadastroTarefa();
+				ft.replace(R.id.container, fCadastroTarefa);
+				ft.commit();
+				
+				
 
-			} else if (acao == 1){ //Alteracao
+			} else if (acao == Tags.ACAO_EDITAR){
 				ehAtu = true;
+<<<<<<< HEAD
 
+=======
+				
+				FragmentEditarTarefa fEditarTarefa = new FragmentEditarTarefa();
+				ft.replace(R.id.container, fEditarTarefa);
+				ft.commit();
+				
+>>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 				idProjeto = dados.getInt(Tags.ID_PROJETO);
 				idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
-				
 				String nome = dados.getString(ContratoTarefas.Colunas.NOME);
 				String descricao = dados.getString(ContratoTarefas.Colunas.DESCRICAO);
 				String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
+<<<<<<< HEAD
 
 				idTarefa = dados.getInt(Tags.ID_TAREFA);
 
 				String tempoLimite = dados.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
 				String tempoFeito = dados.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
 
+=======
+				idTarefa = dados.getInt(Tags.ID_TAREFA);
+				String tempoLimite = dados.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
+				String tempoFeito = dados.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
+>>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 				edtNome.setText(nome);
 				edtDescricao.setText(descricao);
 				edtData.setText(data);
@@ -129,7 +166,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.cadastro_tarefa, menu);
 		return true;
 	}
@@ -144,17 +180,11 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 	public void onNothingSelected(AdapterView<?> parent) {
 	}
 
-	public void onClickSetarData(View v) {
-		FragmentManager fm = getFragmentManager();
-		DateDialog dd = new DateDialog();
-		dd.show(fm, "DateDialog");
-	}
+
 
 	@Override
 	public void onSet(int ano, int mes, int dia) {
-		this.dia = dia;
-		this.mes = mes;
-		this.ano = ano;
+
 		dataOriginal = (dia + "/" + mes + "/" + ano);
 		mes += 1;
 		edtData.setText(dia + "/" + mes + "/" + ano);
@@ -167,7 +197,8 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		if (R.id.action_criar_tarefa == id) {
 			String nome = edtNome.getText().toString();
 			String descricao = edtDescricao.getText().toString();
-			int tempoLimite = 1; //errado
+			int tempoLimite = Integer.parseInt(edtTempoLimite.getText().toString());
+			int tempoFeito = Integer.parseInt(edtTempoFeito.getText().toString());
 			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem().toString());
 			
@@ -177,7 +208,10 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			}
 
 			if (!ehAtu) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4b13e25f649a09878972622d750e735e2b73b84d
 				dao.save(new Tarefa(nome, descricao, idDono, data, tempoLimite, prioridade,idProjeto, ContratoTarefas.StatusTarefa.pendente)); 
 			} else {
 				Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
@@ -187,7 +221,7 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 				tarefaAtu.setNome(nome);
 				tarefaAtu.setDescricao(descricao);
 				tarefaAtu.setDataEntrega(data);
-				//tarefaAtu.setTempoFeito(tempoFeito);
+				tarefaAtu.setTempoFeito(tempoFeito);
 				tarefaAtu.setTempoLimite(tempoLimite);
 				tarefaAtu.setPrioridade(prioridade);
 				tarefaAtu.setIdProjeto(idProjeto);
@@ -226,9 +260,22 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 
 		return super.onOptionsItemSelected(item);
 	}
-
-	private void agendarNotificacao(String titulo, String descricao, int ano,
-			int mes, int dia) {
+	
+	@Override
+	public void onClickSetarData(View v) {
+		FragmentManager fm = getFragmentManager();
+		DateDialog dd = new DateDialog();
+		dd.show(fm, "DateDialog");
+	}
+	
+	@Override
+	public void onClickSetarTempo(View v){
+		FragmentManager fm = getFragmentManager();
+		
+	}
+	
+	
+	private void agendarNotificacao(String titulo, String descricao, int ano,int mes, int dia) {
 
 		Calendar c = Calendar.getInstance();
 
@@ -252,4 +299,5 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 		// sendBroadcast(i);
 
 	}
+
 }

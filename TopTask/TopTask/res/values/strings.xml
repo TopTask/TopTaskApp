@@ -12,6 +12,8 @@
     <string name="g_set">Editar:</string>
     <string name="g_indice">Índice:</string>
     <string name="g_situacao">Situação:</string>
+    <string name="g_tempo_limite">Tempo limite</string>
+    <string name="g_tempo_feito">Tempo feito</string>
 
     <!-- Strings Botões -->
     <string name="btn_entrar">Entrar</string>
@@ -68,4 +70,10 @@
     <string name="tab_g_projeto">Meu Projeto</string>
     <string name="tab_g_burn_down">Burn Down</string>
     
+    <!-- Strings ActionMode Tarefas -->
+    <string name="t_mode_andamento">Em andamento</string>
+    <string name="t_mode_editar">Editar Tarefa</string>
+    <string name="t_mode_excluir">Excluir Tarefa</string>
+    <string name="t_mode_concluir">Concluir Tarefa</string>
+        
 </resources>
