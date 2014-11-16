@@ -1,5 +1,8 @@
 package br.com.android.cotuca.toptask.Graphs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.afree.chart.AFreeChart;
 import org.afree.chart.axis.AxisLocation;
 import org.afree.chart.axis.DateAxis;
@@ -16,10 +19,14 @@ import org.afree.graphics.PaintType;
 import org.afree.graphics.SolidColor;
 import org.afree.graphics.geom.LineShape;
 import org.afree.ui.RectangleInsets;
+
+import br.com.android.cotuca.toptask.Beans.BurnDown;
+import br.com.android.cotuca.toptask.DAO.BurnDownDAO;
 import android.content.Context;
 import android.graphics.Color;
 
 public class GraficoBurnDownView extends DemoView {
+	
 
     public GraficoBurnDownView(Context context) {
         super(context);
@@ -138,6 +145,13 @@ public class GraficoBurnDownView extends DemoView {
     public static XYDataset createGraficoReal() {
 
         TimeSeries s1 = new TimeSeries("");
+        BurnDownDAO daoBurnDown;
+        daoBurnDown = new BurnDownDAO(null);
+        
+        List<BurnDown> burnDowns = new ArrayList<BurnDown>();
+        
+        //burnDowns = daoBurnDown.getBurnDownsDoProjeto();
+    	
         
         s1.add(new Day(24, 9, 2014), 10);
         s1.add(new Day(25, 9, 2014), 7.5);

@@ -15,8 +15,6 @@ import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.BurnDown;
 import br.com.android.cotuca.toptask.Beans.Projeto;
-import br.com.android.cotuca.toptask.Beans.Tarefa;
-import br.com.android.cotuca.toptask.tags.Tags;
 
 public class BurnDownDAO {
 
@@ -37,7 +35,7 @@ public class BurnDownDAO {
 		return instancia;
 	}
 
-	private BurnDownDAO(Context contexto) {
+	public BurnDownDAO(Context contexto) {
 		dbHelper = DBHelper.getInstance(contexto);
 		db = dbHelper.getWritableDatabase();
 	}
@@ -69,4 +67,28 @@ public class BurnDownDAO {
 		return new BurnDown(_id,idProjeto,tempoFeito,tempoLimite,data);
 		
 	}
+	
+	public List<BurnDown> getBurnDownsDoProjeto(int idProjeto) {
+
+		Cursor c = db.query(ContratoBurnDownProjeto.NOME_TABELA,colunas, 
+				ContratoBurnDownProjeto.Colunas.ID_PROJETO + " = ? ", new String[] {String.valueOf(idProjeto)},
+				null, null, ContratoBurnDownProjeto.Colunas.DATA_ATUAL);
+
+		List<BurnDown> burnDowns = new ArrayList<BurnDown>();
+
+		try {
+			if (c.moveToFirst()) {
+				do {
+					BurnDown bd = BurnDownDAO.getCursor(c);
+					burnDowns.add(bd);
+				} while (c.moveToNext());
+			}
+
+		} finally {
+			c.close();
+		}
+
+		return burnDowns;
+	}
+	
 }
