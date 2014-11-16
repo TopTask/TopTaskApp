@@ -64,6 +64,7 @@ public final class R {
         public static final int selector_name=0x7f020015;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int acction_concluir_tarefa=0x7f0b0033;
         public static final int acction_editar_tarefa=0x7f0b0036;
         public static final int acction_excluir_tarefa=0x7f0b0034;
@@ -79,6 +80,22 @@ public final class R {
         public static final int action_entrar_projeto=0x7f0b0030;
         public static final int action_excluir_projeto=0x7f0b0031;
         public static final int action_sair_conta=0x7f0b003e;
+=======
+        public static final int acction_concluir_tarefa=0x7f0b002e;
+        public static final int acction_editar_tarefa=0x7f0b0030;
+        public static final int acction_excluir_tarefa=0x7f0b002f;
+        public static final int action_accept=0x7f0b0031;
+        public static final int action_accept_projeto=0x7f0b003a;
+        public static final int action_add=0x7f0b0036;
+        public static final int action_add_nova_tarefa=0x7f0b003c;
+        public static final int action_criar_tarefa=0x7f0b0032;
+        public static final int action_criar_usuario=0x7f0b0033;
+        public static final int action_editar_projeto=0x7f0b002d;
+        public static final int action_entrar=0x7f0b0035;
+        public static final int action_entrar_projeto=0x7f0b002b;
+        public static final int action_excluir_projeto=0x7f0b002c;
+        public static final int action_sair_conta=0x7f0b003b;
+>>>>>>> 26cded0e989a13068f32e1e8f971b0dbfc567033
         public static final int activity_graficos=0x7f0b0009;
         public static final int background=0x7f0b0006;
         public static final int btn_cadastrar=0x7f0b0007;
@@ -110,6 +127,9 @@ public final class R {
         public static final int img_projeto=0x7f0b0014;
         public static final int img_sem_tarefa=0x7f0b002c;
         public static final int left_drawer=0x7f0b000c;
+        public static final int mover_fazendo=0x7f0b0038;
+        public static final int mover_fazer=0x7f0b0037;
+        public static final int mover_feito=0x7f0b0039;
         public static final int s_prioridade=0x7f0b0005;
         public static final int txt_dataTermino=0x7f0b0017;
         public static final int txt_data_tarefa=0x7f0b001a;
@@ -133,25 +153,26 @@ public final class R {
         public static final int activity_cadastro_projeto=0x7f030000;
         public static final int activity_cadastro_tarefa=0x7f030001;
         public static final int activity_cadastro_usuario=0x7f030002;
-        public static final int activity_entrada=0x7f030003;
-        public static final int activity_graficos=0x7f030004;
-        public static final int activity_login_usuario=0x7f030005;
-        public static final int activity_menu=0x7f030006;
-        public static final int activity_projetos=0x7f030007;
-        public static final int activity_quadro_tarefas=0x7f030008;
-        public static final int adapter_membro=0x7f030009;
-        public static final int adapter_projeto=0x7f03000a;
-        public static final int adapter_quadro_tarefa=0x7f03000b;
-        public static final int adapter_tarefa=0x7f03000c;
-        public static final int drawer_list_item=0x7f03000d;
-        public static final int fragment_cadastro_projeto=0x7f03000e;
-        public static final int fragment_cadastro_usuario=0x7f03000f;
-        public static final int fragment_grafico_projeto=0x7f030010;
-        public static final int fragment_grafico_tarefa=0x7f030011;
-        public static final int fragment_login_usuario=0x7f030012;
-        public static final int fragment_quadro_tarefa=0x7f030013;
-        public static final int fragment_quadro_tarefa_vazio=0x7f030014;
-        public static final int fragment_sem_projetos=0x7f030015;
+        public static final int activity_configuracao=0x7f030003;
+        public static final int activity_entrada=0x7f030004;
+        public static final int activity_graficos=0x7f030005;
+        public static final int activity_login_usuario=0x7f030006;
+        public static final int activity_menu=0x7f030007;
+        public static final int activity_projetos=0x7f030008;
+        public static final int activity_quadro_tarefas=0x7f030009;
+        public static final int adapter_membro=0x7f03000a;
+        public static final int adapter_projeto=0x7f03000b;
+        public static final int adapter_quadro_tarefa=0x7f03000c;
+        public static final int adapter_tarefa=0x7f03000d;
+        public static final int drawer_list_item=0x7f03000e;
+        public static final int fragment_cadastro_projeto=0x7f03000f;
+        public static final int fragment_cadastro_usuario=0x7f030010;
+        public static final int fragment_grafico_projeto=0x7f030011;
+        public static final int fragment_grafico_tarefa=0x7f030012;
+        public static final int fragment_login_usuario=0x7f030013;
+        public static final int fragment_quadro_tarefa=0x7f030014;
+        public static final int fragment_quadro_tarefa_vazio=0x7f030015;
+        public static final int fragment_sem_projetos=0x7f030016;
     }
     public static final class menu {
         public static final int actionmode_projeto=0x7f0a0000;
@@ -162,8 +183,9 @@ public final class R {
         public static final int entrada=0x7f0a0005;
         public static final int login_usuario=0x7f0a0006;
         public static final int main=0x7f0a0007;
-        public static final int projetos=0x7f0a0008;
-        public static final int tarefas=0x7f0a0009;
+        public static final int mover_tarefa=0x7f0a0008;
+        public static final int projetos=0x7f0a0009;
+        public static final int tarefas=0x7f0a000a;
     }
     public static final class raw {
         public static final int tabelas=0x7f040000;
@@ -205,6 +227,9 @@ public final class R {
         public static final int g_senha=0x7f080003;
         public static final int g_set=0x7f080007;
         public static final int g_situacao=0x7f080009;
+        public static final int mover_fazendo=0x7f080025;
+        public static final int mover_fazer=0x7f080024;
+        public static final int mover_feito=0x7f080026;
         public static final int tab_g_projeto=0x7f080023;
         /**  Strings Tabs 
          */

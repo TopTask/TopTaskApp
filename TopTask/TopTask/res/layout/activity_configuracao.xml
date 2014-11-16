@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+   <PreferenceCategory 
+       android:summary="Habilitar as notificações"
+       android:title="@string/config_notificacao">
+    <Preference 
+            android:key="pref_key_auto_delete"
+            android:summary="@string/btn_entrar"
+            android:title="@string/btn_cadastrar" />
+    </PreferenceCategory>
+</PreferenceScreen>

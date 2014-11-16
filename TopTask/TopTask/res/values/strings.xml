@@ -67,4 +67,10 @@
     <string name="tab_g_tarefa">Minhas Tarefas</string>
     <string name="tab_g_projeto">Meu Projeto</string>
     
+    <!-- String TaskBoard -->
+    <string name="mover_fazer">A Fazer</string>
+    <string name="mover_fazendo">Fazendo</string>
+    <string name="mover_feito">Feito</string>
+    
+    
 </resources>

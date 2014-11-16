@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+		android:id="@+id/mover_fazer"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/mover_fazer"/>
+    
+    <item
+		android:id="@+id/mover_fazendo"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/mover_fazendo"/>
+    
+    <item
+		android:id="@+id/mover_feito"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/mover_feito"/>
+    
+</menu>
