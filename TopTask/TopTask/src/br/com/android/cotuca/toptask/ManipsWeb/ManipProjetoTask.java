@@ -1,6 +1,7 @@
 package br.com.android.cotuca.toptask.ManipsWeb;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import org.ksoap2.SoapEnvelope;
@@ -29,18 +30,18 @@ public class ManipProjetoTask {
 		return null;
 	}
 
-	public Projeto consultarProjeto(Integer id) throws InterruptedException,
+	public ArrayList<Projeto> consultarProjeto(Integer id) throws InterruptedException,
 			ExecutionException {
 		// Realizando chamada do WebService
 		ChamarConsulta request = new ChamarConsulta();
-		Projeto p = request.execute(id).get();
+		ArrayList<Projeto> p = request.execute(id).get();
 		return p;
 	}
 
-	private class ChamarConsulta extends AsyncTask<Object, Void, Projeto> {
+	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<Projeto>> {
 
 		@Override
-		protected Projeto doInBackground(Object... params) {
+		protected ArrayList<Projeto> doInBackground(Object... params) {
 			// Para passar de parametro na chamada do WS
 			int id = ((Integer) params[0]).intValue();
 
@@ -48,9 +49,7 @@ public class ManipProjetoTask {
 				Object result = chamaWSConsulta(id);
 				// Verificando se a operacao foi sucedida, e retornou um
 				// <Projeto>
-				if (result instanceof Projeto) {
-					return (Projeto) result;
-				}
+				return (ArrayList<Projeto>)result;
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -149,7 +148,7 @@ public class ManipProjetoTask {
 			} finally {
 				return 0;
 			}
-
+			
 		}
 		return null;
 	}

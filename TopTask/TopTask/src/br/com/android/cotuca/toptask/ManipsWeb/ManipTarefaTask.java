@@ -132,8 +132,8 @@ public class ManipTarefaTask {
 		protected Tarefa[] doInBackground(Object... params) {
 
 			// operacao a ser realizada
-			String op = (String) params[0];
-			Integer id  = (Integer) params[1];
+			Integer id  = (Integer) params[0];
+			String op = (String) params[1];
 
 			return chamarWebService(id, op);
 		}
