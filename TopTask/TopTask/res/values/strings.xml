@@ -28,6 +28,7 @@
     <string name="title_activity_cadastro_usuario">Cadastro</string>
     <string name="title_activity_login_usuario">Login</string>
     <string name="title_activity_cadastro_tarefa">Cadastro de Tarefa</string>
+    <string name="title_activity_editar_tarefa">Editar Tarefa</string>
     <string name="cadastro_titulo_novo_projeto">Cadastro novo Projeto</string>
     <string name="title_activity_graficos">Gráficos</string>
 
@@ -64,16 +65,16 @@
         <item>Scrum</item>
         <item>Livre</item>
     </string-array>
-    
+
     <!-- Strings Tabs -->
     <string name="tab_g_tarefa">Minhas Tarefas</string>
     <string name="tab_g_projeto">Meu Projeto</string>
     <string name="tab_g_burn_down">Burn Down</string>
-    
+
     <!-- Strings ActionMode Tarefas -->
     <string name="t_mode_andamento">Em andamento</string>
     <string name="t_mode_editar">Editar Tarefa</string>
     <string name="t_mode_excluir">Excluir Tarefa</string>
     <string name="t_mode_concluir">Concluir Tarefa</string>
-        
+
 </resources>

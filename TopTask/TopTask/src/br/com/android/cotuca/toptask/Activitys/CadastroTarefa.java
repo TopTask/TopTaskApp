@@ -139,8 +139,6 @@ public class CadastroTarefa extends Activity implements OnItemSelectedListener,
 			String descricao = edtDescricao.getText().toString();
 			int tempoLimite = Integer.parseInt(edtTempoLimite.getText()
 					.toString());
-			int tempoFeito = Integer.parseInt(edtTempoFeito.getText()
-					.toString());
 			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem()
 					.toString());

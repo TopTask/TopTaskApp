@@ -80,6 +80,16 @@
             android:label="@string/title_activity_login_usuario"
             tools:ignore="InnerclassSeparator" >
         </activity>
+        <activity
+            android:name="br.com.android.cotuca.toptask.Activitys.EditarTarefa"
+            android:label="@string/title_activity_editar_tarefa"
+            android:parentActivityName=".MSimplesActivity"
+            tools:ignore="InnerclassSeparator" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MSimplesActivity" />
+            tools:ignore="InnerclassSeparator" >
+        </activity>
 
         <receiver android:name=".Receivers.NotificacaoSimplesReceiver" >
         </receiver>

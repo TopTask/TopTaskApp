@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/edt_data_tarefa"
-            android:layout_below="@+id/edt_data_tarefa"
+            android:layout_below="@+id/s_prioridade"
             android:hint="@string/g_tempo_limite"
             android:inputType="number"
             android:onClick="onClickSetarTempo" />

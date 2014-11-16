@@ -174,31 +174,31 @@ public final class R {
         public static final int tabelas=0x7f040000;
     }
     public static final class string {
-        public static final int action_accept_projeto=0x7f080019;
-        public static final int action_accept_tarefa=0x7f08001b;
-        public static final int action_accept_usuario=0x7f08001c;
-        public static final int action_criar_novo_projeto=0x7f08001a;
+        public static final int action_accept_projeto=0x7f08001a;
+        public static final int action_accept_tarefa=0x7f08001c;
+        public static final int action_accept_usuario=0x7f08001d;
+        public static final int action_criar_novo_projeto=0x7f08001b;
         /**  substituir 
          */
-        public static final int action_entrar=0x7f08001e;
-        public static final int action_enviar=0x7f080020;
-        public static final int action_sair_conta=0x7f08001f;
+        public static final int action_entrar=0x7f08001f;
+        public static final int action_enviar=0x7f080021;
+        public static final int action_sair_conta=0x7f080020;
         /**  String Actions 
          */
-        public static final int action_settings=0x7f080018;
-        public static final int action_websearch=0x7f08001d;
+        public static final int action_settings=0x7f080019;
+        public static final int action_websearch=0x7f08001e;
         public static final int app_name=0x7f080000;
-        public static final int app_not_available=0x7f080023;
+        public static final int app_not_available=0x7f080024;
         public static final int btn_cadastrar=0x7f08000d;
         /**  Strings Botões 
          */
         public static final int btn_entrar=0x7f08000c;
         public static final int btn_novo_projeto=0x7f08000e;
-        public static final int cadastro_titulo_novo_projeto=0x7f080016;
-        public static final int drawer_close=0x7f080022;
+        public static final int cadastro_titulo_novo_projeto=0x7f080017;
+        public static final int drawer_close=0x7f080023;
         /**  Outros 
          */
-        public static final int drawer_open=0x7f080021;
+        public static final int drawer_open=0x7f080022;
         public static final int g_data=0x7f080005;
         public static final int g_data_termino=0x7f080006;
         public static final int g_descricao=0x7f080004;
@@ -214,23 +214,24 @@ public final class R {
         public static final int g_tempo_limite=0x7f08000a;
         /**  Strings ActionMode Tarefas 
          */
-        public static final int t_mode_andamento=0x7f080027;
-        public static final int t_mode_concluir=0x7f08002a;
-        public static final int t_mode_editar=0x7f080028;
-        public static final int t_mode_excluir=0x7f080029;
-        public static final int tab_g_burn_down=0x7f080026;
-        public static final int tab_g_projeto=0x7f080025;
+        public static final int t_mode_andamento=0x7f080028;
+        public static final int t_mode_concluir=0x7f08002b;
+        public static final int t_mode_editar=0x7f080029;
+        public static final int t_mode_excluir=0x7f08002a;
+        public static final int tab_g_burn_down=0x7f080027;
+        public static final int tab_g_projeto=0x7f080026;
         /**  Strings Tabs 
          */
-        public static final int tab_g_tarefa=0x7f080024;
+        public static final int tab_g_tarefa=0x7f080025;
         public static final int title_activity_cadastro_projeto=0x7f080012;
         public static final int title_activity_cadastro_tarefa=0x7f080015;
         public static final int title_activity_cadastro_usuario=0x7f080013;
+        public static final int title_activity_editar_tarefa=0x7f080016;
         /**  Títulos de Activities 
          */
         public static final int title_activity_entrada=0x7f08000f;
         public static final int title_activity_fragment_tarefas=0x7f080010;
-        public static final int title_activity_graficos=0x7f080017;
+        public static final int title_activity_graficos=0x7f080018;
         public static final int title_activity_login_usuario=0x7f080014;
         public static final int title_activity_projetos=0x7f080011;
     }

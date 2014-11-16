@@ -61,7 +61,6 @@ public class EditarTarefa extends Activity implements OnItemSelectedListener,
 
 			Log.d(Tags.B_ACAO, "Acao a ser realizada: " + acao);
 
-		} else {
 			idProjeto = dados.getInt(Tags.ID_PROJETO);
 			idDono = dados.getInt(ContratoTarefas.Colunas.DONO);
 			String nome = dados.getString(ContratoTarefas.Colunas.NOME);
@@ -141,13 +140,6 @@ public class EditarTarefa extends Activity implements OnItemSelectedListener,
 			String data = dataOriginal;
 			int prioridade = Integer.valueOf(spinner.getSelectedItem()
 					.toString());
-
-			if (nome == null || nome.equals("") || data == null
-					|| data.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Preencha todos os campos", Toast.LENGTH_SHORT).show();
-				return false;
-			}
 
 			Log.d(Tags.TOPTASK_ACTIVITY, "ID tarefa:" + idTarefa);
 
