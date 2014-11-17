@@ -16,14 +16,6 @@ import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 
 public class ManipProjetoTask {
-	private static final String PONTO_FINAL = "http://54.94.188.147/SpringTutorialService/CurrencyServiceWS.asmx";
-	private static final String NAMESPACE = "http://zbra.com.br/springtutorial";
-
-	// metodos
-	static final String ADD_PROJETO = "inserir";
-	static final String EXCLUIR_PROJETO = "excluir";
-	static final String ALTERAR_PROJETO = "alterar";
-	static final String CONSULTAR_PROJETO = "consultar";
 
 	public Projeto executarAcao(Integer id) {
 
@@ -64,15 +56,15 @@ public class ManipProjetoTask {
 		private Object chamaWSConsulta(int id) throws HttpResponseException,
 				IOException, XmlPullParserException {
 			
-			SoapObject soap = new SoapObject(NAMESPACE, CONSULTAR_PROJETO);
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, DadosWS.CONSULTAR);
 			soap.addProperty("id", id);
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 					SoapSerializationEnvelope.VER11);
 			envelope.addTemplate(soap);
 
-			HttpTransportSE transporte = new HttpTransportSE(PONTO_FINAL);
-			transporte.call("", envelope);
+			HttpTransportSE transporte = new HttpTransportSE(DadosWS.END_POINT);
+			transporte.call(DadosWS.NAMESPACE +"/" +DadosWS.CONSULTAR, envelope);
 
 			return envelope.getResponse();
 
@@ -84,19 +76,19 @@ public class ManipProjetoTask {
 //do metodo
 	public Integer adicionarProjeto(Projeto p) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, ADD_PROJETO);
+		request.execute(p, DadosWS.ADICIONAR);
 		return null;
 	}
 
 	public Integer alterarProjeto(Projeto p) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, ALTERAR_PROJETO);
+		request.execute(p, DadosWS.ALTERAR);
 		return null;
 	}
 
 	public Integer excluirProjeto(Projeto p) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, EXCLUIR_PROJETO);
+		request.execute(p, DadosWS.EXCLUIR);
 		return null;
 	}
 
@@ -117,8 +109,8 @@ public class ManipProjetoTask {
 
 	@SuppressWarnings("finally")
 	private Integer chamarWebService(Projeto projeto, String op) {
-		SoapObject soap = new SoapObject(NAMESPACE, op);
-		if (op == EXCLUIR_PROJETO) {
+		SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+		if (op == DadosWS.EXCLUIR) {
 			soap.addProperty(ContratoProjetos.Colunas._ID, projeto.getId());
 		} else {
 			// adicionar ou alterar
@@ -135,7 +127,7 @@ public class ManipProjetoTask {
 			envelope.setOutputSoapObject(soap);
 
 			try {
-				HttpTransportSE transport = new HttpTransportSE(PONTO_FINAL);
+				HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
 				transport.call(op, envelope);
 				Object response = envelope.getResponse();
 				return Integer.valueOf(response.toString());

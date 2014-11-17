@@ -14,16 +14,6 @@ import br.com.android.cotuca.toptask.Beans.Usuario;
 
 public class ManipUsuarioTask {
 
-	private static final String PONTO_FINAL = "http:\\";
-	private static final String NAMESPACE = "";
-	
-	// Metodos
-	public static final String ADD_USU = "cadastrar";
-	public static final String EXCLUIR_USU = "excluir";
-	public static final String ALTERAR_USU = "alterar";
-	public static final String CONSULTAR_USU = "consultar";
-	public static final String LISTAR_USU = "listar";
-	
 	//resultados
 	private Usuario[] respUsuarios = null;
 	private Integer respAcoes = 1;
@@ -74,19 +64,19 @@ public class ManipUsuarioTask {
 
 		private Integer chamarWebService(Usuario usu, String op) {
 			
-			SoapObject soap = new SoapObject(NAMESPACE, op);
-			if (op == ADD_USU) {
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+			if (op == DadosWS.ADICIONAR) {
 
 				// parametros
 				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
 				soap.addProperty(ContratoUsuarios.Colunas.NOME, usu.getNome());
 				soap.addProperty(ContratoUsuarios.Colunas.SENHA, usu.getSenha());
 
-			} else if (op == EXCLUIR_USU) {
+			} else if (op == DadosWS.EXCLUIR) {
 
 				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
 
-			} else if (op == ALTERAR_USU) {
+			} else if (op == DadosWS.ALTERAR) {
 
 				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
 				soap.addProperty(ContratoUsuarios.Colunas.NOME, usu.getNome());
@@ -100,7 +90,7 @@ public class ManipUsuarioTask {
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.setOutputSoapObject(soap);
 
-			HttpTransportSE transport = new HttpTransportSE(PONTO_FINAL);
+			HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
 
 			try {
 				transport.call("", envelope);
@@ -145,15 +135,15 @@ public class ManipUsuarioTask {
 		}
 
 		private Usuario[] chamarWebService(String email, String op) {
-			SoapObject soap = new SoapObject(NAMESPACE, op);
-			if (op == CONSULTAR_USU) {
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+			if (op == DadosWS.CONSULTAR) {
 				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, email);
 			} 
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.setOutputSoapObject(soap);
 
-			HttpTransportSE transport = new HttpTransportSE(PONTO_FINAL);
+			HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
 
 			try {
 				transport.call("", envelope);

@@ -13,16 +13,6 @@ import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 
 public class ManipTarefaTask {
-
-	//????
-	private static final String PONTO_FINAL = "http://54.94.188.147:8080/TopTaskWS/services/UsuarioWS";
-	private static final String NAMESPACE = "http://ws";
-	
-	// Metodos
-	public static final String ADD_TAREFA = "inserir";
-	public static final String EXCLUIR_TAREFA = "deletar";
-	public static final String ALTERAR_TAREFA = "alterar";
-	public static final String CONSULTAR_TAREFA = "consultar";
 	
 	//resultados
 	private Tarefa[] respTarefas = null;
@@ -69,8 +59,8 @@ public class ManipTarefaTask {
 		}
 
 		private Integer chamarWebService(Tarefa tarefa, String op) {
-			SoapObject soap = new SoapObject(NAMESPACE, op);
-			if (op == ADD_TAREFA) {
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+			if (op == DadosWS.ADICIONAR) {
 				// parametros
 				soap.addProperty(ContratoTarefas.Colunas.NOME, tarefa.getNome());
 				soap.addProperty(ContratoTarefas.Colunas.DESCRICAO, tarefa.getDescricao());
@@ -81,11 +71,11 @@ public class ManipTarefaTask {
 				soap.addProperty(ContratoTarefas.Colunas.CONCLUIDA, tarefa.getConcluida());
 				//soap.addProperty(ContratoTarefas.Colunas.FOTO, tarefa.getFoto());
 				
-			} else if (op == EXCLUIR_TAREFA) {
+			} else if (op == DadosWS.EXCLUIR) {
 
 				soap.addProperty(ContratoTarefas.Colunas._ID, tarefa.getID());
 
-			} else if (op == ALTERAR_TAREFA) {
+			} else if (op == DadosWS.ALTERAR) {
 
 				soap.addProperty(ContratoTarefas.Colunas.NOME, tarefa.getNome());
 				soap.addProperty(ContratoTarefas.Colunas.DESCRICAO, tarefa.getDescricao());
@@ -104,7 +94,7 @@ public class ManipTarefaTask {
 			envelope.setOutputSoapObject(soap);
 
 			try {
-				HttpTransportSE transport = new HttpTransportSE(PONTO_FINAL);
+				HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
 				transport.call("" +op, envelope);
 				Object response = envelope.getResponse();
 				return Integer.valueOf(response.toString());
@@ -146,18 +136,18 @@ public class ManipTarefaTask {
 		}
 
 		private Tarefa[] chamarWebService(Integer id, String op) {
-			SoapObject soap = new SoapObject(NAMESPACE, op);
-			if (op == CONSULTAR_TAREFA) {
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+			if (op == DadosWS.CONSULTAR) {
 				soap.addProperty(ContratoTarefas.Colunas._ID, id);
 			} 
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.setOutputSoapObject(soap);
 
-			HttpTransportSE transport = new HttpTransportSE(PONTO_FINAL);
+			HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
 
 			try {
-				transport.call(NAMESPACE +"/" +op, envelope);
+				transport.call(DadosWS.NAMESPACE +"/" +op, envelope);
 				Object resposta = envelope.getResponse();
 				return (Tarefa[]) resposta;
 				
