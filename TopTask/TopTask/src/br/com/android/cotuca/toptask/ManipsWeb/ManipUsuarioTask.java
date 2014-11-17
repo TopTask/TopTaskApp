@@ -1,166 +1,155 @@
 package br.com.android.cotuca.toptask.ManipsWeb;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
+import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
+import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Usuario;
-
+import br.com.android.cotuca.toptask.ManipsWeb.ManipProjetoTask.ChamaWSAcoes;
+import br.com.android.cotuca.toptask.ManipsWeb.ManipProjetoTask.ChamarConsulta;
+//UNIFICAR PARA TODOS
 public class ManipUsuarioTask {
+	
+	static final String END_POINT = DadosWS.END_POINT+"UsuarioWS";
 
 	//resultados
-	private Usuario[] respUsuarios = null;
-	private Integer respAcoes = 1;
+	
+	public Projeto executarAcao(Integer id) {
 
-	
-	public Integer executaAcoes(Usuario usu, String op) {
-		
-		ServiceUsuAcoes acao = new ServiceUsuAcoes();
-		acao.execute(usu,op);
-		
-		return respAcoes;
+		return null;
 	}
-	
-	public Usuario[] executaConsultas(String email,String op) {
-		
-		ServiceUsuConsultas consulta = new ServiceUsuConsultas();
-		consulta.execute(email,op);
-		
-		return respUsuarios;
+
+	public ArrayList<Projeto> consultarProjeto(Integer id) throws InterruptedException,
+			ExecutionException {
+		// Realizando chamada do WebService
+		ChamarConsulta request = new ChamarConsulta();
+		ArrayList<Projeto> p = request.execute(id).get();
+		return p;
 	}
-	
-	
-	
-	private class ServiceUsuAcoes extends AsyncTask<Object, Void, Integer> {
+
+	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<Projeto>> {
 
 		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
+		protected ArrayList<Projeto> doInBackground(Object... params) {
+			// Para passar de parametro na chamada do WS
+			int id = ((Integer) params[0]).intValue();
+
+			try {
+				Object result = chamaWSConsulta(id);
+				// Verificando se a operacao foi sucedida, e retornou um
+				// <Projeto>
+				return (ArrayList<Projeto>)result;
+
+			} catch (IOException e) {
+				e.printStackTrace();
+
+			} catch (XmlPullParserException e) {
+				e.printStackTrace();
+			}
+
+			return null;
 		}
+
+		private Object chamaWSConsulta(int id) throws HttpResponseException,
+				IOException, XmlPullParserException {
+			
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, DadosWS.CONSULTAR);
+			soap.addProperty("id", id);
+
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+					SoapSerializationEnvelope.VER11);
+			envelope.addTemplate(soap);
+
+			HttpTransportSE transporte = new HttpTransportSE(END_POINT);
+			transporte.call(DadosWS.NAMESPACE +"/" +DadosWS.CONSULTAR, envelope);
+
+			return envelope.getResponse();
+
+		}
+
+	}
+	
+//Adicionar, Alterar e Excluir. Se diferenciam na hora de chamar o nome
+//do metodo
+	public Integer adicionarProjeto(Projeto p) {
+		ChamaWSAcoes request = new ChamaWSAcoes();
+		request.execute(p, DadosWS.ADICIONAR);
+		return null;
+	}
+
+	public Integer alterarProjeto(Projeto p) {
+		ChamaWSAcoes request = new ChamaWSAcoes();
+		request.execute(p, DadosWS.ALTERAR);
+		return null;
+	}
+
+	public Integer excluirProjeto(Projeto p) {
+		ChamaWSAcoes request = new ChamaWSAcoes();
+		request.execute(p, DadosWS.EXCLUIR);
+		return null;
+	}
+
+	
+	private class ChamaWSAcoes extends AsyncTask<Object, Void, Integer> {
 
 		@Override
 		protected Integer doInBackground(Object... params) {
+			Projeto p = (Projeto) params[0];
+			String operacao = (String) params[1];
 
-			// operacao a ser realizada
-			String op = (String) params[0];
-			Usuario usu = (Usuario) params[1];
-
-			chamarWebService(usu, op);
+			chamarWebService(p, operacao);
 
 			return null;
 		}
 
-		@Override
-		protected void onPostExecute(Integer result) {
-			super.onPostExecute(result);
-			respAcoes = result;
-		}
+	}
 
-		private Integer chamarWebService(Usuario usu, String op) {
-			
-			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
-			if (op == DadosWS.ADICIONAR) {
+	@SuppressWarnings("finally")
+	private Integer chamarWebService(Projeto projeto, String op) {
+		SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+		if (op == DadosWS.EXCLUIR) {
+			soap.addProperty(ContratoProjetos.Colunas._ID, projeto.getId());
+		} else {
+			// adicionar ou alterar
+			soap.addProperty(ContratoProjetos.Colunas.NOME, projeto.getNome());
+			soap.addProperty(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
+			soap.addProperty(ContratoProjetos.Colunas.DATA_ENTREGA,	projeto.getDataEntrega());
+			soap.addProperty(ContratoProjetos.Colunas.DONO, projeto.getDono());
+			soap.addProperty(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
+			soap.addProperty(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
 
-				// parametros
-				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
-				soap.addProperty(ContratoUsuarios.Colunas.NOME, usu.getNome());
-				soap.addProperty(ContratoUsuarios.Colunas.SENHA, usu.getSenha());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+					SoapEnvelope.VER11);
 
-			} else if (op == DadosWS.EXCLUIR) {
-
-				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
-
-			} else if (op == DadosWS.ALTERAR) {
-
-				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usu.getEmail());
-				soap.addProperty(ContratoUsuarios.Colunas.NOME, usu.getNome());
-				soap.addProperty(ContratoUsuarios.Colunas.SENHA, usu.getSenha());
-				// falta foto
-
-			} else {
-				// erro
-			}
-
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.setOutputSoapObject(soap);
 
-			HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
-
 			try {
-				transport.call("", envelope);
+				HttpTransportSE transport = new HttpTransportSE(END_POINT);
+				transport.call(op, envelope);
 				Object response = envelope.getResponse();
 				return Integer.valueOf(response.toString());
-			} catch (IOException e) {
 
+			} catch (IOException e) {
 				e.printStackTrace();
+
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();
+			} finally {
+				return 0;
 			}
-
-			return 1;
-
-		}
-
-	}
-
-	private class ServiceUsuConsultas extends AsyncTask<Object, Void, Usuario[]> {
-
-		@Override
-		protected void onPreExecute() {
-
-			super.onPreExecute();
-		}
-
-		@Override
-		protected Usuario[] doInBackground(Object... params) {
-
-			// operacao a ser realizada
-			String op = (String) params[0];
-			String email  = (String) params[1];
-
-			return chamarWebService(email, op);
-		}
-
-		@Override
-		protected void onPostExecute(Usuario[] result) {
-			super.onPostExecute(result);
 			
-			respUsuarios = result;
 		}
-
-		private Usuario[] chamarWebService(String email, String op) {
-			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
-			if (op == DadosWS.CONSULTAR) {
-				soap.addProperty(ContratoUsuarios.Colunas.EMAIL, email);
-			} 
-
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			envelope.setOutputSoapObject(soap);
-
-			HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
-
-			try {
-				transport.call("", envelope);
-				Object resposta = envelope.getResponse();
-				
-				return (Usuario[]) resposta;
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			} catch (XmlPullParserException e) {
-				e.printStackTrace();
-			}
-
-			return null;
-
-		}
-
+		return null;
 	}
-
 }

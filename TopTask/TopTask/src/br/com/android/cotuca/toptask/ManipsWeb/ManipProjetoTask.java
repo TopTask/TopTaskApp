@@ -16,6 +16,8 @@ import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 
 public class ManipProjetoTask {
+	
+	static final String END_POINT = DadosWS.END_POINT+"ProjetoWS";
 
 	public Projeto executarAcao(Integer id) {
 
@@ -63,7 +65,7 @@ public class ManipProjetoTask {
 					SoapSerializationEnvelope.VER11);
 			envelope.addTemplate(soap);
 
-			HttpTransportSE transporte = new HttpTransportSE(DadosWS.END_POINT);
+			HttpTransportSE transporte = new HttpTransportSE(END_POINT);
 			transporte.call(DadosWS.NAMESPACE +"/" +DadosWS.CONSULTAR, envelope);
 
 			return envelope.getResponse();
@@ -127,7 +129,7 @@ public class ManipProjetoTask {
 			envelope.setOutputSoapObject(soap);
 
 			try {
-				HttpTransportSE transport = new HttpTransportSE(DadosWS.END_POINT);
+				HttpTransportSE transport = new HttpTransportSE(END_POINT);
 				transport.call(op, envelope);
 				Object response = envelope.getResponse();
 				return Integer.valueOf(response.toString());

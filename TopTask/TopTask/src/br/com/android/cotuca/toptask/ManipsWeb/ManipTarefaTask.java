@@ -14,6 +14,9 @@ import br.com.android.cotuca.toptask.Beans.Tarefa;
 
 public class ManipTarefaTask {
 	
+	static final String END_POINT = DadosWS.END_POINT+"TarefaWS";
+	
+	
 	//resultados
 	private Tarefa[] respTarefas = null;
 	private Integer respAcoes = 1;
