@@ -16,8 +16,6 @@ import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Usuario;
-import br.com.android.cotuca.toptask.ManipsWeb.ManipProjetoTask.ChamaWSAcoes;
-import br.com.android.cotuca.toptask.ManipsWeb.ManipProjetoTask.ChamarConsulta;
 //UNIFICAR PARA TODOS
 public class ManipUsuarioTask {
 	
@@ -25,7 +23,7 @@ public class ManipUsuarioTask {
 
 	//resultados
 	
-	public Projeto executarAcao(Integer id) {
+	public Integer executarAcao(Integer id) {
 
 		return null;
 	}

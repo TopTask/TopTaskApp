@@ -19,30 +19,24 @@ public class ManipProjetoTask {
 	
 	static final String END_POINT = DadosWS.END_POINT+"ProjetoWS";
 
-	public Projeto executarAcao(Integer id) {
-
-		return null;
-	}
-
-	public ArrayList<Projeto> consultarProjeto(Integer id) throws InterruptedException,
+	public ArrayList<Projeto> consultarProjeto(String aPesquisar) throws InterruptedException,
 			ExecutionException {
 		// Realizando chamada do WebService
 		ChamarConsulta request = new ChamarConsulta();
-		ArrayList<Projeto> p = request.execute(id).get();
+		ArrayList<Projeto> p = (ArrayList<Projeto>)request.execute(aPesquisar).get();
 		return p;
 	}
 
-	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<Projeto>> {
+	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<?>> {
 
 		@Override
 		protected ArrayList<Projeto> doInBackground(Object... params) {
 			// Para passar de parametro na chamada do WS
-			int id = ((Integer) params[0]).intValue();
+			//param[1] = parte do nome para pesquisar (email ou nome)
+			String  aPesquisar = (String)params[1];
 
 			try {
-				Object result = chamaWSConsulta(id);
-				// Verificando se a operacao foi sucedida, e retornou um
-				// <Projeto>
+				Object result = chamaWSConsulta(aPesquisar);
 				return (ArrayList<Projeto>)result;
 
 			} catch (IOException e) {
@@ -55,23 +49,23 @@ public class ManipProjetoTask {
 			return null;
 		}
 
-		private Object chamaWSConsulta(int id) throws HttpResponseException,
+		private Object chamaWSConsulta(String aPesquisar) throws HttpResponseException,
 				IOException, XmlPullParserException {
-			
+			//presquisar no campo email e nome
 			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, DadosWS.CONSULTAR);
-			soap.addProperty("id", id);
+			soap.addProperty("stringPesquisa", aPesquisar);
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 					SoapSerializationEnvelope.VER11);
 			envelope.addTemplate(soap);
 
 			HttpTransportSE transporte = new HttpTransportSE(END_POINT);
+			//Acho que ta errado
 			transporte.call(DadosWS.NAMESPACE +"/" +DadosWS.CONSULTAR, envelope);
 
 			return envelope.getResponse();
 
 		}
-
 	}
 	
 //Adicionar, Alterar e Excluir. Se diferenciam na hora de chamar o nome
