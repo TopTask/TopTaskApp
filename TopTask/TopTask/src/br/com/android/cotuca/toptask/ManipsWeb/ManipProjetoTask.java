@@ -32,7 +32,7 @@ public class ManipProjetoTask {
 		@Override
 		protected ArrayList<Projeto> doInBackground(Object... params) {
 			// Para passar de parametro na chamada do WS
-			//param[1] = parte do nome para pesquisar (email ou nome)
+			//param[1] = parte do nome para pesquisar (nome, descricao...)
 			String  aPesquisar = (String)params[1];
 
 			try {

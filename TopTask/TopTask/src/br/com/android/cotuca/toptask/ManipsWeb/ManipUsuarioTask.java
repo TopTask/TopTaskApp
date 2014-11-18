@@ -12,42 +12,36 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
-import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.Beans.Usuario;
+
 //UNIFICAR PARA TODOS
 public class ManipUsuarioTask {
-	
-	static final String END_POINT = DadosWS.END_POINT+"UsuarioWS";
 
-	//resultados
-	
-	public Integer executarAcao(Integer id) {
+	static final String END_POINT = DadosWS.END_POINT + "ProjetoWS";
 
-		return null;
-	}
-
-	public ArrayList<Projeto> consultarProjeto(Integer id) throws InterruptedException,
-			ExecutionException {
+	@SuppressWarnings("unchecked")
+	public ArrayList<Usuario> consultarProjeto(String aPesquisar) throws InterruptedException, ExecutionException {
 		// Realizando chamada do WebService
 		ChamarConsulta request = new ChamarConsulta();
-		ArrayList<Projeto> p = request.execute(id).get();
+		
+		ArrayList<Usuario> p;
+		p = (ArrayList<Usuario>) request.execute(aPesquisar).get();
+		
 		return p;
 	}
 
-	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<Projeto>> {
+	private class ChamarConsulta extends AsyncTask<Object, Void, ArrayList<?>> {
 
 		@Override
-		protected ArrayList<Projeto> doInBackground(Object... params) {
+		protected ArrayList<Usuario> doInBackground(Object... params) {
 			// Para passar de parametro na chamada do WS
-			int id = ((Integer) params[0]).intValue();
+			// param[1] = parte do nome para pesquisar (email ou nome)
+			String aPesquisar = (String) params[1];
 
 			try {
-				Object result = chamaWSConsulta(id);
-				// Verificando se a operacao foi sucedida, e retornou um
-				// <Projeto>
-				return (ArrayList<Projeto>)result;
+				Object result = chamaWSConsulta(aPesquisar);
+				return (ArrayList<Usuario>) result;
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -59,76 +53,75 @@ public class ManipUsuarioTask {
 			return null;
 		}
 
-		private Object chamaWSConsulta(int id) throws HttpResponseException,
-				IOException, XmlPullParserException {
-			
-			SoapObject soap = new SoapObject(DadosWS.NAMESPACE, DadosWS.CONSULTAR);
-			soap.addProperty("id", id);
+		private Object chamaWSConsulta(String aPesquisar)
+				throws HttpResponseException, IOException,
+				XmlPullParserException {
+			// presquisar no campo email e nome
+			SoapObject soap = new SoapObject(DadosWS.NAMESPACE,
+					DadosWS.CONSULTAR);
+			soap.addProperty("stringPesquisa", aPesquisar);
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 					SoapSerializationEnvelope.VER11);
 			envelope.addTemplate(soap);
 
 			HttpTransportSE transporte = new HttpTransportSE(END_POINT);
-			transporte.call(DadosWS.NAMESPACE +"/" +DadosWS.CONSULTAR, envelope);
+			// Acho que ta errado
+			transporte.call(DadosWS.NAMESPACE + "/" + DadosWS.CONSULTAR,
+					envelope);
 
 			return envelope.getResponse();
 
 		}
-
 	}
-	
-//Adicionar, Alterar e Excluir. Se diferenciam na hora de chamar o nome
-//do metodo
-	public Integer adicionarProjeto(Projeto p) {
+
+	// Adicionar, Alterar e Excluir. Se diferenciam na hora de chamar o nome
+	// do metodo
+	public Integer adicionarProjeto(Usuario u) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, DadosWS.ADICIONAR);
+		request.execute(u, DadosWS.ADICIONAR);
 		return null;
 	}
 
-	public Integer alterarProjeto(Projeto p) {
+	public Integer alterarProjeto(Usuario u) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, DadosWS.ALTERAR);
+		request.execute(u, DadosWS.ALTERAR);
 		return null;
 	}
 
-	public Integer excluirProjeto(Projeto p) {
+	public Integer excluirProjeto(Usuario u) {
 		ChamaWSAcoes request = new ChamaWSAcoes();
-		request.execute(p, DadosWS.EXCLUIR);
+		request.execute(u, DadosWS.EXCLUIR);
 		return null;
 	}
 
-	
 	private class ChamaWSAcoes extends AsyncTask<Object, Void, Integer> {
 
 		@Override
 		protected Integer doInBackground(Object... params) {
-			Projeto p = (Projeto) params[0];
+			Usuario u = (Usuario) params[0];
 			String operacao = (String) params[1];
-
-			chamarWebService(p, operacao);
-
-			return null;
+				
+			//1 se sucedido, 0 se houve falha.
+			return chamarWebService(u, operacao);
 		}
 
 	}
 
 	@SuppressWarnings("finally")
-	private Integer chamarWebService(Projeto projeto, String op) {
+	private Integer chamarWebService(Usuario usuario, String op) {
 		SoapObject soap = new SoapObject(DadosWS.NAMESPACE, op);
+		
 		if (op == DadosWS.EXCLUIR) {
-			soap.addProperty(ContratoProjetos.Colunas._ID, projeto.getId());
+			soap.addProperty(ContratoUsuarios.Colunas._ID, usuario.getId());
 		} else {
 			// adicionar ou alterar
-			soap.addProperty(ContratoProjetos.Colunas.NOME, projeto.getNome());
-			soap.addProperty(ContratoProjetos.Colunas.DESCRICAO, projeto.getDescricao());
-			soap.addProperty(ContratoProjetos.Colunas.DATA_ENTREGA,	projeto.getDataEntrega());
-			soap.addProperty(ContratoProjetos.Colunas.DONO, projeto.getDono());
-			soap.addProperty(ContratoProjetos.Colunas.CONCLUIDA, projeto.getConcluida());
-			soap.addProperty(ContratoProjetos.Colunas.FOTO, projeto.getFoto());
+			soap.addProperty(ContratoUsuarios.Colunas.NOME,   usuario.getNome());
+			soap.addProperty(ContratoUsuarios.Colunas.EMAIL, usuario.getEmail());
+			soap.addProperty(ContratoUsuarios.Colunas.SENHA, usuario.getSenha());
+			soap.addProperty(ContratoUsuarios.Colunas.FOTO,   usuario.getFoto());
 
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-					SoapEnvelope.VER11);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
 			envelope.setOutputSoapObject(soap);
 
@@ -136,6 +129,7 @@ public class ManipUsuarioTask {
 				HttpTransportSE transport = new HttpTransportSE(END_POINT);
 				transport.call(op, envelope);
 				Object response = envelope.getResponse();
+				
 				return Integer.valueOf(response.toString());
 
 			} catch (IOException e) {
@@ -146,7 +140,7 @@ public class ManipUsuarioTask {
 			} finally {
 				return 0;
 			}
-			
+
 		}
 		return null;
 	}
