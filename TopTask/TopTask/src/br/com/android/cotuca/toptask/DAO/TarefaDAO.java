@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import br.com.android.cotuca.toptask.BD.ContratoBurnDownTarefa;
 import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
@@ -53,6 +52,10 @@ public class TarefaDAO {
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 
+		if (c==null){
+			return null;
+		}
+		
 		try {
 			if (c.moveToFirst()) {
 				do {
@@ -81,6 +84,9 @@ public class TarefaDAO {
 					Tarefa t = TarefaDAO.getCursor(c);
 					tarefas.add(t);
 				} while (c.moveToNext());
+			}
+			else{
+				return tarefas;
 			}
 
 		} finally {

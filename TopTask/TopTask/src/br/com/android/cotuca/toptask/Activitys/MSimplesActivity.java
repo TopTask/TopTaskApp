@@ -19,9 +19,15 @@ package br.com.android.cotuca.toptask.Activitys;
 /**
  * @author jvgengo
  */
+import java.util.Calendar;
+
+import org.afree.data.time.Day;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -45,6 +51,7 @@ import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.Beans.Tarefa;
 import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Fragments.FragmentTarefas;
+import br.com.android.cotuca.toptask.Receivers.BurnDownReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
 
 public class MSimplesActivity extends Activity implements
@@ -338,5 +345,4 @@ public class MSimplesActivity extends Activity implements
 	public void onBackPressed() {
 		//nao pode voltar para a activity de projetos
 	}
-
 }

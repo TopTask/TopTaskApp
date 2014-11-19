@@ -4,26 +4,32 @@ public class BurnDown {
 	
 	private int id;
 	private int idProjeto;
-	private String data;
+	private int diaAtual;
+	private int mesAtual;
+	private int anoAtual;
 	private int limite; 
 	private int feito; 
 	
-	public BurnDown(int idProjeto, int feito, int limite, String data) {
+	public BurnDown(int idProjeto, int feito, int limite, int dia, int mes, int ano) {
 		super();
 		this.setIdProjeto(idProjeto);
 		this.setFeito(feito);
 		this.setLimite(limite);
-		this.setData(data);
+		this.setDiaAtual(dia);
+		this.setMesAtual(mes);
+		this.setAnoAtual(ano);
 	}
 	
 	//construtor para edição e retorno
-	public BurnDown(int id, int idProjeto, int feito, int limite, String data) {
+	public BurnDown(int id, int idProjeto, int feito, int limite, int dia, int mes, int ano) {
 		super();
 		this.setId(id);
 		this.setIdProjeto(idProjeto);
 		this.setFeito(feito);
 		this.setLimite(limite);
-		this.setData(data);
+		this.setDiaAtual(dia);
+		this.setMesAtual(mes);
+		this.setAnoAtual(ano);
 	}
 
 	public int getId() {
@@ -42,14 +48,6 @@ public class BurnDown {
 		this.idProjeto = idProjeto;
 	}
 
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
 	public int getLimite() {
 		return limite;
 	}
@@ -64,6 +62,30 @@ public class BurnDown {
 
 	public void setFeito(int feito) {
 		this.feito = feito;
+	}
+
+	public int getDiaAtual() {
+		return diaAtual;
+	}
+
+	public void setDiaAtual(int diaAtual) {
+		this.diaAtual = diaAtual;
+	}
+
+	public int getMesAtual() {
+		return mesAtual;
+	}
+
+	public void setMesAtual(int mesAtual) {
+		this.mesAtual = mesAtual;
+	}
+
+	public int getAnoAtual() {
+		return anoAtual;
+	}
+
+	public void setAnoAtual(int anoAtual) {
+		this.anoAtual = anoAtual;
 	}
 	
 }

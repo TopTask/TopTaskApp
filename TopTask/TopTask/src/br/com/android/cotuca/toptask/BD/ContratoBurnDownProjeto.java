@@ -9,7 +9,9 @@ public static final String NOME_TABELA = "TTBurnDownProjeto";
 		public static final String ID_PROJETO = "idProjeto";
 		public static final String TEMPO_FEITO = "tempoFeito";
 		public static final String TEMPO_LIMITE = "tempoLimite";
-		public static final String DATA_ATUAL = "data";
+		public static final String DIA_ATUAL = "diaAtual";
+		public static final String MES_ATUAL = "mesAtual";
+		public static final String ANO_ATUAL = "anoAtual";
 	}
 }
 

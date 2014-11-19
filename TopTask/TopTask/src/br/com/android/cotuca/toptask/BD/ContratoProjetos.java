@@ -15,4 +15,9 @@ public class ContratoProjetos {
 		public static final String TOTAL_FEITO = "tempoFeito";
 		public static final String TOTAL_LIMITE = "tempoLimite";
 	}
+	
+	public static final class StatusTarefa {
+		public static final int andamento = 1;
+		public static final int concluido = 2;
+	}
 }

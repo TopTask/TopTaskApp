@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoBurnDownProjeto;
-import br.com.android.cotuca.toptask.BD.ContratoBurnDownTarefa;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.BD.DBHelper;
@@ -41,7 +40,7 @@ public class ProjetoDAO {
 		return instancia;
 	}
 
-	private ProjetoDAO(Context contexto) {
+	public ProjetoDAO(Context contexto) {
 		dbHelper = DBHelper.getInstance(contexto);
 		db = dbHelper.getWritableDatabase();
 	}

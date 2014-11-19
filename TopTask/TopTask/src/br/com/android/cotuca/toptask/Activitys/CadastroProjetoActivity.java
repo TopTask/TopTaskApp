@@ -1,7 +1,11 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,7 +21,9 @@ import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
+import br.com.android.cotuca.toptask.Receivers.BurnDownReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
+import br.com.android.cotuca.toptask.Activitys.MSimplesActivity;
 
 public class CadastroProjetoActivity extends Activity implements
 		OnItemSelectedListener, DateDialog.SetDateListener {
@@ -30,11 +36,14 @@ public class CadastroProjetoActivity extends Activity implements
 	private int idProjeto;
 	private boolean ehAtu;
 	private int dia, mes, ano;
-	
+
 	private String dataOriginal;
 
 	private int idUsuario;
 	
+	private AlarmManager alarm;
+	private PendingIntent pi;
+
 	@Override
 	protected void onCreate(Bundle estado) {
 		super.onCreate(estado);
@@ -49,16 +58,20 @@ public class CadastroProjetoActivity extends Activity implements
 		edtData = (EditText) findViewById(R.id.edt_data);
 		ehAtu = false;
 		Bundle dados = getIntent().getExtras();
-		
+
+		alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+
 		int acao = dados.getInt("ACAO");
 		if (acao == 1) {
 			ehAtu = true;
 			String nome = dados.getString(ContratoProjetos.Colunas.NOME);
-			String descricao = dados.getString(ContratoProjetos.Colunas.DESCRICAO);
-			String data = dados.getString(ContratoProjetos.Colunas.DATA_ENTREGA);
+			String descricao = dados
+					.getString(ContratoProjetos.Colunas.DESCRICAO);
+			String data = dados
+					.getString(ContratoProjetos.Colunas.DATA_ENTREGA);
 			idProjeto = dados.getInt(Tags.ID_PROJETO);
 			idUsuario = dados.getInt(Tags.ID_USUARIO);
-			
+
 			edtNome.setText(nome);
 			edtDescricao.setText(descricao);
 			edtData.setText(data);
@@ -96,7 +109,7 @@ public class CadastroProjetoActivity extends Activity implements
 
 	@Override
 	public void onSet(int ano, int mes, int dia) {
-		
+
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
@@ -113,28 +126,52 @@ public class CadastroProjetoActivity extends Activity implements
 			String descricao = edtDescricao.getText().toString();
 			String data = dataOriginal;
 
-			if (nome == null || nome.equals("") || data == null || data.equals("")) {
-				Toast.makeText(getApplicationContext(),"Preencha todos os campos", Toast.LENGTH_SHORT).show();
+			if (nome == null || nome.equals("") || data == null
+					|| data.equals("")) {
+				Toast.makeText(getApplicationContext(),
+						"Preencha todos os campos", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 
 			if (!ehAtu) {
-				Projeto novoProjeto = new Projeto(nome, descricao, data,idUsuario, 1,"");
+				Projeto novoProjeto = new Projeto(nome, descricao, data,
+						idUsuario, ContratoProjetos.StatusTarefa.andamento, "");
 				dao.save(novoProjeto);
+				
+				//agendamento de alarme para atualizacao das tabelas Burn Down para cria��o do gr�fico
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				calendar.set(Calendar.HOUR_OF_DAY, 17);
+				calendar.set(Calendar.MINUTE, 15);
+				calendar.set(Calendar.SECOND, 0);
+
+				Intent i = new Intent(getApplicationContext(), BurnDownReceiver.class);
+			
+				Bundle dados = new Bundle();
+				dados.putInt("id_projeto", novoProjeto.getId());
+				i.putExtras(dados);
+				pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+						
+				Toast.makeText(getApplicationContext(), "Agendou alarme",Toast.LENGTH_SHORT).show();
+				
+				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+						AlarmManager.INTERVAL_DAY, pi);
+				
+				
 			} else {
 				Projeto projetoAtu = dao.getProjeto(String.valueOf(idProjeto));
 
 				projetoAtu.setNome(nome);
 				projetoAtu.setDescricao(descricao);
 				projetoAtu.setDataEntrega(data);
-				
+
 				ehAtu = false;
 				dao.update(projetoAtu);
 
 			}
 			Intent i = new Intent(this, ProjetosActivity.class);
-			i.putExtra(Tags.ID_USUARIO,idUsuario);
-			
+			i.putExtra(Tags.ID_USUARIO, idUsuario);
+
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 			startActivity(i);
@@ -142,17 +179,22 @@ public class CadastroProjetoActivity extends Activity implements
 			return true;
 
 		} else if (id == android.R.id.home) {
-			
+
 			Intent i = new Intent(this, ProjetosActivity.class);
-			i.putExtra(Tags.ID_USUARIO,idUsuario);
+			i.putExtra(Tags.ID_USUARIO, idUsuario);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 			startActivity(i);
-			
+
 			return true;
 
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
+
+	public void cancelaAlarmeAtualizaBurnDown() {
+		alarm.cancel(pi);
+	}
+
 }
