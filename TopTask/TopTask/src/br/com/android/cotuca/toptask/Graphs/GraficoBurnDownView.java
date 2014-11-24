@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.afree.chart.AFreeChart;
+import org.afree.chart.ChartFactory;
 import org.afree.chart.axis.AxisLocation;
 import org.afree.chart.axis.DateAxis;
 import org.afree.chart.axis.NumberAxis;
 import org.afree.chart.axis.ValueAxis;
 import org.afree.chart.plot.CombinedDomainXYPlot;
+import org.afree.chart.plot.CombinedRangeXYPlot;
 import org.afree.chart.plot.XYPlot;
 import org.afree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.afree.data.time.Day;
@@ -75,26 +77,15 @@ public class GraficoBurnDownView extends DemoView {
 
 			int feito = burnDowns.get(i).getFeito();
 			int limite = burnDowns.get(i).getLimite();
-			int porcentagem = 10 * feito / limite;
+			int porcentagem = 10*feito / limite;
+			int real = 10 - porcentagem;
 
 			int dia = burnDowns.get(i).getDiaAtual();
 			int mes = burnDowns.get(i).getMesAtual();
 			int ano = burnDowns.get(i).getAnoAtual();
 
-			s1.add(new Day(dia, mes, ano), porcentagem);
+			s1.add(new Day(dia, mes, ano), real);
 		}
-
-		// s1.add(new Day(24, 9, 2014), 10);
-		// s1.add(new Day(25, 9, 2014), 7.5);
-		// s1.add(new Day(26, 9, 2014), 5);
-		// s1.add(new Day(27, 9, 2014), 4);
-		// s1.add(new Day(28, 9, 2014), 4.5);
-		// s1.add(new Day(29, 9, 2014), 5);
-		// s1.add(new Day(30, 9, 2014), 6);
-		// s1.add(new Day(1, 10, 2014), 6);
-		// s1.add(new Day(2, 10, 2014), 5);
-		// s1.add(new Day(3, 10, 2014), 3);
-		// s1.add(new Day(4, 10, 2014), 0);
 
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.addSeries(s1);
@@ -108,8 +99,8 @@ public class GraficoBurnDownView extends DemoView {
 		PaintType white = new SolidColor(Color.WHITE);
 		PaintType gray = new SolidColor(Color.DKGRAY);
 
-		XYDataset dataset2 = createGraficoReal(idProjeto);
-		XYDataset dataset1 = createGraficoIdeal(idProjeto);
+		XYDataset datasetReal = createGraficoReal(idProjeto);
+		XYDataset datasetIdeal = createGraficoIdeal(idProjeto);
 
 		NumberAxis rangeAxis2 = new NumberAxis();
 		rangeAxis2.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -145,8 +136,8 @@ public class GraficoBurnDownView extends DemoView {
 		renderer1.setBaseShapesVisible(false);
 		renderer1.setLegendLine(new LineShape());
 
-		XYPlot subplot2 = new XYPlot(dataset2, null, rangeAxis2, renderer2);
-		XYPlot subplot1 = new XYPlot(dataset1, null, rangeAxis1, renderer1);
+		XYPlot subplot2 = new XYPlot(datasetReal, null, rangeAxis2, renderer2);
+		XYPlot subplot1 = new XYPlot(datasetIdeal, null, rangeAxis1, renderer1);
 
 		subplot2.setDomainGridlinesVisible(true);
 		subplot2.setBackgroundPaintType(white);
@@ -177,6 +168,7 @@ public class GraficoBurnDownView extends DemoView {
 		plot.setBackgroundPaintType(white);
 		plot.add(subplot2);
 		plot.add(subplot1);
+		
 
 		AFreeChart chart = new AFreeChart(null, AFreeChart.DEFAULT_TITLE_FONT,
 				plot, false);

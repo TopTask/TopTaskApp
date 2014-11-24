@@ -1,5 +1,6 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -19,7 +20,10 @@ import br.com.android.cotuca.toptask.R;
 import br.com.android.cotuca.toptask.BD.ContratoProjetos;
 import br.com.android.cotuca.toptask.BD.ContratoUsuarios;
 import br.com.android.cotuca.toptask.Beans.Projeto;
+import br.com.android.cotuca.toptask.Beans.Tarefa;
+import br.com.android.cotuca.toptask.DAO.BurnDownDAO;
 import br.com.android.cotuca.toptask.DAO.ProjetoDAO;
+import br.com.android.cotuca.toptask.DAO.TarefaDAO;
 import br.com.android.cotuca.toptask.Dialogs.DateDialog;
 import br.com.android.cotuca.toptask.Receivers.BurnDownReceiver;
 import br.com.android.cotuca.toptask.tags.Tags;
@@ -29,6 +33,8 @@ public class CadastroProjetoActivity extends Activity implements
 		OnItemSelectedListener, DateDialog.SetDateListener {
 
 	private ProjetoDAO dao;
+	private BurnDownDAO daoBurnDown;
+	private TarefaDAO daoTarefa;
 
 	private EditText edtNome;
 	private EditText edtDescricao;
@@ -52,6 +58,8 @@ public class CadastroProjetoActivity extends Activity implements
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		dao = ProjetoDAO.getInstance(this);
+		daoBurnDown = BurnDownDAO.getInstance(this);
+		daoTarefa = TarefaDAO.getInstance(this);
 
 		edtNome = (EditText) findViewById(R.id.edt_nomeNovoProjeto);
 		edtDescricao = (EditText) findViewById(R.id.edt_DescricaoNovoProjeto);
@@ -138,24 +146,32 @@ public class CadastroProjetoActivity extends Activity implements
 						idUsuario, ContratoProjetos.StatusTarefa.andamento, "");
 				dao.save(novoProjeto);
 				
-				//agendamento de alarme para atualizacao das tabelas Burn Down para cria��o do gr�fico
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(System.currentTimeMillis());
-				calendar.set(Calendar.HOUR_OF_DAY, 17);
-				calendar.set(Calendar.MINUTE, 15);
-				calendar.set(Calendar.SECOND, 0);
-
-				Intent i = new Intent(getApplicationContext(), BurnDownReceiver.class);
-			
-				Bundle dados = new Bundle();
-				dados.putInt("id_projeto", novoProjeto.getId());
-				i.putExtras(dados);
-				pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-						
-				Toast.makeText(getApplicationContext(), "Agendou alarme",Toast.LENGTH_SHORT).show();
+				daoBurnDown.saveTeste(novoProjeto, 19, 11, 2014, 0, 100);
+				daoBurnDown.saveTeste(novoProjeto, 20, 11, 2014, 50, 100);
+				daoBurnDown.saveTeste(novoProjeto, 21, 11, 2014, 100, 200);
+				daoBurnDown.saveTeste(novoProjeto, 22, 11, 2014, 150, 200);
+				daoBurnDown.saveTeste(novoProjeto, 23, 11, 2014, 150, 250);
+				daoBurnDown.saveTeste(novoProjeto, 24, 11, 2014, 150, 350);
+				daoBurnDown.saveTeste(novoProjeto, 25, 11, 2014, 250, 350);
 				
-				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
-						AlarmManager.INTERVAL_DAY, pi);
+			//	agendamento de alarme para atualizacao das tabelas Burn Down para cria��o do gr�fico
+//				Calendar calendar = Calendar.getInstance();
+//				calendar.setTimeInMillis(System.currentTimeMillis());
+//				calendar.set(Calendar.HOUR_OF_DAY, 17);
+//				calendar.set(Calendar.MINUTE, 15);
+//				calendar.set(Calendar.SECOND, 0);
+//
+//				Intent i = new Intent(getApplicationContext(), BurnDownReceiver.class);
+//			
+//				Bundle dados = new Bundle();
+//				dados.putInt("id_projeto", novoProjeto.getId());
+//				i.putExtras(dados);
+//				pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+//						
+//				Toast.makeText(getApplicationContext(), "Agendou alarme",Toast.LENGTH_SHORT).show();
+//				
+//				alarm.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+//						AlarmManager.INTERVAL_DAY, pi);
 				
 				
 			} else {

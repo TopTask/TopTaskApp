@@ -38,7 +38,7 @@ public class TarefaDAO {
 		return instancia;
 	}
 
-	private TarefaDAO(Context contexto) {
+	public TarefaDAO(Context contexto) {
 		dbHelper = DBHelper.getInstance(contexto);
 		db = dbHelper.getWritableDatabase();
 	}

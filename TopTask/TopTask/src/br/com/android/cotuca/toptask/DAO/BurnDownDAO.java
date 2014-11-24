@@ -1,6 +1,5 @@
 package br.com.android.cotuca.toptask.DAO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,11 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.format.DateFormat;
-import android.util.Log;
 import br.com.android.cotuca.toptask.BD.ContratoBurnDownProjeto;
-import br.com.android.cotuca.toptask.BD.ContratoProjetos;
-import br.com.android.cotuca.toptask.BD.ContratoTarefas;
 import br.com.android.cotuca.toptask.BD.DBHelper;
 import br.com.android.cotuca.toptask.Beans.BurnDown;
 import br.com.android.cotuca.toptask.Beans.Projeto;
@@ -54,6 +49,19 @@ public class BurnDownDAO {
 		values.put(ContratoBurnDownProjeto.Colunas.ID_PROJETO, projeto.getId());
 		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_FEITO, projeto.getTotalFeito());
 		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_LIMITE, projeto.getTotalLimite());
+		
+		db.insert(ContratoBurnDownProjeto.NOME_TABELA, null, values);
+	}
+	
+	public void saveTeste(Projeto projeto, int dia, int mes, int ano, int tempoFeito, int tempoLimite){
+		
+		ContentValues values = new ContentValues();
+		values.put(ContratoBurnDownProjeto.Colunas.DIA_ATUAL, dia);
+		values.put(ContratoBurnDownProjeto.Colunas.MES_ATUAL, mes);
+		values.put(ContratoBurnDownProjeto.Colunas.ANO_ATUAL, ano);
+		values.put(ContratoBurnDownProjeto.Colunas.ID_PROJETO, projeto.getId());
+		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_FEITO, tempoFeito);
+		values.put(ContratoBurnDownProjeto.Colunas.TEMPO_LIMITE, tempoLimite);
 		
 		db.insert(ContratoBurnDownProjeto.NOME_TABELA, null, values);
 	}

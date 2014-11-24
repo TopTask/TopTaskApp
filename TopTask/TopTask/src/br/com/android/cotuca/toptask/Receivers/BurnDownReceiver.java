@@ -22,6 +22,9 @@ public class BurnDownReceiver extends BroadcastReceiver {
 		Bundle dados = intent.getExtras();
 		
 		daoProjeto = new ProjetoDAO(context);
+		daoBurnDown = new BurnDownDAO(context);
+		daoTarefa = new TarefaDAO(context);
+		
 		
 		Projeto projetoAtual = daoProjeto.getProjeto(dados.getString("id_projeto"));
 		
