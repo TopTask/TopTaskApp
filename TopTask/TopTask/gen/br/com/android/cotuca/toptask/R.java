@@ -49,20 +49,23 @@ public final class R {
         public static final int g1=0x7f020006;
         public static final int g2=0x7f020007;
         public static final int ic_action_accept=0x7f020008;
-        public static final int ic_action_chat=0x7f020009;
-        public static final int ic_action_discard=0x7f02000a;
-        public static final int ic_action_edit=0x7f02000b;
-        public static final int ic_action_good=0x7f02000c;
-        public static final int ic_action_new=0x7f02000d;
-        public static final int ic_action_overflow=0x7f02000e;
-        public static final int ic_action_read=0x7f02000f;
-        public static final int ic_action_sort_by_size=0x7f020010;
-        public static final int ic_drawer=0x7f020011;
-        public static final int ic_launcher=0x7f020012;
-        public static final int icon=0x7f020013;
-        public static final int img_sem_tarefa=0x7f020014;
-        public static final int new_task=0x7f020015;
-        public static final int selector_name=0x7f020016;
+        public static final int ic_action_cancel=0x7f020009;
+        public static final int ic_action_chat=0x7f02000a;
+        public static final int ic_action_discard=0x7f02000b;
+        public static final int ic_action_edit=0x7f02000c;
+        public static final int ic_action_good=0x7f02000d;
+        public static final int ic_action_merge=0x7f02000e;
+        public static final int ic_action_new=0x7f02000f;
+        public static final int ic_action_overflow=0x7f020010;
+        public static final int ic_action_read=0x7f020011;
+        public static final int ic_action_sort_by_size=0x7f020012;
+        public static final int ic_action_view_as_list=0x7f020013;
+        public static final int ic_drawer=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
+        public static final int icon=0x7f020016;
+        public static final int img_sem_tarefa=0x7f020017;
+        public static final int new_task=0x7f020018;
+        public static final int selector_name=0x7f020019;
     }
     public static final class id {
         public static final int acction_concluir_tarefa=0x7f0b0038;

@@ -20,15 +20,21 @@ public class BurnDownReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		Toast.makeText(context, "Atualiza Burn Down foi chamado", Toast.LENGTH_LONG).show();
 		Bundle dados = intent.getExtras();
+
+		daoProjeto = new ProjetoDAO(context);
+		daoBurnDown = new BurnDownDAO(context);
+		daoTarefa = new TarefaDAO(context);
+		
 		
 		Projeto projetoAtual = daoProjeto.getProjeto(dados.getString("id_projeto"));
 		
-		projetoAtual.setTotalFeito(daoTarefa.getTotalFeito(dados.getInt("id_projeto")));
-		projetoAtual.setTotalLimite(daoTarefa.getTotalLimite(dados.getInt("id_projeto")));
+		if(!daoTarefa.getTarefasProjeto(dados.getInt("id_projeto")).isEmpty()){
+			projetoAtual.setTotalFeito(daoTarefa.getTotalFeito(dados.getInt("id_projeto")));
+			projetoAtual.setTotalLimite(daoTarefa.getTotalLimite(dados.getInt("id_projeto")));
 		
-		daoProjeto.update(projetoAtual);
+			daoProjeto.update(projetoAtual);
 		
-		daoBurnDown.save(projetoAtual);
-		
+			daoBurnDown.save(projetoAtual);
+		}
 	}
 }

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/action_entrar_projeto"
-        android:icon="@drawable/ic_action_read"
+        android:icon="@drawable/ic_action_merge"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Entrar Projeto"/>

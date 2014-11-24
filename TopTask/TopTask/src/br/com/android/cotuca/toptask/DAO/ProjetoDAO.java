@@ -40,7 +40,7 @@ public class ProjetoDAO {
 		return instancia;
 	}
 
-	private ProjetoDAO(Context contexto) {
+	public ProjetoDAO(Context contexto) {
 		dbHelper = DBHelper.getInstance(contexto);
 		db = dbHelper.getWritableDatabase();
 	}

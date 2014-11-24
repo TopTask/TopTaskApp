@@ -35,7 +35,7 @@ public class TarefaDAO {
 		return instancia;
 	}
 
-	private TarefaDAO(Context contexto) {
+	public TarefaDAO(Context contexto) {
 		dbHelper = DBHelper.getInstance(contexto);
 		db = dbHelper.getWritableDatabase();
 	}
@@ -47,6 +47,10 @@ public class TarefaDAO {
 
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 
+		if (c==null){
+			return null;
+		}
+		
 		try {
 			if (c.moveToFirst()) {
 				do {
@@ -76,6 +80,9 @@ public class TarefaDAO {
 					Tarefa t = TarefaDAO.getCursor(c);
 					tarefas.add(t);
 				} while (c.moveToNext());
+			}
+			else{
+				return tarefas;
 			}
 
 		} finally {

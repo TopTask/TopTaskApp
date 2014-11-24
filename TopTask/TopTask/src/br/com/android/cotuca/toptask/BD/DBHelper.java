@@ -8,7 +8,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	private static DBHelper instancia;
 	private static final String DB_NOME = "DB_Toptask";
-	private static final int DB_VERSAO = 8;
+	private static final int DB_VERSAO = 10;
 	
 	private static final String SQL_DROP_USUARIO = "DROP TABLE IF EXISTS " + ContratoUsuarios.NOME_TABELA;
 	private static final String SQL_DROP_PROJETO = "DROP TABLE IF EXISTS " + ContratoProjetos.NOME_TABELA;
@@ -58,11 +58,13 @@ public class DBHelper extends SQLiteOpenHelper{
 	
 	private static final String SQL_CREATE_BURNDOWN_PROJETO = String.format(
 			"CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-					"%s INTEGER NOT NULL, %s DATE NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL)", 
+					"%s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL)", 
 					ContratoBurnDownProjeto.NOME_TABELA,
 					ContratoBurnDownProjeto.Colunas._ID, 
 					ContratoBurnDownProjeto.Colunas.ID_PROJETO,
-					ContratoBurnDownProjeto.Colunas.DATA_ATUAL, 
+					ContratoBurnDownProjeto.Colunas.DIA_ATUAL,
+					ContratoBurnDownProjeto.Colunas.MES_ATUAL,
+					ContratoBurnDownProjeto.Colunas.ANO_ATUAL,
 					ContratoBurnDownProjeto.Colunas.TEMPO_FEITO,
 					ContratoBurnDownProjeto.Colunas.TEMPO_LIMITE);
 	
