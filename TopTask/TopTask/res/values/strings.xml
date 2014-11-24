@@ -53,10 +53,7 @@
     <!-- Strings Menu -->
     <string-array name="menu_array">
         <item>Tarefas</item>
-        <item>Taskboard</item>
         <item>Gráficos</item>
-        <item>Membros</item>
-        <item>Configurações</item>
         <item>Sair</item>
     </string-array>
 

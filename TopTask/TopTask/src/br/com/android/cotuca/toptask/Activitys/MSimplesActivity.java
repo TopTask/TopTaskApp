@@ -199,7 +199,7 @@ public class MSimplesActivity extends Activity implements
 			fm.beginTransaction().replace(R.id.content_frame, f_tarefas)
 					.commit();
 
-		} else if (posicao == 2) { 
+		} else if (posicao == 1) { 
 
 			if (!dao.getTarefasDoUsuarioNoProjetos(idProjetoSelecionado,
 					idUsuarioSelecionado).isEmpty()) {
@@ -216,7 +216,7 @@ public class MSimplesActivity extends Activity implements
 						"Voce ainda nao possui tarefas", Toast.LENGTH_SHORT)
 						.show();
 			}
-		}else if (posicao == 5) {
+		}else if (posicao == 2) {
 			Intent iSairProjetoAtual = new Intent(this, ProjetosActivity.class);
 			Bundle dados = new Bundle();
 			dados.putInt(Tags.ID_USUARIO, idUsuarioSelecionado);

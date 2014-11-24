@@ -68,10 +68,8 @@ public class EditarTarefa extends Activity implements OnItemSelectedListener,
 					.getString(ContratoTarefas.Colunas.DESCRICAO);
 			String data = dados.getString(ContratoTarefas.Colunas.DATA_ENTREGA);
 			idTarefa = dados.getInt(Tags.ID_TAREFA);
-			String tempoLimite = dados
-					.getString(ContratoTarefas.Colunas.TEMPO_LIMITE);
-			String tempoFeito = dados
-					.getString(ContratoTarefas.Colunas.TEMPO_FEITO);
+			int tempoLimite = dados.getInt(ContratoTarefas.Colunas.TEMPO_LIMITE);
+			int tempoFeito = dados.getInt(ContratoTarefas.Colunas.TEMPO_FEITO);
 
 			edtNome = (EditText) findViewById(R.id.edt_nomeNovaTarefa);
 			edtDescricao = (EditText) findViewById(R.id.edt_descricaoNovaTarefa);
@@ -82,8 +80,8 @@ public class EditarTarefa extends Activity implements OnItemSelectedListener,
 			edtNome.setText(nome);
 			edtDescricao.setText(descricao);
 			edtData.setText(data);
-			edtTempoFeito.setText(tempoFeito);
-			edtTempoLimite.setText(tempoLimite);
+			edtTempoFeito.setText(tempoFeito+"");
+			edtTempoLimite.setText(tempoLimite+"");
 		}
 		spinner = (Spinner) findViewById(R.id.s_prioridade);
 
