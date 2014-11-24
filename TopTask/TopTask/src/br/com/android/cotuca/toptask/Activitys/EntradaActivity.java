@@ -1,10 +1,22 @@
 package br.com.android.cotuca.toptask.Activitys;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpResponseException;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 import br.com.android.cotuca.toptask.R;
 
 public class EntradaActivity extends Activity {
@@ -19,6 +31,7 @@ public class EntradaActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.entrada, menu);
+		
 		return true;
 	}
 	

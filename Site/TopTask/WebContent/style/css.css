@@ -1,0 +1,159 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #D6D6D6;
+	font-family: Segoe UI, Tahoma, sans-serif;
+	/*font-family: 'Cambria', serif;*/
+	font-size: 62.5%;
+	color: #837F7F;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Cambria", serif;
+	font-weight: 400;
+}
+
+#footerBody{
+	position:absolute;
+	bottom: 0%;
+	width: 100%;
+	background: #FAFAD2;
+	text-align: center;
+}
+
+#pagina {
+	background: url(../res/images/bg.png) repeat;
+	height: 100%;
+}
+
+#pagina-bg {
+	padding: 0px 0px 600px 0px;/**padding = espaço entre a fronteira de um elemento eo conteúdo dentro dela.(acima, direita, botao -, esquerda)**/
+}
+
+
+
+
+
+
+#cabecalho-container{
+	height: 75px; 
+	background: url(../res/images/menu.png) repeat-x left top;
+}
+
+#cabecalho {
+	width: 100%;
+	height: 6.36%;
+	margin: 0px 100px; /**margens acima e direira/esquerda **/
+}
+
+
+#logo {
+	position: relative;
+	float: left;
+	width: 120px;
+	height: 70px;
+}
+
+
+#logo h1 a {
+	display: block;
+	padding: 12px 0px 0px 0px;
+	letter-spacing: -2px;
+	text-decoration: none;
+	font-size: 40px;
+	color: #FA830C;
+}
+
+
+
+
+#menu {
+	float: left;
+	background-color: #
+}
+
+#menu ul {
+	margin: -10px; /**margem acima**/
+	list-style: none;
+}
+
+#menu li {
+	float: left;
+	margin-left: 90px; /**margem entre tópicos de menu*/
+}
+
+#menu a {
+	top: 50%;
+	display: block; /**Um bloco contém um espaço em branco tanto em cima como embaixo e não permite outros elementos HTML ao lado**/
+	height: 30px;
+	padding: 35px 10px 0px 15px; /**padding = espaço entre a fronteira de um elemento eo conteúdo dentro dela.(acima, direita, botao -, esquerda)**/
+	text-decoration: none; /**padrao de <a> é deixar em negrito**/
+	font-size: 20px;
+		color: #FA830C;
+	<!-- color: #6699FF; -->
+
+}
+
+
+
+#caixa {
+	float: right;
+	width: 400px;
+	height: 400px;
+
+}
+
+
+.caixa-texto {
+	width: 610px;
+	height: 350px;
+  	padding: 40px;
+  	margin-top: 70px;
+  	margin-right: 100px;
+  	float: right;
+	background-color: #FFFFFF;
+	border: 1px solid #D8D8D8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,.1);
+}
+
+.caixa-texto h2 {
+	padding: 0px 0px 0px 0px;
+	letter-spacing: -2px;
+	font-size: 30px;
+	color: #3B3B3B;
+}
+
+.caixa-texto a {
+	font-size: 10px;
+}
+
+#submit {
+display: inline-block;
+background-color: #FFC693;
+color: #342E29;
+padding: 8px 16px;
+text-decoration: none;
+box-sizing: border-box;
+font-family: Cambria, Helvetica, Arial, sans-serif;
+font-size: 14px;
+border: 0px;
+}
+
+
+#submit:hover { /** mouse em cima 
+background-image: radial-gradient(#FFE7D1, #FFC693); /**laranja claro, cor primaria do botao**/
+cursor: pointer;
+}
+
+#form {
+	top: 10%;
+	right: 10%;
+	font-size: 2.5EM;
+	width: 26%;
+	text-align: left;
+	margin-left: 10px;
+}
+
+
