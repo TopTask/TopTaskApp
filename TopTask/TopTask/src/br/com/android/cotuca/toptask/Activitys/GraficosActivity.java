@@ -16,12 +16,20 @@ import br.com.android.cotuca.toptask.tags.Tags;
 
 public class GraficosActivity extends Activity {
 	
+	private int idProjeto;
+	private int idDono;
+ 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-	    
+
+		Bundle dadosRecebidos = this.getIntent().getExtras();
+		
+		idProjeto = dadosRecebidos.getInt(Tags.ID_PROJETO);
+		idDono = dadosRecebidos.getInt(Tags.ID_USUARIO);
+
 	    //Log.d(Tags.ID_USUARIO, getIntent().getExtras().getInt(ContratoUsuarios.Colunas._ID)+ " no graficosActivity");
 
 	    ActionBar actionBar = getActionBar();
@@ -49,8 +57,8 @@ public class GraficosActivity extends Activity {
 				Intent i = new Intent(getApplicationContext(),
 						MSimplesActivity.class);
 				Bundle dadosBundle = new Bundle();
-//				dadosBundle.putInt(Tags.ID_PROJETO, idProjeto);
-//				dadosBundle.putInt(Tags.ID_USUARIO, idDono);
+				dadosBundle.putInt(Tags.ID_PROJETO, idProjeto);
+				dadosBundle.putInt(Tags.ID_USUARIO, idDono);
 				i.putExtras(dadosBundle);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 						| Intent.FLAG_ACTIVITY_NEW_TASK);
